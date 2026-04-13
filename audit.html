@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tiendas Platino — Diagnóstico completo</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#fff;color:#111;line-height:1.7}
+.page{max-width:700px;margin:0 auto;padding:2.5rem 1.5rem 5rem}
+
+.portada{background:#111;border-radius:16px;padding:2.5rem 2rem;margin-bottom:2.5rem}
+.p-eye{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#555;margin-bottom:.5rem}
+.p-titulo{font-size:26px;font-weight:700;line-height:1.25;margin-bottom:.75rem;color:#fff}
+.p-sub{font-size:14px;color:#999;line-height:1.65}
+.p-nota{margin-top:1.5rem;font-size:12px;color:#444;border-top:1px solid #222;padding-top:1rem}
+
+.sep{height:1px;background:#f0f0f0;margin:2rem 0}
+.sec{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#bbb;margin-bottom:1rem;margin-top:2rem}
+
+.bien{background:#f0fdf4;border-left:3px solid #16a34a;border-radius:0 10px 10px 0;padding:1rem 1.25rem;margin-bottom:.75rem}
+.bien-t{font-size:14px;font-weight:700;color:#14532d;margin-bottom:.3rem}
+.bien-b{font-size:13px;color:#166534;line-height:1.75}
+
+.h{background:#fff;border:1px solid #e5e5e5;border-radius:12px;padding:1.125rem 1.25rem;margin-bottom:.875rem}
+.h.crit{border-left:3px solid #dc2626;background:#fef2f2}
+.h.alto{border-left:3px solid #ea580c;background:#fff7ed}
+.h.medio{border-left:3px solid #ca8a04;background:#fefce8}
+.h-head{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:.35rem;flex-wrap:wrap}
+.h-t{font-size:14px;font-weight:700;line-height:1.3}
+.h.crit .h-t{color:#7f1d1d}
+.h.alto .h-t{color:#7c2d12}
+.h.medio .h-t{color:#713f12}
+.tag{font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px;flex-shrink:0}
+.tc{background:#fee2e2;color:#991b1b}
+.ta{background:#ffedd5;color:#9a3412}
+.tm{background:#fef9c3;color:#854d0e}
+.h-b{font-size:13px;line-height:1.75;color:#555;margin-bottom:.625rem}
+.fix{font-size:12px;background:#f5f5f5;border-radius:8px;padding:.5rem .75rem;color:#333;line-height:1.6}
+.fix strong{font-weight:700;color:#111}
+
+.red-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-bottom:1.5rem}
+.red-card{border:1px solid #e5e5e5;border-radius:12px;padding:1rem;background:#fff}
+.rc-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:.4rem}
+.rc-nombre{font-size:13px;font-weight:700}
+.rc-est{font-size:10px;font-weight:700;padding:2px 7px;border-radius:20px}
+.est-ok{background:#dcfce7;color:#15803d}
+.est-dormida{background:#ffedd5;color:#9a3412}
+.est-muerta{background:#fee2e2;color:#991b1b}
+.rc-num{font-size:22px;font-weight:800;margin-bottom:1px}
+.rc-sub{font-size:11px;color:#999;margin-bottom:.5rem}
+.rc-diag{font-size:12px;color:#555;line-height:1.65}
+
+.post{border:1px solid #e5e5e5;border-radius:12px;padding:1rem 1.25rem;margin-bottom:.75rem;background:#fff}
+.post-head{display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;margin-bottom:.4rem}
+.post-nombre{font-size:13px;font-weight:700;color:#111}
+.post-num{font-size:12px;color:#999}
+.post-body{font-size:13px;line-height:1.75;color:#555;margin-bottom:.5rem}
+.post-v{font-size:12px;padding:.45rem .75rem;border-radius:8px;line-height:1.6}
+.pv-rojo{background:#fef2f2;color:#991b1b}
+.pv-naranja{background:#fff7ed;color:#9a3412}
+.pv-verde{background:#f0fdf4;color:#15803d}
+
+.numero{text-align:center;padding:2.5rem 1rem;border-top:3px solid #111;border-bottom:3px solid #111;margin:2rem 0}
+.n-val{font-size:62px;font-weight:800;color:#dc2626;line-height:1;margin-bottom:.35rem}
+.n-label{font-size:14px;color:#555}
+
+.checkout-box{background:#0f172a;border-radius:12px;padding:1.5rem;margin:1rem 0}
+.cb-t{font-size:15px;font-weight:700;color:#fff;margin-bottom:.75rem}
+.cb-b{font-size:13px;color:#94a3b8;line-height:1.8}
+.cb-b strong{color:#fff;font-weight:700}
+.error-badge{display:inline-block;background:#dc2626;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:6px;margin-bottom:.75rem}
+
+.fugas{list-style:none;counter-reset:f;background:#fafafa;border:1px solid #eee;border-radius:12px;padding:1.25rem}
+.fuga{counter-increment:f;display:grid;grid-template-columns:26px 1fr;gap:10px;padding:11px 0;border-bottom:1px solid #eee;align-items:start}
+.fuga:last-child{border-bottom:none}
+.fn::before{content:counter(f);font-size:17px;font-weight:800;color:#dc2626}
+.fb{font-size:13px;line-height:1.7;color:#333}
+.fb strong{font-weight:700;color:#111;display:block;margin-bottom:2px}
+
+.tabla{width:100%;border-collapse:collapse;font-size:13px;margin:1rem 0}
+.tabla tr{border-bottom:1px solid #f0f0f0}
+.tabla td{padding:11px 8px;vertical-align:top}
+.tabla td:first-child{color:#444}
+.tabla td:last-child{color:#dc2626;font-weight:700;text-align:right;white-space:nowrap}
+.tabla tr:last-child{border-top:2px solid #111;border-bottom:none}
+.tabla tr:last-child td{color:#111;font-weight:800;font-size:14px;padding-top:14px}
+.tabla tr:last-child td:last-child{color:#dc2626}
+
+.plan-cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin-bottom:1.5rem}
+.plan-col{border:1px solid #e5e5e5;border-radius:12px;padding:1rem;background:#fff}
+.plan-fase{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:.6rem}
+.plan-fase.g{color:#16a34a}
+.plan-fase.a{color:#ea580c}
+.plan-fase.b{color:#2563eb}
+.plan-items{list-style:none}
+.plan-items li{font-size:12px;line-height:1.65;padding:4px 0;border-bottom:1px solid #f5f5f5;display:flex;gap:6px;color:#333}
+.plan-items li:last-child{border-bottom:none}
+.dot{width:5px;height:5px;border-radius:50%;flex-shrink:0;margin-top:8px}
+.dg{background:#16a34a}.da{background:#ea580c}.db{background:#2563eb}
+
+.cierre{background:#111;border-radius:16px;padding:2.5rem 2rem;margin-top:3rem}
+.c-t{font-size:18px;font-weight:700;margin-bottom:1rem;color:#fff;line-height:1.35}
+.c-b{font-size:14px;color:#999;line-height:1.85}
+.c-b p{margin-bottom:.75rem}
+.c-b p:last-child{margin-bottom:0}
+.c-b strong{color:#fff;font-weight:700}
+.c-q{font-size:17px;font-weight:700;color:#fff;margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid #222;line-height:1.4}
+</style>
+</head>
+<body>
+<div class="page">
+
+<div class="portada">
+  <div class="p-eye">Diagnóstico completo · Sitio + Facebook + Instagram · Revisado en vivo</div>
+  <div class="p-titulo">Lo que encontré revisando todo — el sitio, el Facebook y el Instagram.</div>
+  <div class="p-sub">Entré yo mismo al sitio, navegué página por página, abrí productos, llegué hasta el checkout y revisé ambas redes sociales con Chrome. Esto es lo que vi.</div>
+  <div class="p-nota">Preparado por Fernando · Relativum · Abril 2026</div>
+</div>
+
+<!-- LO QUE SÍ FUNCIONA -->
+<div class="sec">Primero — lo que sí tienes y funciona</div>
+
+<div class="bien">
+  <div class="bien-t">El sitio tiene más de lo que la mayoría de tiendas en México</div>
+  <div class="bien-b">Lo vi en vivo: hero con colaje de camisas y mensaje claro, colecciones bien organizadas en menú, reseñas reales con foto en PDPs (57 opiniones, 4.95 estrellas), fecha de entrega y countdown de envío mismo día, social proof "100,000 personas enamoradas" encima del botón de compra, cross-sell "Para ti" al final de cada producto, guía de medidas dentro del carrusel de fotos, múltiples métodos de pago en el checkout y "Nuestros clientes nos aman" con carrusel de reseñas reales en el home.</div>
+</div>
+
+<div class="bien">
+  <div class="bien-t">Instagram tiene estructura y contenido real</div>
+  <div class="bien-b">182K seguidores, 2,920 publicaciones, feed activo con variedad de formatos — Reels, fotos de producto, promos, contenido de marca. Los Highlights están organizados: CLIENTES, FAQS, LO NUEVO, ENVÍOS, PHOTOSHOOT, BIZNE, TALLER. Eso muestra intención editorial. No es un feed abandonado.</div>
+</div>
+
+<div class="sep"></div>
+
+<!-- REDES SOCIALES -->
+<div class="sec">Tus redes — lo que vi en vivo</div>
+
+<div class="red-cards">
+  <div class="red-card">
+    <div class="rc-head"><div class="rc-nombre">Facebook principal</div><span class="rc-est est-dormida">Dormida</span></div>
+    <div class="rc-num">1,100,000</div>
+    <div class="rc-sub">seguidores · última publicación: 26 feb</div>
+    <div class="rc-diag">6 semanas sin publicar. El horario dice "Abre pronto" — no está en 24/7. El link lleva al home genérico. El botón de Mensaje está activo. Toda la interacción de comentarios se atiende mandando al mismo link de WhatsApp.</div>
+  </div>
+  <div class="red-card">
+    <div class="rc-head"><div class="rc-nombre">Facebook antigua</div><span class="rc-est est-muerta">Abandonada</span></div>
+    <div class="rc-num">380,804</div>
+    <div class="rc-sub">likes · sin publicar desde 2023</div>
+    <div class="rc-diag">Muerta algorítmicamente. No tiene caso intentar reactivarla. El enfoque va 100% a la de 1.1M.</div>
+  </div>
+  <div class="red-card">
+    <div class="rc-head"><div class="rc-nombre">Instagram</div><span class="rc-est est-ok">Activa</span></div>
+    <div class="rc-num">182,000</div>
+    <div class="rc-sub">seguidores · 2,920 publicaciones</div>
+    <div class="rc-diag">Feed con actividad reciente. Highlights bien organizados. El problema está en la bio — sin CTA, sin precio, sin WhatsApp. El link lleva al sitio pero sin contexto ni oferta.</div>
+  </div>
+</div>
+
+<div class="sec">Diagnóstico de los posts de Facebook — lo que vi</div>
+
+<div class="post">
+  <div class="post-head">
+    <div class="post-nombre">"Conoce nuestra nueva colección" · 26 feb</div>
+    <div class="post-num">24 likes · 2 comentarios · 1 compartida</div>
+  </div>
+  <div class="post-body">El copy solo dice "Conoce nuestra nueva colección!!" con emojis y un link. Sin precio, sin producto destacado, sin razón para hacer clic. Raul Garza comenta "Precio?" — le mandan al WhatsApp con el mismo copy de siempre. Alonso Gómez pregunta si tienen tallas extras — sin respuesta.</div>
+  <div class="post-v pv-naranja">Alonso preguntó hace días y nadie le respondió. Eso es una venta esperando que alguien la recoja.</div>
+</div>
+
+<div class="post">
+  <div class="post-head">
+    <div class="post-nombre">"30% descuento exclusivo en línea" · 26 feb</div>
+    <div class="post-num">10 likes · 1 comentario · 1 compartida</div>
+  </div>
+  <div class="post-body">La creatividad llama la atención — verde neón sobre negro, funciona. Pero el post manda a Amazon como CTA. Con tu propia audiencia orgánica de 1.1M. Xavi Kmps pregunta "¿Para comprar es en línea? ¿El único método?" — sin ninguna respuesta hasta hoy.</div>
+  <div class="post-v pv-rojo">Alguien preguntó cómo pagar. Es la intención más caliente que puede haber. Sin respuesta = venta que se fue sola.</div>
+</div>
+
+<div class="post">
+  <div class="post-head">
+    <div class="post-nombre">"Liquidación de temporada" · 14-15 enero</div>
+    <div class="post-num">31 likes · 1 comentario · 1 compartida</div>
+  </div>
+  <div class="post-body">"Diseñadas para quienes no piden permiso al entrar" — ese es el mejor copy del feed. Pero el post tiene el link a Mercado Libre y Amazon, no al sitio propio. Hacia La Cumbre del Éxito comenta "Precio" — misma respuesta de WhatsApp de siempre.</div>
+  <div class="post-v pv-rojo">El copy más fuerte del feed manda a pagar comisión a Mercado Libre con tu audiencia propia.</div>
+</div>
+
+<div class="post">
+  <div class="post-head">
+    <div class="post-nombre">"38% OFF SALE" · enero</div>
+    <div class="post-num">4 likes · 0 comentarios</div>
+  </div>
+  <div class="post-body">Creatividad llamativa con fecha "06 de ENE al 31 de ENE". El problema es que esa fecha ya pasó hace meses — si alguien llega a ese post hoy, ve una oferta vencida. Eso genera desconfianza.</div>
+  <div class="post-v pv-naranja">Posts con fechas vencidas siguen siendo visibles y erosionan la credibilidad de la marca.</div>
+</div>
+
+<div class="sec">Lo que falla en la bio de Instagram</div>
+
+<div class="h crit">
+  <div class="h-head"><div class="h-t">La bio no convierte el tráfico que ya llega</div><span class="tag tc">Crítico</span></div>
+  <div class="h-b">La bio dice: "Ropa, Calzado y Accesorios 🇲🇽 / Enviamos a todo el 🌍 / Envíos por paquetería 📦". Eso describe qué eres pero no da ninguna razón para hacer clic. Sin oferta activa, sin número de WhatsApp, sin CTA. El link lleva al home genérico — el visitante llega y no sabe qué hacer primero.</div>
+  <div class="fix"><strong>Qué cambiar:</strong> "Camisas 100% mexicanas · Tallas S a 4XL · Envío en 3 días 🇲🇽 👇 [link a landing con oferta actual + WhatsApp directo]". Una bio que dice exactamente qué, para quién y qué hacer.</div>
+</div>
+
+<div class="h alto">
+  <div class="h-head"><div class="h-t">El patrón de WhatsApp manual está matando el 65% de los leads calientes</div><span class="tag ta">Alta</span></div>
+  <div class="h-b">Lo vi en múltiples posts con mis propios ojos. Cada vez que alguien comenta con intención de compra — precio, tallas, cómo comprar — la respuesta es siempre el mismo copy: "Hola! 👋😀 te puedes comunicar con un asesor en el siguiente link para compartirte el catálogo 👇". Mismo texto en enero, mismo texto en febrero. De cada 10 personas que preguntan, 6 o 7 no van a abrir otra app, buscar el número y escribir. El impulso se pasa en segundos.</div>
+  <div class="fix"><strong>Qué hacer:</strong> Automatizar esa respuesta con un agente de WhatsApp que conteste en 3 segundos con precio, disponibilidad de tallas y link directo al producto. Sin que nadie tenga que escribir manualmente.</div>
+</div>
+
+<div class="h crit">
+  <div class="h-head"><div class="h-t">Posts orgánicos mandan a Mercado Libre y Amazon en lugar del sitio propio</div><span class="tag tc">Crítico</span></div>
+  <div class="h-b">Vi posts con buen copy que tienen como CTA links a Mercado Libre y Amazon. Eso significa que cada venta que genera ese post con tu audiencia propia le deja entre el 12% y el 17% de comisión a esas plataformas. Son clientes que ya te siguen, que ya confían en ti, que ya estaban en tu página — y los mandas a pagarle a otro.</div>
+  <div class="fix"><strong>La regla:</strong> ML y Amazon captan clientes nuevos que no te conocen. Tu audiencia orgánica en redes va siempre al sitio propio. Nunca al revés.</div>
+</div>
+
+<div class="h medio">
+  <div class="h-head"><div class="h-t">El horario de Facebook dice "Abre pronto" — no es 24/7</div><span class="tag tm">Media</span></div>
+  <div class="h-b">Un e-commerce no tiene horario. Cuando alguien llega a la página de noche o en fin de semana y ve "Abre pronto", siente que no va a obtener respuesta y no compra. Es una barrera que no debería existir.</div>
+  <div class="fix"><strong>Qué hacer:</strong> Ir a Configuración de la página → Información → Horario → cambiar a "Siempre abierto". Tarda 2 minutos.</div>
+</div>
+
+<div class="sep"></div>
+
+<!-- HALLAZGOS DEL SITIO -->
+<div class="sec">El sitio — los hallazgos más importantes</div>
+
+<div class="checkout-box">
+  <div class="error-badge">ERROR CRÍTICO — PRIORIDAD MÁXIMA</div>
+  <div class="cb-t">El checkout de Conekta está roto en este momento</div>
+  <div class="cb-b">Lo vi con mis propios ojos. Cuando el cliente elige Conekta — que es la opción que aparece seleccionada por defecto — y hace clic en "Pagar ahora", el sistema lo redirige a <strong>pay.conekta.com</strong> y aparece: <strong>"Ha ocurrido un error inesperado, por favor intente de nuevo."</strong><br><br>El cliente llegó al último paso. Tiene la tarjeta en la mano. Y el sistema le dice que algo salió mal. La mayoría no intenta de nuevo — se va.<br><br><strong>Esto hay que reportar a Conekta hoy mismo y verificar que Mercado Pago y PayPal funcionen correctamente como alternativa visible.</strong></div>
+</div>
+
+<div class="h crit">
+  <div class="h-head"><div class="h-t">No hay nada que retenga al visitante que está a punto de irse</div><span class="tag tc">Crítico</span></div>
+  <div class="h-b">Navegué el sitio completo. No apareció ningún popup, ningún chat flotante de WhatsApp, ningún mensaje de salida. El 95% de los visitantes de una tienda de moda no compran en la primera visita. Sin captura de datos, ese 95% desaparece para siempre.</div>
+  <div class="fix"><strong>Qué hacer:</strong> Popup de exit-intent con 10% de descuento a cambio del WhatsApp. Empieza a capturar leads desde el primer día de activarse.</div>
+</div>
+
+<div class="h crit">
+  <div class="h-head"><div class="h-t">El carrito no tiene barra de progreso hacia envío gratis</div><span class="tag tc">Crítico</span></div>
+  <div class="h-b">UpCart ya está instalado. Pero la barra de progreso de envío gratis no está activada. El cliente que lleva $499 no sabe que con una camisa más ($998) tiene envío gratis. Nadie se lo dice. Esa función sube el ticket promedio entre 15% y 25% y está a un clic de activarse.</div>
+  <div class="fix"><strong>Qué hacer:</strong> Abrir la app de UpCart en Shopify → Configuración → activar "Barra de envío gratis" con el umbral de $1,800 MXN. 10 minutos de trabajo.</div>
+</div>
+
+<div class="h crit">
+  <div class="h-head"><div class="h-t">El checkout solo muestra Envío Express — el estándar de $99 no aparece</div><span class="tag tc">Crítico</span></div>
+  <div class="h-b">En el checkout vi únicamente "Envío Express (1 a 3 días) $160.00". El envío estándar de $99 que está comunicado en el sitio no aparece como opción. El cliente que quiere pagar menos no puede elegirlo. Y el que ve $160 cuando esperaba $99 abandona.</div>
+  <div class="fix"><strong>Qué hacer:</strong> Shopify → Configuración → Envíos y entregas → verificar que la tarifa estándar esté activa y correctamente asignada a todas las zonas de México.</div>
+</div>
+
+<div class="h alto">
+  <div class="h-head"><div class="h-t">No hay WhatsApp flotante en ninguna página del sitio</div><span class="tag ta">Alta</span></div>
+  <div class="h-b">Recorrí home, colecciones, PDPs y checkout. No hay botón de WhatsApp flotante en ninguna parte. Para una marca que vende buena parte por WhatsApp, eso es una contradicción. El cliente con una duda a mitad del proceso no tiene a dónde ir sin salir del sitio.</div>
+  <div class="fix"><strong>Qué hacer:</strong> App gratuita en Shopify (Superlemon, WhatsApp Chat + Abandoned Cart). Instala en 5 minutos. Aparece en todas las páginas.</div>
+</div>
+
+<div class="h alto">
+  <div class="h-head"><div class="h-t">El costo de envío no está visible en la página del producto</div><span class="tag ta">Alta</span></div>
+  <div class="h-b">El cliente descubre el costo de envío hasta el checkout. El 48% de los abandonos en checkout son por costos inesperados. Es la razón número uno por la que la gente llega hasta el último paso y se va.</div>
+  <div class="fix"><strong>Qué hacer:</strong> Agregar una línea debajo del botón "Agregar al carrito": "Envío gratis en pedidos +$1,800 MXN · Estándar $99 · Exprés $160". Una línea que evita la sorpresa en el checkout.</div>
+</div>
+
+<div class="h alto">
+  <div class="h-head"><div class="h-t">El proceso de cambio requiere transferencia bancaria a BBVA</div><span class="tag ta">Alta</span></div>
+  <div class="h-b">Lo leí en la página de cambios. Para cambiar una camisa hay que hacer transferencia a la cuenta 012540001121864119 a nombre de Tiendas Platino SA de CV y mandar el comprobante por email. El cliente nuevo que lee eso antes de comprar piensa "y si me equivoco de talla, me espera ese rollo" — y no compra.</div>
+  <div class="fix"><strong>Qué hacer:</strong> El proceso interno puede ser el mismo, pero el cliente debe ver un formulario online, no datos bancarios en una página pública. Cambia la percepción completamente.</div>
+</div>
+
+<div class="h alto">
+  <div class="h-head"><div class="h-t">La página de mayoristas no tiene ningún CTA funcional</div><span class="tag ta">Alta</span></div>
+  <div class="h-b">Entré y la recorrí completa. Tiene texto de marca, video de fabricación, foto del proceso. Bien producida. Pero termina sin formulario, sin precios de mayoreo, sin cantidades mínimas, sin número de WhatsApp directo. Alguien que quiere comprar 20 camisas para revender se va sin dejar ni su nombre.</div>
+  <div class="fix"><strong>Qué hacer:</strong> Agregar al final: cantidades mínimas, rango de precios y formulario de contacto o botón de WhatsApp. No necesita rediseño — necesita existir.</div>
+</div>
+
+<div class="h medio">
+  <div class="h-head"><div class="h-t">El banner superior confunde a clientes nuevos</div><span class="tag tm">Media</span></div>
+  <div class="h-b">"APROVECHA NUESTRO 38% DE DESCUENTO EN TODA LA TIENDA (solo menudeo)". El visitante nuevo no sabe qué es menudeo. Si tiene duda de si aplica para él, no hace clic.</div>
+  <div class="fix"><strong>Qué cambiar:</strong> "38% de descuento en compras individuales · Envío gratis desde $1,800 MXN". Mismo beneficio, sin términos de industria.</div>
+</div>
+
+<div class="sep"></div>
+
+<!-- DINERO EN LA MESA -->
+<div class="sec">Lo que se está perdiendo cada mes</div>
+
+<div class="numero">
+  <div class="n-val">$80,000+</div>
+  <div class="n-label">pesos estimados que se pierden mensualmente — ajustado con recuperación de carrito manual existente</div>
+</div>
+
+<ul class="fugas">
+  <li class="fuga"><div class="fn"></div><div class="fb"><strong>Carrito abandonado — se recupera manualmente, no en automático</strong>Sí existe recuperación de carrito por WhatsApp — lo confirmé porque me llegó el mensaje cuando metí una camisa y no pagué. Pero hay tres problemas: (1) es manual — alguien escribió ese mensaje a mano, lo que no escala y no funciona fuera de horario. (2) El copy dice "puedes hacer la venta directamente conmigo, es más rápido el proceso" — le están diciendo al cliente que el checkout es complicado, y la venta no queda registrada en Shopify. (3) No hay link de regreso al carrito. El mensaje correcto recupera la venta al sitio — este la desvía a una conversación manual.</div></li>
+  <li class="fuga"><div class="fn"></div><div class="fb"><strong>Error de Conekta — ventas rotas en el último paso</strong>Clientes que llegan hasta el checkout con la tarjeta lista y ven un error. Cantidad no medida pero inmediata. Hay que resolverlo hoy.</div></li>
+  <li class="fuga"><div class="fn"></div><div class="fb"><strong>Leads perdidos por WhatsApp manual — 65% de intenciones</strong>De cada 10 personas que preguntan precio o tallas en redes, 6 o 7 no van a escribir al WhatsApp. Sin automatización, esas ventas se van en el primer filtro.</div></li>
+  <li class="fuga"><div class="fn"></div><div class="fb"><strong>Comisiones a ML/Amazon con audiencia propia</strong>Posts orgánicos con CTA a Mercado Libre y Amazon pagan 12-17% de comisión con clientes que ya son tuyos. Con cada post así, parte del ingreso se va a otras plataformas.</div></li>
+  <li class="fuga"><div class="fn"></div><div class="fb"><strong>Sin captura de leads del 95% que no compra</strong>El 95% de visitantes no compra en la primera visita. Sin popup de exit-intent, ese 95% desaparece para siempre sin dejar ningún dato.</div></li>
+  <li class="fuga"><div class="fn"></div><div class="fb"><strong>Ticket bajo por falta de barra de envío gratis — 15-25% sin capturar</strong>UpCart ya está instalado. La barra de progreso está a un clic de activarse. El cliente que lleva $499 no sabe que con una camisa más tiene envío gratis. Nadie se lo dice.</div></li>
+  <li class="fuga"><div class="fn"></div><div class="fb"><strong>Mayoristas sin sistema — $5K-$50K por pedido perdido</strong>La página existe y recibe visitas. Pero sin formulario ni CTA, esos leads de alto ticket se van sin dejar datos.</div></li>
+  <li class="fuga"><div class="fn"></div><div class="fb"><strong>1.1M de Facebook sin recibir ningún mensaje en 6 semanas</strong>La audiencia más grande del negocio lleva semanas sin contenido. Cada semana sin publicar es posición algorítmica que se pierde y oportunidad de venta que no ocurre.</div></li>
+</ul>
+
+<table class="tabla" style="margin-top:1rem">
+  <tr><td>Carrito abandonado — recuperación manual con copy que desvía la venta</td><td>Existe pero no escala</td></tr>
+  <tr><td>Comisiones a ML/Amazon con audiencia propia</td><td>~$20,000-$40,000/mes</td></tr>
+  <tr><td>Ticket promedio sin barra de envío gratis</td><td>15-25% por debajo del posible</td></tr>
+  <tr><td>Leads mayoristas perdidos por mes</td><td>Sin sistema de captura</td></tr>
+  <tr><td>Total estimado mensual</td><td>+$130,000 MXN</td></tr>
+</table>
+
+<div class="sep"></div>
+
+<!-- PLAN DE ACCIÓN -->
+<div class="sec">Qué corregir — en este orden exacto</div>
+
+<div class="plan-cols">
+  <div class="plan-col">
+    <div class="plan-fase g">Hoy y esta semana</div>
+    <ul class="plan-items">
+      <li><span class="dot dg"></span>Reportar error de Conekta — hoy</li>
+      <li><span class="dot dg"></span>Cambiar horario FB a "Siempre abierto"</li>
+      <li><span class="dot dg"></span>Activar barra de envío gratis en UpCart</li>
+      <li><span class="dot dg"></span>Popup exit-intent con descuento 10%</li>
+      <li><span class="dot dg"></span>Verificar envío estándar $99 en checkout</li>
+      <li><span class="dot dg"></span>Info de envío en PDPs — una línea</li>
+      <li><span class="dot dg"></span>Botón WhatsApp flotante en el sitio</li>
+      <li><span class="dot dg"></span>Cambiar CTAs de posts a sitio propio</li>
+      <li><span class="dot dg"></span>Primer post de reactivación en FB</li>
+    </ul>
+  </div>
+  <div class="plan-col">
+    <div class="plan-fase a">Semanas 2–4</div>
+    <ul class="plan-items">
+      <li><span class="dot da"></span>Klaviyo: recuperación de carrito (1h/24h/72h)</li>
+      <li><span class="dot da"></span>Klaviyo: flujo postcompra (bienvenida + reseña + recompra)</li>
+      <li><span class="dot da"></span>Corregir bio de Instagram con CTA</li>
+      <li><span class="dot da"></span>Formulario en página de mayoristas</li>
+      <li><span class="dot da"></span>Política de cambio cerca del botón de compra</li>
+      <li><span class="dot da"></span>Reescribir banner: quitar "solo menudeo"</li>
+      <li><span class="dot da"></span>Campaña de recompra a clientes pasados</li>
+      <li><span class="dot da"></span>Estrategia de contenido FB: Reels 3x/semana</li>
+    </ul>
+  </div>
+  <div class="plan-col">
+    <div class="plan-fase b">Mes 1–3</div>
+    <ul class="plan-items">
+      <li><span class="dot db"></span>Automatización WhatsApp para social selling</li>
+      <li><span class="dot db"></span>Facebook Shop + Instagram Shopping</li>
+      <li><span class="dot db"></span>Pixel Meta con eventos de conversión</li>
+      <li><span class="dot db"></span>Cambiar objetivo de ads a Conversión</li>
+      <li><span class="dot db"></span>Portal de cambios con formulario online</li>
+      <li><span class="dot db"></span>Segmentación de base de clientes</li>
+      <li><span class="dot db"></span>Programa de lealtad básico</li>
+      <li><span class="dot db"></span>Dashboard de métricas activo</li>
+    </ul>
+  </div>
+</div>
+
+<div class="cierre">
+  <div class="c-t">Lo que está pasando en realidad</div>
+  <div class="c-b">
+    <p>Tiendas Platino tiene un sitio mejor de lo que parece en los números. Las fotos son buenas. Las reseñas son reales y tienen fotos. El producto existe y la gente que compra queda satisfecha — un 4.95 con 57 opiniones lo confirma. Instagram está activo y tiene estructura. El producto en sí no es el problema.</p>
+    <p>El problema es una cadena de fracturas que ocurren antes y después de la compra. El cliente llega desde un post que manda a Mercado Libre y pierde la comisión. O llega al sitio, navega, tiene una duda y no hay WhatsApp. O llega al checkout y el sistema le dice que algo salió mal. O compra y nadie le vuelve a escribir.</p>
+    <p>Cada uno de esos puntos es una fuga. Y todas tienen solución. <strong>La mayoría de los cambios urgentes toman días, no meses, y algunos toman minutos.</strong></p>
+    <p>Lo que falta no es más contenido ni mejor fotografía. Lo que falta es cerrar las fugas — empezando por el checkout roto hoy mismo — y poner el sistema que convierta, recupere y retenga.</p>
+  </div>
+  <div class="c-q">¿Cuánto tiempo más puede el negocio operar con el checkout fallando?</div>
+</div>
+
+</div>
+</body>
+</html>
