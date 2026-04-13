@@ -8,383 +8,320 @@
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#fff;color:#111;line-height:1.7}
 .page{max-width:680px;margin:0 auto;padding:2.5rem 1.5rem 5rem}
+.nav{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:1rem}
+.nav a{font-size:12px;font-weight:700;text-decoration:none;padding:8px 12px;border-radius:999px;border:1px solid #e5e5e5;color:#111;background:#fff}
+.nav a.active{background:#111;color:#fff;border-color:#111}
 
 .portada{background:#111;border-radius:16px;padding:2.5rem 2rem;margin-bottom:2rem}
-.p-eye{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#555;margin-bottom:.5rem}
+.p-eye{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#555;margin-bottom:.4rem}
 .p-titulo{font-size:26px;font-weight:700;line-height:1.2;margin-bottom:.5rem;color:#fff}
-.p-sub{font-size:14px;color:#999;line-height:1.65}
-.p-meta{margin-top:1.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;border-top:1px solid #222;padding-top:1rem;font-size:12px;color:#444}
+.p-subtitulo{font-size:15px;color:#888;line-height:1.5;margin-bottom:1.5rem}
+.p-divider{height:1px;background:#222;margin-bottom:1.25rem}
+.p-objetivo-label{font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:#555;margin-bottom:.3rem;font-weight:700}
+.p-objetivo{font-size:13px;color:#aaa;line-height:1.75}
+.p-meta{margin-top:1.5rem;display:flex;justify-content:space-between;align-items:center;border-top:1px solid #222;padding-top:1rem;font-size:12px;color:#444;flex-wrap:wrap;gap:6px}
 
 .sep{height:1px;background:#f0f0f0;margin:2rem 0}
-.sec{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#bbb;margin-bottom:1rem}
 
-/* PRECIO TOTAL */
-.precio-total{border:2px solid #111;border-radius:16px;padding:2rem;margin-bottom:1.5rem;display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;align-items:center}
-.pt-left{}
-.pt-label{font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:#999;margin-bottom:.25rem;font-weight:700}
-.pt-precio{font-size:52px;font-weight:800;color:#111;line-height:1}
-.pt-nota{font-size:13px;color:#888;margin-top:.35rem}
-.pt-right{border-left:1px solid #f0f0f0;padding-left:1.5rem}
-.pt-row{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid #f5f5f5;font-size:13px}
-.pt-row:last-child{border-bottom:none;font-weight:700;font-size:14px;padding-top:10px}
-.pt-row-l{color:#666}
-.pt-row-v{font-weight:700;color:#111}
-.pt-row:last-child .pt-row-l{color:#111}
+/* TOTAL */
+.total-strip{border:2px solid #111;border-radius:14px;padding:1.5rem 2rem;margin-bottom:2rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.ts-left .ts-label{font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:#999;font-weight:700;margin-bottom:.2rem}
+.ts-left .ts-precio{font-size:48px;font-weight:800;color:#111;line-height:1}
+.ts-left .ts-nota{font-size:13px;color:#888;margin-top:.2rem}
+.ts-right{display:flex;flex-direction:column;gap:6px}
+.ts-fase{display:flex;justify-content:space-between;gap:2rem;font-size:13px;padding:5px 0;border-bottom:1px solid #f0f0f0}
+.ts-fase:last-of-type{border-bottom:none}
+.ts-fase-n{color:#666}
+.ts-fase-v{font-weight:700;color:#111}
 
-/* INICIO BOX */
-.inicio-box{background:#f0fdf4;border:2px solid #16a34a;border-radius:14px;padding:1.75rem;margin-bottom:2rem}
-.ib-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1rem;flex-wrap:wrap;gap:8px}
-.ib-titulo{font-size:18px;font-weight:700;color:#14532d}
-.ib-sub{font-size:13px;color:#15803d;margin-top:2px}
-.ib-precio{text-align:right}
-.ib-monto{font-size:32px;font-weight:800;color:#15803d;line-height:1}
-.ib-nota{font-size:11px;color:#16a34a;margin-top:2px}
-.ib-badge{display:inline-block;background:#15803d;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;margin-top:.5rem}
+/* FASES */
+.fase{border-radius:14px;overflow:hidden;margin-bottom:1.75rem;border:1px solid #e5e5e5}
 
-/* RESTO BOX */
-.resto-box{background:#fafafa;border:1px solid #e5e5e5;border-radius:14px;padding:1.75rem;margin-bottom:2rem}
-.rb-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1rem;flex-wrap:wrap;gap:8px}
-.rb-titulo{font-size:18px;font-weight:700;color:#111}
-.rb-sub{font-size:13px;color:#666;margin-top:2px}
-.rb-precio{text-align:right}
-.rb-monto{font-size:32px;font-weight:800;color:#111;line-height:1}
-.rb-nota{font-size:11px;color:#999;margin-top:2px}
+.fase-header{padding:1.5rem 1.75rem}
+.fh-1{background:#f9fafb;border-bottom:1px solid #f0f0f0}
+.fh-2{background:#f0f5ff;border-bottom:1px solid #dbeafe}
+.fh-3{background:#faf5ff;border-bottom:1px solid #e9d5ff}
 
-/* ITEMS */
-.item{display:flex;gap:10px;padding:10px 0;border-bottom:1px solid #f0f0f0;align-items:flex-start}
+.fh-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap;margin-bottom:.75rem}
+.fh-num{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin-bottom:.2rem}
+.fh-1 .fh-num{color:#6b7280}
+.fh-2 .fh-num{color:#3b82f6}
+.fh-3 .fh-num{color:#9333ea}
+.fh-titulo{font-size:18px;font-weight:700;color:#111;line-height:1.2}
+.fh-tagline{font-size:13px;color:#666;margin-top:.2rem}
+.fh-precio-wrap{text-align:right;flex-shrink:0}
+.fh-precio{font-size:28px;font-weight:800;line-height:1}
+.fh-1 .fh-precio{color:#111}
+.fh-2 .fh-precio{color:#1d4ed8}
+.fh-3 .fh-precio{color:#7e22ce}
+.fh-precio-nota{font-size:11px;color:#999;margin-top:2px}
+.fh-badges{display:flex;gap:6px;flex-wrap:wrap}
+.badge{font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px}
+.b-tiempo{background:#f0f0f0;color:#555}
+.b-urgente{background:#111;color:#fff}
+.b-resultado{background:#dcfce7;color:#15803d}
+
+.fase-body{padding:1.5rem 1.75rem;background:#fff}
+
+.objetivo{font-size:13px;color:#555;line-height:1.7;margin-bottom:1.25rem;padding-bottom:1.25rem;border-bottom:1px solid #f5f5f5;font-style:italic}
+
+.items-titulo{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#bbb;margin-bottom:.625rem}
+.item{display:flex;gap:9px;padding:7px 0;border-bottom:1px solid #f8f8f8;font-size:13px;color:#333;align-items:flex-start;line-height:1.55}
 .item:last-child{border-bottom:none}
-.item-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;margin-top:9px}
-.dot-g{background:#16a34a}
-.dot-b{background:#111}
-.item-body{font-size:13px;line-height:1.65;color:#333}
-.item-body strong{font-weight:700;color:#111;display:block;margin-bottom:1px}
-.herr{display:inline-flex;flex-wrap:wrap;gap:4px;margin-top:4px}
-.h{font-size:11px;padding:1px 6px;border-radius:4px;background:#f0f0f0;color:#666}
-.h.g{background:#dcfce7;color:#15803d}
-.h.p{background:#fef9c3;color:#854d0e}
+.item-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0;margin-top:8px}
+.d1{background:#9ca3af}
+.d2{background:#3b82f6}
+.d3{background:#9333ea}
 
-/* TOOLS TABLE */
-.tools{background:#fafafa;border:1px solid #eee;border-radius:12px;padding:1.25rem;margin-bottom:1.5rem}
-.tools-t{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#bbb;margin-bottom:.75rem}
-.tr{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid #f0f0f0;font-size:13px}
-.tr:last-child{border-bottom:none}
-.tr-n{color:#333;font-weight:600}
-.tr-c{font-weight:700}
-.tr-c.g{color:#15803d}
-.tr-c.p{color:#ca8a04}
+.resultado{border-radius:8px;padding:.875rem 1rem;margin-top:1rem;font-size:13px;line-height:1.65}
+.r1{background:#f9fafb;border:1px solid #e5e5e5;color:#555}
+.r2{background:#eff6ff;border:1px solid #bfdbfe;color:#1e40af}
+.r3{background:#faf5ff;border:1px solid #e9d5ff;color:#6b21a8}
+.resultado-t{font-weight:700;margin-bottom:2px;font-size:12px;text-transform:uppercase;letter-spacing:.06em}
+.r1 .resultado-t{color:#6b7280}
+.r2 .resultado-t{color:#2563eb}
+.r3 .resultado-t{color:#7e22ce}
 
-/* ROI */
-.roi{background:#f0fdf4;border:1px solid #bbf7d0;border-radius:10px;padding:1rem 1.25rem;margin-top:1rem}
-.roi-t{font-size:12px;font-weight:700;color:#15803d;margin-bottom:3px}
-.roi-b{font-size:13px;color:#166534;line-height:1.7}
+/* PAGO */
+.pago{background:#f9fafb;border:1px solid #e5e5e5;border-radius:14px;padding:1.5rem;margin-bottom:1.5rem}
+.pago-titulo{font-size:13px;font-weight:700;color:#111;margin-bottom:1rem}
+.pago-row{display:flex;align-items:flex-start;gap:12px;padding:9px 0;border-bottom:1px solid #f0f0f0;font-size:13px}
+.pago-row:last-child{border-bottom:none}
+.pago-num{width:24px;height:24px;border-radius:50%;background:#111;color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.pago-body{flex:1}
+.pago-monto{font-weight:700;color:#111}
+.pago-cuando{color:#888;font-size:12px;margin-top:1px}
 
-/* CONDICIONES */
-.cond{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid #f5f5f5;font-size:13px}
-.cond:last-child{border-bottom:none}
-.cond-l{font-weight:700;color:#111;min-width:150px;flex-shrink:0}
-.cond-v{color:#555;line-height:1.55}
-
-/* NO INCLUYE */
-.ni{background:#fff8f0;border:1px solid #fed7aa;border-radius:10px;padding:1rem 1.25rem;margin-bottom:1.5rem}
-.ni-t{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#c2410c;margin-bottom:.5rem}
-.ni-r{font-size:13px;color:#7c2d12;line-height:1.75;display:flex;gap:8px}
-.ni-r::before{content:"—";color:#fdba74;flex-shrink:0}
+/* CONSIDERACIONES */
+.consid{margin-bottom:1.5rem}
+.consid-row{display:flex;gap:10px;padding:8px 0;border-bottom:1px solid #f5f5f5;font-size:13px;align-items:flex-start}
+.consid-row:last-child{border-bottom:none}
+.consid-row::before{content:"·";color:#ccc;flex-shrink:0;font-size:18px;line-height:1.3}
+.consid-text{color:#555;line-height:1.55}
 
 /* CIERRE */
-.cierre{background:#111;border-radius:16px;padding:2rem;color:#fff}
-.c-t{font-size:17px;font-weight:700;color:#fff;margin-bottom:.875rem;line-height:1.35}
-.c-b{font-size:13px;color:#999;line-height:1.85}
-.c-b p{margin-bottom:.625rem}
-.c-b p:last-child{margin-bottom:0}
-.c-b strong{color:#fff}
-.c-q{font-size:16px;font-weight:700;color:#fff;margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid #222;line-height:1.4}
+.cierre{background:#111;border-radius:16px;padding:2rem}
+.c-titulo{font-size:17px;font-weight:700;color:#fff;line-height:1.35;margin-bottom:1rem}
+.c-cuerpo{font-size:13px;color:#999;line-height:1.85;margin-bottom:1.5rem}
+.c-cuerpo p{margin-bottom:.625rem}
+.c-cuerpo p:last-child{margin-bottom:0}
+.c-cuerpo strong{color:#fff}
+.c-firma{border-top:1px solid #222;padding-top:1.25rem;display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:8px}
+.c-firma-nombre{font-size:15px;font-weight:700;color:#fff}
+.c-firma-empresa{font-size:12px;color:#555;margin-top:2px}
+.c-firma-precio{text-align:right}
+.c-firma-total{font-size:11px;color:#555;text-transform:uppercase;letter-spacing:.08em;margin-bottom:2px}
+.c-firma-monto{font-size:22px;font-weight:800;color:#fff}
 
 @media(max-width:520px){
-  .precio-total{grid-template-columns:1fr}
-  .pt-right{border-left:none;padding-left:0;border-top:1px solid #f0f0f0;padding-top:1rem}
-  .pt-precio{font-size:40px}
+  .total-strip{flex-direction:column}
+  .ts-left .ts-precio{font-size:38px}
+  .fh-top{flex-direction:column}
+  .fh-precio-wrap{text-align:left}
 }
 </style>
 </head>
 <body>
 <div class="page">
+<div class="nav">
+  <a href="./audit.html">Audit</a>
+  <a class="active" href="./propuesta.html">Propuesta</a>
+  <a href="./index.html">Inicio</a>
+</div>
 
+<!-- PORTADA -->
 <div class="portada">
-  <div class="p-eye">Propuesta comercial · Tiendas Platino</div>
-  <div class="p-titulo">El sistema completo — con un arranque claro esta semana.</div>
-  <div class="p-sub">El proyecto tiene un precio total. Para no detenerte esperando el presupuesto completo, arrancamos con lo urgente y lo que da resultados inmediatos, y completamos el sistema en las semanas siguientes.</div>
+  <div class="p-eye">Propuesta comercial · Abril 2026</div>
+  <div class="p-titulo">Optimización comercial y de conversión para Tiendas Platino</div>
+  <div class="p-subtitulo">Implementación en 3 fases sobre Shopify</div>
+  <div class="p-divider"></div>
+  <div class="p-objetivo-label">Objetivo</div>
+  <div class="p-objetivo">Transformar el ecosistema digital de Tiendas Platino en una estructura más eficiente de conversión, seguimiento y recompra, corrigiendo primero las fugas críticas de dinero y después fortaleciendo el sistema comercial completo.</div>
   <div class="p-meta">
-    <span>Fernando · Relativum · Abril 2026</span>
+    <span>Presentada por Fernando · Relativum</span>
+    <span>tiendasplatino.com.mx</span>
   </div>
 </div>
 
-<!-- PRECIO TOTAL -->
-<div class="sec">El proyecto completo</div>
-<div class="precio-total">
-  <div class="pt-left">
-    <div class="pt-label">Inversión total del proyecto</div>
-    <div class="pt-precio">$70,000</div>
-    <div class="pt-nota">MXN · honorarios Fernando · 6–8 semanas</div>
+<!-- TOTAL -->
+<div class="total-strip">
+  <div class="ts-left">
+    <div class="ts-label">Inversión total del proyecto</div>
+    <div class="ts-precio">$78,000</div>
+    <div class="ts-nota">MXN · 3 fases · honorarios Fernando</div>
   </div>
-  <div class="pt-right">
-    <div class="pt-row"><div class="pt-row-l">Para arrancar esta semana</div><div class="pt-row-v">$30,000</div></div>
-    <div class="pt-row"><div class="pt-row-l">Para completar el sistema</div><div class="pt-row-v">$40,000</div></div>
-    <div class="pt-row"><div class="pt-row-l">Total</div><div class="pt-row-v">$70,000 MXN</div></div>
+  <div class="ts-right">
+    <div class="ts-fase"><span class="ts-fase-n">Fase 1 — Contención y recuperación</span><span class="ts-fase-v">$24,000</span></div>
+    <div class="ts-fase"><span class="ts-fase-n">Fase 2 — Conversión y seguimiento</span><span class="ts-fase-v">$28,000</span></div>
+    <div class="ts-fase"><span class="ts-fase-n">Fase 3 — Escalamiento y sistema</span><span class="ts-fase-v">$26,000</span></div>
   </div>
 </div>
 
-<!-- PARTE 1 -->
-<div class="sec">Parte 1 — Arranque · $30,000 MXN · Semanas 1–2</div>
+<!-- ENFOQUE -->
+<p style="font-size:13px;color:#666;line-height:1.75;margin-bottom:2rem;padding:1.25rem;background:#fafafa;border-radius:10px;border-left:3px solid #111">
+  La implementación se desarrolla en 3 fases para evitar cargar todo de golpe, priorizar resultados rápidos y construir una mejora progresiva y medible.
+</p>
 
-<div class="inicio-box">
-  <div class="ib-head">
-    <div>
-      <div class="ib-titulo">Lo urgente y lo que da resultado esta semana</div>
-      <div class="ib-sub">Todo lo que está roto hoy + las primeras automatizaciones activas</div>
+<!-- FASE 1 -->
+<div class="fase">
+  <div class="fase-header fh-1">
+    <div class="fh-top">
+      <div>
+        <div class="fh-num">Fase 1</div>
+        <div class="fh-titulo">Contención y recuperación</div>
+        <div class="fh-tagline">Detener fugas inmediatas y asegurar que el sitio pueda cobrar, responder y convertir</div>
+      </div>
+      <div class="fh-precio-wrap">
+        <div class="fh-precio">$24,000</div>
+        <div class="fh-precio-nota">MXN</div>
+      </div>
     </div>
-    <div class="ib-precio">
-      <div class="ib-monto">$30,000</div>
-      <div class="ib-nota">MXN · primer pago</div>
+    <div class="fh-badges">
+      <span class="badge b-urgente">Arranca esta semana</span>
+      <span class="badge b-tiempo">7–10 días hábiles</span>
     </div>
   </div>
-  <div class="ib-badge">Arranca esta semana</div>
-
-  <div style="margin-top:1.25rem">
-    <div class="item">
-      <div class="item-dot dot-g"></div>
-      <div class="item-body">
-        <strong>Error de Conekta resuelto — día 1</strong>
-        Gestión con Conekta y Shopify. Hoy hay ventas llegando al último paso del checkout y rompiéndose. Se atiende el primer día de trabajo.
-        <div class="herr"><span class="h">Conekta</span><span class="h">Shopify</span></div>
-      </div>
-    </div>
-
-    <div class="item">
-      <div class="item-dot dot-g"></div>
-      <div class="item-body">
-        <strong>Identidad correcta en WhatsApp Business</strong>
-        El número que recupera carritos aparece como "Moon & Rain". El cliente que compró en Tiendas Platino no reconoce quién le escribe y lo ignora. Corrección completa del perfil de empresa.
-        <div class="herr"><span class="h">WhatsApp Business</span></div>
-      </div>
-    </div>
-
-    <div class="item">
-      <div class="item-dot dot-g"></div>
-      <div class="item-body">
-        <strong>Barra de envío gratis + upsell en carrito — UpCart</strong>
-        UpCart ya está instalado. Activar la barra de progreso y el módulo de upsell. Sube el ticket promedio 15–25% desde el primer día que se activa.
-        <div class="herr"><span class="h g">UpCart ya instalado</span></div>
-      </div>
-    </div>
-
-    <div class="item">
-      <div class="item-dot dot-g"></div>
-      <div class="item-body">
-        <strong>Información de envío y política de cambio en PDPs</strong>
-        Una línea con costo de envío y otra con link a política de cambio debajo del botón de compra. Elimina las dos objeciones más comunes antes de agregar al carrito.
-        <div class="herr"><span class="h">Shopify Theme</span></div>
-      </div>
-    </div>
-
-    <div class="item">
-      <div class="item-dot dot-g"></div>
-      <div class="item-body">
-        <strong>Popup de exit-intent — captura de WhatsApp</strong>
-        Aparece cuando el visitante va a irse. Descuento a cambio de WhatsApp o email. El 95% que no compra hoy se va para siempre — esto los retiene.
-        <div class="herr"><span class="h">Klaviyo</span></div>
-      </div>
-    </div>
-
-    <div class="item">
-      <div class="item-dot dot-g"></div>
-      <div class="item-body">
-        <strong>Klaviyo — carrito abandonado (3 emails)</strong>
-        1h recordatorio con foto del producto, 24h con reseñas, 72h con incentivo. Link directo al carrito en cada mensaje. Reemplaza el proceso manual actual que llega con identidad desconocida y tasa de recuperación cercana a cero.
-        <div class="herr"><span class="h">Klaviyo</span><span class="h p">$0–$800 MXN/mes herramienta</span></div>
-      </div>
-    </div>
-
-    <div class="item">
-      <div class="item-dot dot-g"></div>
-      <div class="item-body">
-        <strong>Klaviyo — postcompra (3 emails)</strong>
-        Día 1 bienvenida, día 7 reseña, día 30 recompra. El cliente compra hoy y vuelve a saber de la marca en el momento correcto — sin que nadie tenga que recordarlo.
-        <div class="herr"><span class="h">Klaviyo</span></div>
-      </div>
-    </div>
-
-    <div class="item">
-      <div class="item-dot dot-g"></div>
-      <div class="item-body">
-        <strong>Campaña de recompra a base instalada de clientes</strong>
-        Broadcast a clientes de los últimos 12 meses con nueva colección y descuento exclusivo. Es el ingreso más fácil — ya confían, ya tienen su talla. Se lanza en la primera semana de Klaviyo activo.
-        <div class="herr"><span class="h">Klaviyo</span></div>
-      </div>
-    </div>
-
-    <div class="item">
-      <div class="item-dot dot-g"></div>
-      <div class="item-body">
-        <strong>Correcciones rápidas: banner, horario FB, CTAs de posts, botón WhatsApp flotante</strong>
-        Banner sin "solo menudeo", horario de Facebook a 24/7, links de posts a sitio propio en lugar de ML/Amazon, botón de WhatsApp visible en todas las páginas.
-        <div class="herr"><span class="h">Shopify</span><span class="h">Facebook</span><span class="h">Instagram</span></div>
-      </div>
-    </div>
-
-    <div class="roi">
-      <div class="roi-t">Qué se mueve en las primeras 2 semanas</div>
-      <div class="roi-b">El checkout deja de perder ventas el primer día. El ticket promedio sube con UpCart desde que se activa. La campaña de recompra puede generar ingresos en las primeras 48h. Los carritos empiezan a recuperarse automáticamente. Estimado conservador de ingreso adicional solo en el primer mes: <strong>$20,000–$35,000 MXN</strong> entre carrito recuperado, ticket más alto y recompra de base instalada.</div>
+  <div class="fase-body">
+    <div class="objetivo">Detener fugas inmediatas de venta y asegurar que el sitio pueda cobrar, responder y convertir con menos fricción.</div>
+    <div class="items-titulo">Incluye</div>
+    <div class="item"><div class="item-dot d1"></div>Diagnóstico técnico y corrección del checkout prioritario</div>
+    <div class="item"><div class="item-dot d1"></div>Validación de métodos de pago y tarifas de envío</div>
+    <div class="item"><div class="item-dot d1"></div>Activación de barra de progreso de envío gratis en carrito</div>
+    <div class="item"><div class="item-dot d1"></div>Instalación de botón flotante de WhatsApp</div>
+    <div class="item"><div class="item-dot d1"></div>Mensaje visible de envío en páginas de producto</div>
+    <div class="item"><div class="item-dot d1"></div>Popup de salida para captura de leads</div>
+    <div class="item"><div class="item-dot d1"></div>Ajustes rápidos en Facebook e Instagram para mejorar respuesta y ruta comercial</div>
+    <div class="resultado r1">
+      <div class="resultado-t">Resultado esperado</div>
+      Reducir pérdida de ventas inmediatas, capturar tráfico que hoy se está escapando y hacer que Shopify funcione más como vendedor que como catálogo.
     </div>
   </div>
 </div>
 
-<!-- PARTE 2 -->
-<div class="sec">Parte 2 — Sistema completo · $40,000 MXN · Semanas 3–8</div>
-
-<div class="resto-box">
-  <div class="rb-head">
-    <div>
-      <div class="rb-titulo">Todo lo que falta para que el sistema opere solo</div>
-      <div class="rb-sub">E-commerce optimizado, Accretum, redes sociales y métricas</div>
+<!-- FASE 2 -->
+<div class="fase">
+  <div class="fase-header fh-2">
+    <div class="fh-top">
+      <div>
+        <div class="fh-num">Fase 2</div>
+        <div class="fh-titulo">Conversión y seguimiento</div>
+        <div class="fh-tagline">Aumentar la conversión del tráfico actual y reducir la dependencia de respuestas manuales</div>
+      </div>
+      <div class="fh-precio-wrap">
+        <div class="fh-precio">$28,000</div>
+        <div class="fh-precio-nota">MXN</div>
+      </div>
     </div>
-    <div class="rb-precio">
-      <div class="rb-monto">$40,000</div>
-      <div class="rb-nota">MXN · segundo pago</div>
+    <div class="fh-badges">
+      <span class="badge b-tiempo">2–3 semanas</span>
     </div>
   </div>
-
-  <div style="margin-top:1.25rem">
-    <div class="item">
-      <div class="item-dot dot-b"></div>
-      <div class="item-body">
-        <strong>Reescritura de copy — 30 productos más vendidos</strong>
-        De descripción técnica a copy que vende. Beneficio, ocasión de uso, tono de marca. Los 30 productos con más tráfico o ventas.
-      </div>
-    </div>
-
-    <div class="item">
-      <div class="item-dot dot-b"></div>
-      <div class="item-body">
-        <strong>Judge.me — reseñas automáticas en todas las PDPs</strong>
-        Solicitud automática post-entrega. Campaña a clientes pasados para poblar los productos que todavía no tienen reseñas. Las que ya tienen 4.95★ son el benchmark.
-        <div class="herr"><span class="h g">Judge.me gratis plan básico</span></div>
-      </div>
-    </div>
-
-    <div class="item">
-      <div class="item-dot dot-b"></div>
-      <div class="item-body">
-        <strong>Accretum — agente comercial en WhatsApp</strong>
-        Seed completo de la marca: catálogo, precios, tallas, políticas y tono de Tiendas Platino. Responde precio y tallas en 3 segundos, recupera carritos por WhatsApp con link directo al carrito, ejecuta postcompra y califica mayoristas. Reemplaza el proceso manual actual.
-        <div class="herr"><span class="h p">Licencia mensual Accretum aparte</span></div>
-      </div>
-    </div>
-
-    <div class="item">
-      <div class="item-dot dot-b"></div>
-      <div class="item-body">
-        <strong>Portal de cambios self-service</strong>
-        Reemplazar la transferencia bancaria visible en la página por formulario online. El proceso interno puede ser el mismo — lo que cambia es que el cliente nunca ve datos bancarios en una página pública.
-        <div class="herr"><span class="h">Shopify Forms</span></div>
-      </div>
-    </div>
-
-    <div class="item">
-      <div class="item-dot dot-b"></div>
-      <div class="item-body">
-        <strong>Pixel de Meta + eventos de conversión</strong>
-        Los 4 eventos estándar en Shopify: ViewContent, AddToCart, InitiateCheckout, Purchase. Sin esto los anuncios optimizan para clickers. Con esto, el mismo presupuesto de pauta puede rendir 2–3x más.
-        <div class="herr"><span class="h g">Gratis</span><span class="h">Meta Business</span></div>
-      </div>
-    </div>
-
-    <div class="item">
-      <div class="item-dot dot-b"></div>
-      <div class="item-body">
-        <strong>Facebook Shop + Instagram Shopping</strong>
-        Catálogo de Shopify visible en ambas plataformas con precios. Elimina "¿precio?" en comentarios. Compra sin salir de la app.
-        <div class="herr"><span class="h g">Gratis</span><span class="h">Meta Commerce</span></div>
-      </div>
-    </div>
-
-    <div class="item">
-      <div class="item-dot dot-b"></div>
-      <div class="item-body">
-        <strong>Estrategia de reactivación de Facebook 1.1M + bio de Instagram</strong>
-        Brief del primer post de regreso correcto. Calendario mensual con mix de formatos que recupera posición algorítmica. Bio de Instagram con CTA real. Para que el equipo de Yesbet lo ejecute sin agencia.
-        <div class="herr"><span class="h">Facebook</span><span class="h">Instagram</span></div>
-      </div>
-    </div>
-
-    <div class="item">
-      <div class="item-dot dot-b"></div>
-      <div class="item-body">
-        <strong>Página de mayoristas funcional</strong>
-        Agregar lo que falta: cantidades mínimas, precios de referencia, formulario de contacto y WhatsApp directo. Leads de $5K–$50K por pedido dejan de irse sin datos.
-      </div>
-    </div>
-
-    <div class="item">
-      <div class="item-dot dot-b"></div>
-      <div class="item-body">
-        <strong>Segmentación de base de clientes</strong>
-        En Klaviyo: nuevos, recurrentes, mayoristas e inactivos. Cada grupo recibe mensajes distintos. Los inactivos +90 días reciben campaña de win-back.
-        <div class="herr"><span class="h">Klaviyo</span></div>
-      </div>
-    </div>
-
-    <div class="item">
-      <div class="item-dot dot-b"></div>
-      <div class="item-body">
-        <strong>Dashboard de métricas configurado</strong>
-        Tasa de conversión, ticket promedio, carritos recuperados, tasa de recompra, ROAS. Sin números no hay decisiones.
-        <div class="herr"><span class="h g">Nativo Shopify + Klaviyo</span></div>
-      </div>
+  <div class="fase-body">
+    <div class="objetivo">Aumentar la conversión del tráfico actual y reducir la dependencia de respuestas manuales.</div>
+    <div class="items-titulo">Incluye</div>
+    <div class="item"><div class="item-dot d2"></div>Implementación de automatización inicial en email marketing</div>
+    <div class="item"><div class="item-dot d2"></div>Flujo de carrito abandonado</div>
+    <div class="item"><div class="item-dot d2"></div>Flujo postcompra y solicitud de reseña</div>
+    <div class="item"><div class="item-dot d2"></div>Mejora de copy estratégico en bio, CTA y mensajes comerciales</div>
+    <div class="item"><div class="item-dot d2"></div>Ajustes de confianza en PDP y proceso de compra</div>
+    <div class="item"><div class="item-dot d2"></div>Estructura funcional para mayoristas con CTA o formulario</div>
+    <div class="item"><div class="item-dot d2"></div>Campaña inicial de recompra a clientes existentes</div>
+    <div class="resultado r2">
+      <div class="resultado-t">Resultado esperado</div>
+      Más ventas recuperadas, mejor seguimiento a prospectos calientes y un proceso comercial más ordenado y escalable.
     </div>
   </div>
 </div>
 
-<!-- HERRAMIENTAS -->
-<div class="sec">Herramientas — costo mensual de Yesbet (no incluido en honorarios)</div>
-<div class="tools">
-  <div class="tools-t">Recurrente mensual — separado de los $70K</div>
-  <div class="tr"><span class="tr-n">Klaviyo</span><span class="tr-c g">Gratis hasta 500 contactos · ~$500–$800 MXN/mes después</span></div>
-  <div class="tr"><span class="tr-n">UpCart</span><span class="tr-c p">Ya instalado — verificar plan vigente</span></div>
-  <div class="tr"><span class="tr-n">Judge.me</span><span class="tr-c g">Gratis plan básico</span></div>
-  <div class="tr"><span class="tr-n">WhatsApp flotante</span><span class="tr-c g">Gratis</span></div>
-  <div class="tr"><span class="tr-n">Facebook Shop / IG Shopping / Pixel</span><span class="tr-c g">Gratis</span></div>
-  <div class="tr"><span class="tr-n">Accretum</span><span class="tr-c p">Según tier Relativum — cotizar aparte</span></div>
+<!-- FASE 3 -->
+<div class="fase">
+  <div class="fase-header fh-3">
+    <div class="fh-top">
+      <div>
+        <div class="fh-num">Fase 3</div>
+        <div class="fh-titulo">Escalamiento y sistema comercial</div>
+        <div class="fh-tagline">Convertir la infraestructura digital en un sistema completo de adquisición, recompra y retención</div>
+      </div>
+      <div class="fh-precio-wrap">
+        <div class="fh-precio">$26,000</div>
+        <div class="fh-precio-nota">MXN</div>
+      </div>
+    </div>
+    <div class="fh-badges">
+      <span class="badge b-tiempo">4–6 semanas</span>
+    </div>
+  </div>
+  <div class="fase-body">
+    <div class="objetivo">Convertir la infraestructura digital en un sistema más completo de adquisición, recompra y retención.</div>
+    <div class="items-titulo">Incluye</div>
+    <div class="item"><div class="item-dot d3"></div>Automatización avanzada por WhatsApp para social selling</div>
+    <div class="item"><div class="item-dot d3"></div>Configuración de eventos y medición para Meta</div>
+    <div class="item"><div class="item-dot d3"></div>Conexión estratégica entre campañas, landing y producto</div>
+    <div class="item"><div class="item-dot d3"></div>Integración de Facebook e Instagram Shopping</div>
+    <div class="item"><div class="item-dot d3"></div>Segmentación inicial de base de clientes</div>
+    <div class="item"><div class="item-dot d3"></div>Estructura de recompra y win-back</div>
+    <div class="item"><div class="item-dot d3"></div>Dashboard base de métricas comerciales</div>
+    <div class="resultado r3">
+      <div class="resultado-t">Resultado esperado</div>
+      Mayor aprovechamiento del activo social de la marca, mejor monetización del tráfico y una base más fuerte para crecer con control.
+    </div>
+  </div>
 </div>
 
-<!-- NO INCLUYE -->
-<div class="ni">
-  <div class="ni-t">No incluye</div>
-  <div class="ni-r">Producción de contenido — fotos, videos, diseño. Eso es del equipo de Yesbet.</div>
-  <div class="ni-r">Presupuesto de pauta publicitaria — va aparte, lo maneja Yesbet.</div>
-  <div class="ni-r">Licencia mensual de Accretum — el setup está incluido en los $70K, la licencia se cotiza aparte.</div>
-  <div class="ni-r">Retainer mensual de optimización — opcional después de la implementación.</div>
+<!-- FORMA DE PAGO -->
+<div class="pago">
+  <div class="pago-titulo">Forma de pago</div>
+  <div class="pago-row">
+    <div class="pago-num">1</div>
+    <div class="pago-body">
+      <div class="pago-monto">50% — $39,000 MXN</div>
+      <div class="pago-cuando">Anticipo para iniciar · al firmar la propuesta</div>
+    </div>
+  </div>
+  <div class="pago-row">
+    <div class="pago-num">2</div>
+    <div class="pago-body">
+      <div class="pago-monto">30% — $23,400 MXN</div>
+      <div class="pago-cuando">Al cierre de la Fase 1</div>
+    </div>
+  </div>
+  <div class="pago-row">
+    <div class="pago-num">3</div>
+    <div class="pago-body">
+      <div class="pago-monto">20% — $15,600 MXN</div>
+      <div class="pago-cuando">Al cierre de la Fase 3</div>
+    </div>
+  </div>
 </div>
 
-<!-- CONDICIONES -->
-<div class="sec">Condiciones</div>
+<!-- CONSIDERACIONES -->
 <div style="margin-bottom:2rem">
-  <div class="cond"><div class="cond-l">Pago Parte 1</div><div class="cond-v">$30,000 MXN al inicio — arrancamos esta semana.</div></div>
-  <div class="cond"><div class="cond-l">Pago Parte 2</div><div class="cond-v">$40,000 MXN al iniciar la segunda etapa — cuando la Parte 1 está entregada y funcionando.</div></div>
-  <div class="cond"><div class="cond-l">Alternativa</div><div class="cond-v">Pago completo de $70,000 MXN al inicio con 5% de descuento ($66,500 MXN).</div></div>
-  <div class="cond"><div class="cond-l">Tiempo de entrega</div><div class="cond-v">Parte 1: 1–2 semanas. Parte 2: 4–6 semanas adicionales.</div></div>
-  <div class="cond"><div class="cond-l">Accesos necesarios</div><div class="cond-v">Shopify admin, Meta Business Manager, WhatsApp Business, Conekta. Todo permanece propiedad de Tiendas Platino.</div></div>
-  <div class="cond"><div class="cond-l">Retainer (opcional)</div><div class="cond-v">Optimización mensual continua después de la implementación: $10,000–$14,000 MXN/mes. Mínimo 3 meses.</div></div>
-  <div class="cond"><div class="cond-l">Vigencia</div><div class="cond-v">15 días a partir de la fecha de emisión.</div></div>
+  <p style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#bbb;margin-bottom:.75rem">Consideraciones</p>
+  <div class="consid">
+    <div class="consid-row"><div class="consid-text">La implementación se realiza sobre la infraestructura actual de Shopify.</div></div>
+    <div class="consid-row"><div class="consid-text">No incluye costo de apps, suscripciones, pauta publicitaria, dominio, producción fotográfica o video.</div></div>
+    <div class="consid-row"><div class="consid-text">En caso de requerirse herramientas externas como Judge.me, Klaviyo, automatización de WhatsApp u otras, se presentarán como costos separados al cliente.</div></div>
+    <div class="consid-row"><div class="consid-text">El proyecto puede ejecutarse por fases, pero la recomendación estratégica es completar las 3 para obtener un sistema realmente funcional.</div></div>
+  </div>
 </div>
 
 <!-- CIERRE -->
 <div class="cierre">
-  <div class="c-t">El negocio tiene todo para vender bien. Lo que falta es el sistema.</div>
-  <div class="c-b">
-    <p>Tienes 1.1 millones de personas en Facebook que llevan 6 semanas sin recibir un mensaje. Hay un checkout roto que pierde ventas en el último segundo. Hay un WhatsApp de recuperación de carrito que llega como cuenta desconocida y nadie abre. Hay posts que mandan tu audiencia propia a pagar comisión a Mercado Libre.</p>
-    <p>Todo eso se resuelve. <strong>La Parte 1 arranca esta semana y en 2 semanas ya hay resultados medibles.</strong> La Parte 2 completa el sistema para que opere solo — sin depender de que alguien esté disponible a las 3am para responder un "¿precio?".</p>
+  <div class="c-titulo">Tiendas Platino no necesita empezar de cero.<br>Necesita corregir fugas, convertir mejor el tráfico que ya tiene y construir un sistema que no dependa de esfuerzo manual para vender.</div>
+  <div class="c-cuerpo">
+    <p>Tienes 1.1 millones de personas en Facebook, un sitio funcionando, producto propio y reseñas reales de 4.95 estrellas. Los activos están. Lo que falta es el sistema que los conecta.</p>
+    <p><strong>La Fase 1 arranca esta semana.</strong> En 7 a 10 días hábiles el checkout funciona, el carrito empieza a convertir mejor y el tráfico que hoy se escapa empieza a quedarse.</p>
   </div>
-  <div class="c-q">¿Arrancamos con la Parte 1 esta semana?</div>
+  <div class="c-firma">
+    <div>
+      <div class="c-firma-nombre">Fernando</div>
+      <div class="c-firma-empresa">Relativum · relativum.com</div>
+    </div>
+    <div class="c-firma-precio">
+      <div class="c-firma-total">Inversión total</div>
+      <div class="c-firma-monto">$78,000 MXN</div>
+    </div>
+  </div>
 </div>
 
 </div>

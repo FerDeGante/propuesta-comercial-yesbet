@@ -1,0 +1,40 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "redirects": [
+    {
+      "source": "/index.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/audit.html",
+      "destination": "/audit",
+      "permanent": true
+    },
+    {
+      "source": "/audit/",
+      "destination": "/audit",
+      "permanent": true
+    },
+    {
+      "source": "/propuesta.html",
+      "destination": "/propuesta",
+      "permanent": true
+    },
+    {
+      "source": "/propuesta/",
+      "destination": "/propuesta",
+      "permanent": true
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/audit",
+      "destination": "/audit.html"
+    },
+    {
+      "source": "/propuesta",
+      "destination": "/propuesta.html"
+    }
+  ]
+}

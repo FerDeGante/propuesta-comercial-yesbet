@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Acceso a las dos páginas del proyecto: audit y propuesta.">
+<title>Tiendas Platino — Audit y Propuesta</title>
+<style>
+:root{
+  --bg:#f5f1e8;
+  --ink:#111111;
+  --muted:#5b5b5b;
+  --line:rgba(17,17,17,.12);
+  --card:rgba(255,255,255,.72);
+  --card-strong:#ffffff;
+  --accent:#0f766e;
+  --accent-2:#9a3412;
+  --shadow:0 24px 60px rgba(17,17,17,.10);
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%}
+body{
+  color:var(--ink);
+  background:
+    radial-gradient(circle at top left, rgba(15,118,110,.18), transparent 30%),
+    radial-gradient(circle at top right, rgba(154,52,18,.14), transparent 28%),
+    linear-gradient(180deg, #faf7ef 0%, #f0e7d8 100%);
+  font-family: "Avenir Next", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+}
+.shell{
+  max-width:1120px;
+  margin:0 auto;
+  padding:32px 20px 44px;
+}
+.topline{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:16px;
+  flex-wrap:wrap;
+  margin-bottom:32px;
+}
+.eyebrow{
+  font-size:12px;
+  text-transform:uppercase;
+  letter-spacing:.2em;
+  color:#6b7280;
+}
+.chip{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:8px 12px;
+  border-radius:999px;
+  border:1px solid rgba(17,17,17,.10);
+  background:rgba(255,255,255,.65);
+  color:#374151;
+  font-size:12px;
+}
+h1{
+  margin:0;
+  max-width:11ch;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size:clamp(44px, 8vw, 90px);
+  line-height:.94;
+  letter-spacing:-.04em;
+}
+.intro{
+  max-width:760px;
+  margin:18px 0 0;
+  font-size:18px;
+  line-height:1.7;
+  color:#404040;
+}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:18px;
+  margin-top:34px;
+}
+.card{
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+  min-height:280px;
+  padding:26px;
+  border-radius:24px;
+  border:1px solid var(--line);
+  background:linear-gradient(180deg, rgba(255,255,255,.84), rgba(255,255,255,.68));
+  box-shadow:var(--shadow);
+  backdrop-filter:blur(12px);
+}
+.card::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:24px;
+  padding:1px;
+  background:linear-gradient(145deg, rgba(17,17,17,.15), rgba(17,17,17,0));
+  -webkit-mask:linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite:xor;
+  mask-composite:exclude;
+  pointer-events:none;
+}
+.card.audit{
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.86), rgba(255,255,255,.72)),
+    linear-gradient(135deg, rgba(220,38,38,.12), transparent 48%);
+}
+.card.propuesta{
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.86), rgba(255,255,255,.72)),
+    linear-gradient(135deg, rgba(15,118,110,.12), transparent 48%);
+}
+.badge{
+  display:inline-flex;
+  width:fit-content;
+  align-items:center;
+  gap:8px;
+  padding:6px 10px;
+  border-radius:999px;
+  background:#111;
+  color:#fff;
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:.14em;
+}
+.badge.green{background:var(--accent)}
+.badge.orange{background:var(--accent-2)}
+.card h2{
+  margin:0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size:clamp(28px, 4vw, 40px);
+  line-height:1.02;
+  letter-spacing:-.03em;
+}
+.card p{
+  margin:0;
+  color:#52525b;
+  line-height:1.65;
+  font-size:15px;
+}
+.meta{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:10px;
+}
+.meta div{
+  padding:10px 12px;
+  border-radius:14px;
+  background:rgba(255,255,255,.78);
+  border:1px solid rgba(17,17,17,.08);
+  color:#3f3f46;
+  font-size:13px;
+  line-height:1.5;
+}
+.actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  margin-top:auto;
+}
+.button{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:46px;
+  padding:0 16px;
+  border-radius:999px;
+  text-decoration:none;
+  font-weight:700;
+  font-size:14px;
+  transition:transform .18s ease, box-shadow .18s ease, background .18s ease;
+}
+.button:hover{transform:translateY(-1px)}
+.button.primary{
+  background:#111;
+  color:#fff;
+  box-shadow:0 14px 28px rgba(17,17,17,.18);
+}
+.button.secondary{
+  background:rgba(255,255,255,.8);
+  color:#111;
+  border:1px solid rgba(17,17,17,.12);
+}
+.footer{
+  margin-top:24px;
+  color:#6b7280;
+  font-size:12px;
+  line-height:1.6;
+}
+@media (max-width: 760px){
+  .grid{grid-template-columns:1fr}
+  .card{min-height:auto}
+  .meta{grid-template-columns:1fr}
+  .intro{font-size:16px}
+}
+</style>
+</head>
+<body>
+  <main class="shell">
+    <div class="topline">
+      <div class="eyebrow">Tiendas Platino</div>
+      <div class="chip">Dos rutas disponibles: <strong>audit</strong> y <strong>propuesta</strong></div>
+    </div>
+
+    <h1>Elige la página que quieres abrir</h1>
+    <p class="intro">
+      El despliegue ya no debe caer en una pantalla vacía. Esta portada conecta las dos páginas del proyecto y deja claro cuál abrir según lo que necesites revisar.
+    </p>
+
+    <section class="grid" aria-label="Páginas del proyecto">
+      <article class="card audit">
+        <span class="badge orange">Audit</span>
+        <h2>Diagnóstico completo del sitio y redes</h2>
+        <p>
+          Hallazgos, fugas de conversión, checkout roto, acciones urgentes y el resumen de lo que sí está funcionando.
+        </p>
+        <div class="meta">
+          <div>Ruta: <strong>/audit</strong></div>
+          <div>Archivo: <strong>audit.html</strong></div>
+        </div>
+        <div class="actions">
+          <a class="button primary" href="./audit.html">Abrir audit</a>
+          <a class="button secondary" href="./audit.html">Ver versión directa</a>
+        </div>
+      </article>
+
+      <article class="card propuesta">
+        <span class="badge green">Propuesta</span>
+        <h2>Propuesta comercial y plan de implementación</h2>
+        <p>
+          Inversión total, 3 fases de implementación, herramientas, condiciones y el orden exacto de ejecución.
+        </p>
+        <div class="meta">
+          <div>Ruta: <strong>/propuesta</strong></div>
+          <div>Archivo: <strong>propuesta.html</strong></div>
+        </div>
+        <div class="actions">
+          <a class="button primary" href="./propuesta.html">Abrir propuesta</a>
+          <a class="button secondary" href="./propuesta.html">Ver versión directa</a>
+        </div>
+      </article>
+    </section>
+
+    <div class="footer">
+      Si entras por la raíz del dominio, esta es la página correcta. Si quieres ir directo a una de las dos, usa <code>/audit</code> o <code>/propuesta</code>.
+    </div>
+  </main>
+</body>
+</html>
