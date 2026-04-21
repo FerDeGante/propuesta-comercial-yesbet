@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Auditoría de Campañas Meta — Tiendas Platino</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#fff;color:#111;line-height:1.7}
+.page{max-width:720px;margin:0 auto;padding:2.5rem 1.5rem 5rem}
+.nav{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:1rem}
+.nav a{font-size:12px;font-weight:700;text-decoration:none;padding:8px 12px;border-radius:999px;border:1px solid #e5e5e5;color:#111;background:#fff}
+.nav a.active{background:#111;color:#fff;border-color:#111}
+
+.portada{background:#111;border-radius:16px;padding:2.5rem 2rem;margin-bottom:2rem}
+.p-eye{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#555;margin-bottom:.4rem}
+.p-titulo{font-size:26px;font-weight:700;line-height:1.2;margin-bottom:.5rem;color:#fff}
+.p-sub{font-size:14px;color:#999;line-height:1.65}
+.p-meta{margin-top:1.5rem;display:flex;justify-content:space-between;border-top:1px solid #222;padding-top:1rem;font-size:12px;color:#444;flex-wrap:wrap;gap:6px}
+
+.sep{height:1px;background:#f0f0f0;margin:2rem 0}
+.sec{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#bbb;margin-bottom:1rem;margin-top:2rem}
+
+/* NÚMEROS GRANDES */
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-bottom:1.5rem}
+.kpi{border:1px solid #e5e5e5;border-radius:12px;padding:1rem;text-align:center}
+.kpi-val{font-size:28px;font-weight:800;line-height:1;margin-bottom:3px}
+.kpi-label{font-size:11px;color:#888;line-height:1.4}
+.kpi.red .kpi-val{color:#dc2626}
+.kpi.green .kpi-val{color:#16a34a}
+.kpi.yellow .kpi-val{color:#ca8a04}
+.kpi.blue .kpi-val{color:#2563eb}
+
+/* HALLAZGO CRÍTICO */
+.critico{background:#fef2f2;border:2px solid #dc2626;border-radius:14px;padding:1.5rem;margin-bottom:1.5rem}
+.c-titulo{font-size:16px;font-weight:700;color:#7f1d1d;margin-bottom:.5rem}
+.c-body{font-size:13px;color:#7f1d1d;line-height:1.75}
+.c-body strong{font-weight:700}
+
+/* TABLA */
+.tabla-wrap{overflow-x:auto;margin-bottom:1.5rem}
+table{width:100%;border-collapse:collapse;font-size:12px}
+thead tr{background:#f9fafb;border-bottom:2px solid #e5e5e5}
+th{padding:8px 10px;text-align:left;font-weight:700;color:#555;font-size:11px;text-transform:uppercase;letter-spacing:.05em;white-space:nowrap}
+td{padding:8px 10px;border-bottom:1px solid #f5f5f5;vertical-align:top;line-height:1.4}
+tr:last-child td{border-bottom:none}
+.td-nombre{font-weight:600;color:#111;max-width:200px}
+.td-rojo{color:#dc2626;font-weight:700}
+.td-verde{color:#16a34a;font-weight:700}
+.td-gris{color:#999}
+.td-amarillo{color:#ca8a04;font-weight:700}
+.badge{font-size:10px;padding:2px 7px;border-radius:10px;font-weight:700;white-space:nowrap}
+.badge-rojo{background:#fee2e2;color:#991b1b}
+.badge-verde{background:#dcfce7;color:#15803d}
+.badge-amarillo{background:#fef9c3;color:#854d0e}
+.badge-gris{background:#f5f5f5;color:#6b7280}
+
+/* BLOQUES DE ANÁLISIS */
+.bloque{border:1px solid #e5e5e5;border-radius:12px;padding:1.25rem 1.5rem;margin-bottom:1rem}
+.bloque.rojo{border-left:3px solid #dc2626;background:#fef2f2}
+.bloque.verde{border-left:3px solid #16a34a;background:#f0fdf4}
+.bloque.amarillo{border-left:3px solid #ca8a04;background:#fefce8}
+.bloque.azul{border-left:3px solid #2563eb;background:#eff6ff}
+.b-titulo{font-size:14px;font-weight:700;margin-bottom:.35rem}
+.bloque.rojo .b-titulo{color:#7f1d1d}
+.bloque.verde .b-titulo{color:#14532d}
+.bloque.amarillo .b-titulo{color:#713f12}
+.bloque.azul .b-titulo{color:#1e3a8a}
+.b-body{font-size:13px;line-height:1.75;color:#555}
+.bloque.rojo .b-body{color:#7f1d1d}
+.bloque.verde .b-body{color:#166534}
+.bloque.amarillo .b-body{color:#713f12}
+.bloque.azul .b-body{color:#1e40af}
+
+/* PROPUESTAS */
+.propuesta{border:1px solid #e5e5e5;border-radius:12px;overflow:hidden;margin-bottom:1rem}
+.prop-header{padding:1rem 1.25rem;display:flex;justify-content:space-between;align-items:flex-start;gap:8px;flex-wrap:wrap}
+.ph-1{background:#f0fdf4;border-bottom:1px solid #bbf7d0}
+.ph-2{background:#eff6ff;border-bottom:1px solid #bfdbfe}
+.ph-3{background:#faf5ff;border-bottom:1px solid #e9d5ff}
+.ph-4{background:#fff7ed;border-bottom:1px solid #fed7aa}
+.prop-num{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:.2rem}
+.ph-1 .prop-num{color:#15803d}
+.ph-2 .prop-num{color:#1d4ed8}
+.ph-3 .prop-num{color:#7e22ce}
+.ph-4 .prop-num{color:#c2410c}
+.prop-titulo{font-size:15px;font-weight:700;color:#111}
+.prop-subtitulo{font-size:12px;color:#666;margin-top:2px}
+.prop-kpi{text-align:right;font-size:12px;color:#888}
+.prop-body{padding:1.25rem;background:#fff}
+.prop-item{display:flex;gap:8px;font-size:13px;padding:5px 0;border-bottom:1px solid #f8f8f8;line-height:1.55;color:#333}
+.prop-item:last-child{border-bottom:none}
+.prop-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0;margin-top:8px}
+.pd1{background:#16a34a}.pd2{background:#2563eb}.pd3{background:#7e22ce}.pd4{background:#c2410c}
+
+/* CIERRE */
+.cierre{background:#111;border-radius:16px;padding:2rem;margin-top:2rem}
+.cierre-t{font-size:17px;font-weight:700;color:#fff;margin-bottom:.875rem;line-height:1.35}
+.cierre-b{font-size:13px;color:#999;line-height:1.85}
+.cierre-b p{margin-bottom:.625rem}
+.cierre-b p:last-child{margin-bottom:0}
+.cierre-b strong{color:#fff}
+</style>
+</head>
+<body>
+<div class="page">
+<div class="nav">
+  <a href="./audit.html">Audit</a>
+  <a href="./propuesta.html">Propuesta</a>
+  <a class="active" href="./meta.html">Meta Ads</a>
+  <a href="./plan-meta.html">Plan Meta</a>
+  <a href="./index.html">Inicio</a>
+</div>
+
+<div class="portada">
+  <div class="p-eye">Auditoría de campañas Meta · Tiendas Platino · Mar–Abr 2026</div>
+  <div class="p-titulo">El problema no es el presupuesto.<br>Es dónde se está yendo.</div>
+  <div class="p-sub">Análisis de 385 campañas con datos reales de Meta Ads Manager. Período: 22 marzo – 20 abril 2026.</div>
+  <div class="p-meta">
+    <span>Fernando · Relativum · Abril 2026</span>
+    <span>Confidencial</span>
+  </div>
+</div>
+
+<!-- NÚMEROS REALES -->
+<div class="sec">Los números reales</div>
+<div class="kpis">
+  <div class="kpi red">
+    <div class="kpi-val">372</div>
+    <div class="kpi-label">campañas sin<br>ningún gasto</div>
+  </div>
+  <div class="kpi blue">
+    <div class="kpi-val">13</div>
+    <div class="kpi-label">campañas con<br>gasto real</div>
+  </div>
+  <div class="kpi red">
+    <div class="kpi-val">$36,826</div>
+    <div class="kpi-label">MXN gastado<br>en total</div>
+  </div>
+  <div class="kpi red">
+    <div class="kpi-val">$17,773</div>
+    <div class="kpi-label">MXN gastado<br>con ROAS = 0</div>
+  </div>
+  <div class="kpi green">
+    <div class="kpi-val">48</div>
+    <div class="kpi-label">compras<br>generadas</div>
+  </div>
+  <div class="kpi green">
+    <div class="kpi-val">4.53x</div>
+    <div class="kpi-label">ROAS promedio<br>campañas con ventas</div>
+  </div>
+</div>
+
+<!-- HALLAZGO CRÍTICO -->
+<div class="critico">
+  <div class="c-titulo">El hallazgo más importante</div>
+  <div class="c-body">
+    <strong>El 48% del presupuesto total — $17,773 MXN — se gastó en campañas que no generaron ninguna compra.</strong> No porque el producto sea malo ni porque la audiencia esté equivocada. Porque el objetivo de esas campañas no era vender: era generar conversaciones en Messenger, clics a links o vistas de landing page. Meta optimizó exactamente para eso — y cumplió. El problema es que esos objetivos no se convierten en dinero.
+  </div>
+</div>
+
+<!-- ANÁLISIS POR OBJETIVO -->
+<div class="sec">Por qué no funcionaron — análisis por objetivo</div>
+
+<div class="bloque rojo">
+  <div class="b-titulo">Campañas de Mensajería (Messenger) — $14,119 MXN gastados · 0 ventas registradas</div>
+  <div class="b-body">4 campañas activas con objetivo "Conversación iniciada en Messenger" (ESME/MAYOREO, Rodrigo/MAYOREO, LINEA AXEL/MAYOREO, Campaña febrero Alexis). Meta cobró por cada conversación iniciada — pero esas conversaciones no tienen tracking de compra. Aunque 3 compras aparecen en los datos, el ROAS reportado es 0 porque el Pixel no está conectado al flujo de venta por WhatsApp/Messenger. El dinero no está completamente perdido — puede haber ventas reales sin medir — pero no hay forma de saberlo ni de optimizar.</div>
+</div>
+
+<div class="bloque rojo">
+  <div class="b-titulo">Campañas de Tráfico — $3,070 MXN gastados · 0 ventas</div>
+  <div class="b-body">5 campañas con objetivo Tráfico (link clicks y landing page views). Meta trajo visitas al sitio — CPM bajo de $7–$28 MXN — pero sin Pixel de Conversión correctamente configurado, esas visitas son anónimas. No hay retargeting posible, no hay audiencias lookalike de compradores, no hay optimización hacia quien tiene intención real de compra.</div>
+</div>
+
+<div class="bloque verde">
+  <div class="b-titulo">Campañas de Conversión con Pixel — $18,636 MXN · 45 compras · ROAS 4.53x promedio</div>
+  <div class="b-body">Las únicas 4 campañas con objetivo de compra (fb_pixel_purchase) son las únicas que generaron ventas. "Campaña ventas shopify 3" tiene ROAS de 6.88x con $2,897 MXN gastados — la mejor del portafolio. "Nueva campaña de Ventas Vaquera" tiene ROAS de 6.59x con solo $634 MXN gastados — señal de que hay una audiencia o creatividad que funciona muy bien con bajo presupuesto. El patrón es claro: cuando el objetivo es correcto, funciona.</div>
+</div>
+
+<!-- TABLA CAMPAÑAS CON GASTO -->
+<div class="sec">Todas las campañas con gasto real</div>
+<div class="tabla-wrap">
+<table>
+  <thead>
+    <tr>
+      <th>Campaña</th>
+      <th>Objetivo</th>
+      <th>Gastado</th>
+      <th>Compras</th>
+      <th>ROAS</th>
+      <th>Frec.</th>
+      <th>Diagnóstico</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="td-nombre">Campaña 2 de Shopify Alexis</td>
+      <td><span class="badge badge-verde">Conversión</span></td>
+      <td>$7,560</td>
+      <td class="td-verde">22</td>
+      <td class="td-amarillo">3.78x</td>
+      <td>2.6</td>
+      <td><span class="badge badge-amarillo">ROAS bajo para el gasto</span></td>
+    </tr>
+    <tr>
+      <td class="td-nombre">Ventas Alexis SHOPIFY</td>
+      <td><span class="badge badge-verde">Conversión</span></td>
+      <td>$7,543</td>
+      <td class="td-amarillo">6</td>
+      <td class="td-rojo">0.87x</td>
+      <td>2.5</td>
+      <td><span class="badge badge-rojo">Pérdida neta</span></td>
+    </tr>
+    <tr>
+      <td class="td-nombre">LINEA AXEL / MAYOREO / IOS</td>
+      <td><span class="badge badge-amarillo">Mensajería</span></td>
+      <td>$4,859</td>
+      <td class="td-gris">0</td>
+      <td class="td-rojo">0x</td>
+      <td>1.7</td>
+      <td><span class="badge badge-rojo">Sin ventas medibles</span></td>
+    </tr>
+    <tr>
+      <td class="td-nombre">ESME / MAYOREO / IOS</td>
+      <td><span class="badge badge-amarillo">Mensajería</span></td>
+      <td>$4,516</td>
+      <td class="td-gris">3*</td>
+      <td class="td-rojo">0x</td>
+      <td>2.2</td>
+      <td><span class="badge badge-rojo">Ventas sin trackear</span></td>
+    </tr>
+    <tr>
+      <td class="td-nombre">rodrigo / MAYOREO / IOS</td>
+      <td><span class="badge badge-amarillo">Mensajería</span></td>
+      <td>$2,938</td>
+      <td class="td-gris">0</td>
+      <td class="td-rojo">0x</td>
+      <td>1.7</td>
+      <td><span class="badge badge-rojo">Sin ventas medibles</span></td>
+    </tr>
+    <tr>
+      <td class="td-nombre">Campaña ventas shopify 3</td>
+      <td><span class="badge badge-verde">Conversión</span></td>
+      <td>$2,897</td>
+      <td class="td-verde">14</td>
+      <td class="td-verde">6.88x</td>
+      <td>2.9</td>
+      <td><span class="badge badge-verde">La mejor del portafolio</span></td>
+    </tr>
+    <tr>
+      <td class="td-nombre">Nueva campaña de Tráfico</td>
+      <td><span class="badge badge-gris">Tráfico</span></td>
+      <td>$2,049</td>
+      <td class="td-gris">0</td>
+      <td class="td-rojo">0x</td>
+      <td>1.7</td>
+      <td><span class="badge badge-rojo">Tráfico sin conversión</span></td>
+    </tr>
+    <tr>
+      <td class="td-nombre">Campaña febrero alexis</td>
+      <td><span class="badge badge-amarillo">Mensajería</span></td>
+      <td>$1,805</td>
+      <td class="td-gris">0</td>
+      <td class="td-rojo">0x</td>
+      <td>1.5</td>
+      <td><span class="badge badge-rojo">Sin ventas medibles</span></td>
+    </tr>
+    <tr>
+      <td class="td-nombre">Tráfico web personalizada</td>
+      <td><span class="badge badge-gris">Tráfico</span></td>
+      <td>$910</td>
+      <td class="td-gris">0</td>
+      <td class="td-rojo">0x</td>
+      <td>1.4</td>
+      <td><span class="badge badge-rojo">Tráfico sin conversión</span></td>
+    </tr>
+    <tr>
+      <td class="td-nombre">Tráfico config. recomendada</td>
+      <td><span class="badge badge-gris">Tráfico</span></td>
+      <td>$694</td>
+      <td class="td-gris">0</td>
+      <td class="td-rojo">0x</td>
+      <td>1.3</td>
+      <td><span class="badge badge-rojo">Tráfico sin conversión</span></td>
+    </tr>
+    <tr>
+      <td class="td-nombre">Nueva campaña Ventas Vaquera</td>
+      <td><span class="badge badge-verde">Conversión</span></td>
+      <td>$634</td>
+      <td class="td-verde">3</td>
+      <td class="td-verde">6.59x</td>
+      <td>3.2</td>
+      <td><span class="badge badge-verde">Alta eficiencia — escalar</span></td>
+    </tr>
+    <tr>
+      <td class="td-nombre">Campaña de Tráfico (varios)</td>
+      <td><span class="badge badge-gris">Tráfico</span></td>
+      <td>$255</td>
+      <td class="td-gris">0</td>
+      <td class="td-rojo">0x</td>
+      <td>1.1</td>
+      <td><span class="badge badge-rojo">Tráfico sin conversión</span></td>
+    </tr>
+    <tr>
+      <td class="td-nombre">Campaña de Tráfico</td>
+      <td><span class="badge badge-gris">Tráfico</span></td>
+      <td>$160</td>
+      <td class="td-gris">0</td>
+      <td class="td-rojo">0x</td>
+      <td>1.2</td>
+      <td><span class="badge badge-rojo">Tráfico sin conversión</span></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<p style="font-size:11px;color:#999;margin-top:-.5rem;margin-bottom:1.5rem">* 3 compras aparecen en datos de ESME/MAYOREO pero ROAS reportado es 0 porque el Pixel no está conectado al flujo de Messenger.</p>
+
+<!-- DIAGNÓSTICO RAÍZ -->
+<div class="sec">El diagnóstico de raíz — 3 problemas estructurales</div>
+
+<div class="bloque rojo">
+  <div class="b-titulo">Problema 1 — Objetivo equivocado en la mayoría del gasto</div>
+  <div class="b-body">De $36,826 MXN gastados, solo $18,636 (51%) fue con objetivo de Conversión. El resto se destinó a Mensajería y Tráfico — objetivos que no le dicen a Meta "quiero compradores". Meta es una máquina de optimización: le das el objetivo correcto y encuentra a quién compra. Le das el objetivo equivocado y encuentra a quien hace clic o manda un mensaje. El dinero no está mal gastado por mala segmentación — está mal gastado por mal objetivo.</div>
+</div>
+
+<div class="bloque rojo">
+  <div class="b-titulo">Problema 2 — Las campañas de Mensajería no tienen tracking de ventas</div>
+  <div class="b-body">Las 4 campañas de mayoreo con objetivo Messenger han gastado $14,119 MXN. Puede haber ventas reales detrás de esas conversaciones — pero sin sistema de tracking, no se puede medir, no se puede optimizar y no se puede escalar. Meta no puede aprender quién compra si nunca recibe la señal de compra. Cada peso que se mete en esas campañas opera a ciegas.</div>
+</div>
+
+<div class="bloque amarillo">
+  <div class="b-titulo">Problema 3 — "Ventas Alexis SHOPIFY" gastó $7,543 con ROAS de 0.87x</div>
+  <div class="b-body">Es la segunda campaña con más gasto y está generando pérdida neta. Por cada peso que entra en esa campaña, salen $0.87 en ventas. Tiene objetivo correcto (Conversión con Pixel) pero algo está fallando: puede ser la creatividad, la audiencia, la landing, el producto anunciado o la frecuencia. Necesita diagnóstico creativo y de audiencia antes de seguir corriendo.</div>
+</div>
+
+<!-- LO QUE SÍ FUNCIONA -->
+<div class="sec">Lo que sí funciona — y hay que escalar</div>
+
+<div class="bloque verde">
+  <div class="b-titulo">Patrón ganador identificado</div>
+  <div class="b-body">Las campañas "Campaña ventas shopify 3" (ROAS 6.88x) y "Nueva campaña de Ventas Vaquera" (ROAS 6.59x) tienen algo en común: objetivo de Conversión con Pixel de Purchase, creatividad de producto específico y presupuesto moderado. Esas dos campañas con $3,532 MXN generaron 17 compras. El mismo presupuesto que se fue en las campañas de tráfico ($3,070 MXN) generó 0 compras. La diferencia no es el presupuesto — es la estructura.</div>
+</div>
+
+<!-- CAMPAÑAS PROPUESTAS -->
+<div class="sec">Campañas propuestas para Tiendas Platino</div>
+
+<div class="propuesta">
+  <div class="prop-header ph-1">
+    <div>
+      <div class="prop-num">Campaña 1 — Prioridad máxima</div>
+      <div class="prop-titulo">Escalar lo que ya funciona — Vaquera y Shopify 3</div>
+      <div class="prop-subtitulo">Duplicar presupuesto en las dos campañas con mejor ROAS</div>
+    </div>
+    <div class="prop-kpi">ROAS esperado: 5–7x</div>
+  </div>
+  <div class="prop-body">
+    <div class="prop-item"><div class="prop-dot pd1"></div>Objetivo: Conversión → Compra (fb_pixel_purchase) — mismo que las campañas ganadoras</div>
+    <div class="prop-item"><div class="prop-dot pd1"></div>Duplicar el presupuesto de "Campaña ventas shopify 3" de $2,897 a $6,000 MXN</div>
+    <div class="prop-item"><div class="prop-dot pd1"></div>Escalar "Nueva campaña Ventas Vaquera" de $634 a $3,000 MXN — tiene el mejor ROAS del portafolio con poco gasto</div>
+    <div class="prop-item"><div class="prop-dot pd1"></div>No cambiar creatividades ni audiencias — solo subir presupuesto gradualmente 20% cada 3 días</div>
+    <div class="prop-item"><div class="prop-dot pd1"></div>Monitorear que el ROAS no baje de 4x al escalar</div>
+  </div>
+</div>
+
+<div class="propuesta">
+  <div class="prop-header ph-2">
+    <div>
+      <div class="prop-num">Campaña 2</div>
+      <div class="prop-titulo">Retargeting de visitantes del sitio</div>
+      <div class="prop-subtitulo">Personas que ya vieron productos pero no compraron</div>
+    </div>
+    <div class="prop-kpi">ROAS esperado: 8–15x</div>
+  </div>
+  <div class="prop-body">
+    <div class="prop-item"><div class="prop-dot pd2"></div>Audiencia: visitantes del sitio en los últimos 30 días que NO compraron (requiere Pixel con ViewContent activo)</div>
+    <div class="prop-item"><div class="prop-dot pd2"></div>Objetivo: Conversión → Compra</div>
+    <div class="prop-item"><div class="prop-dot pd2"></div>Creatividad: producto específico que vieron + oferta del 28% de descuento</div>
+    <div class="prop-item"><div class="prop-dot pd2"></div>Presupuesto inicial: $1,500–$2,000 MXN — el retargeting siempre tiene el mejor ROAS del portafolio</div>
+    <div class="prop-item"><div class="prop-dot pd2"></div>Frecuencia objetivo: 3–5x en 7 días — suficiente para recordar sin saturar</div>
+  </div>
+</div>
+
+<div class="propuesta">
+  <div class="prop-header ph-3">
+    <div>
+      <div class="prop-num">Campaña 3</div>
+      <div class="prop-titulo">Lookalike de compradores reales</div>
+      <div class="prop-subtitulo">Audiencia similar a quienes ya compraron en el sitio</div>
+    </div>
+    <div class="prop-kpi">ROAS esperado: 3–6x</div>
+  </div>
+  <div class="prop-body">
+    <div class="prop-item"><div class="prop-dot pd3"></div>Audiencia base: lista de clientes que compraron (exportar de Shopify → subir a Meta como Custom Audience)</div>
+    <div class="prop-item"><div class="prop-dot pd3"></div>Crear Lookalike 1% sobre esa base — son los más parecidos a quienes ya compraron</div>
+    <div class="prop-item"><div class="prop-dot pd3"></div>Objetivo: Conversión → Compra</div>
+    <div class="prop-item"><div class="prop-dot pd3"></div>Creatividad: colección nueva o producto más vendido con prueba social (reseñas reales)</div>
+    <div class="prop-item"><div class="prop-dot pd3"></div>Presupuesto: $3,000–$5,000 MXN — esta audiencia es fría pero de muy alta calidad</div>
+  </div>
+</div>
+
+<div class="propuesta">
+  <div class="prop-header ph-4">
+    <div>
+      <div class="prop-num">Campaña 4</div>
+      <div class="prop-titulo">Mayoreo con tracking real</div>
+      <div class="prop-subtitulo">Redirigir el presupuesto de Messenger a un flujo medible</div>
+    </div>
+    <div class="prop-kpi">Actualmente: $14,119 MXN sin medición</div>
+  </div>
+  <div class="prop-body">
+    <div class="prop-item"><div class="prop-dot pd4"></div>Crear una landing page de mayoristas con formulario de contacto — no mandar directo a Messenger</div>
+    <div class="prop-item"><div class="prop-dot pd4"></div>Objetivo: Conversión → Lead (formulario completado) con evento de Pixel configurado</div>
+    <div class="prop-item"><div class="prop-dot pd4"></div>El formulario captura: nombre, ciudad, cantidad estimada, WhatsApp — y dispara una automatización</div>
+    <div class="prop-item"><div class="prop-dot pd4"></div>Así Meta puede optimizar hacia quién llena el formulario, no hacia quién inicia un chat</div>
+    <div class="prop-item"><div class="prop-dot pd4"></div>Presupuesto: mismo que hoy ($4,000–$5,000 MXN) pero con resultados medibles y optimizables</div>
+  </div>
+</div>
+
+<!-- ACCIONES INMEDIATAS -->
+<div class="sec">Qué hacer esta semana — en orden de impacto</div>
+
+<div class="bloque azul">
+  <div class="b-titulo">1. Pausar "Ventas Alexis SHOPIFY" — hoy</div>
+  <div class="b-body">Está gastando $7,543 MXN con ROAS de 0.87x — genera pérdida neta. Cada día que corre pierde dinero. Pausarla no significa abandonar esa audiencia o creatividad — significa diagnosticar qué está fallando antes de seguir invirtiendo.</div>
+</div>
+
+<div class="bloque azul">
+  <div class="b-titulo">2. Verificar que el Pixel tiene los 4 eventos activos — esta semana</div>
+  <div class="b-body">ViewContent, AddToCart, InitiateCheckout y Purchase deben estar disparando correctamente en Shopify. Sin estos eventos, Meta no puede crear audiencias de retargeting ni lookalikes de compradores. Es la base de todo lo demás.</div>
+</div>
+
+<div class="bloque azul">
+  <div class="b-titulo">3. Escalar las dos campañas ganadoras — esta semana</div>
+  <div class="b-body">"Campaña ventas shopify 3" y "Nueva campaña Ventas Vaquera" tienen ROAS de 6.88x y 6.59x. No tocar las creatividades. Solo subir presupuesto 20% cada 3 días hasta encontrar el techo de eficiencia.</div>
+</div>
+
+<div class="bloque azul">
+  <div class="b-titulo">4. Crear la audiencia de retargeting — esta semana</div>
+  <div class="b-body">En Meta Business Manager → Audiencias → Crear audiencia personalizada → Tráfico del sitio web → Visitantes de los últimos 30 días que no compraron. Lanzar campaña de retargeting con $1,500 MXN de prueba.</div>
+</div>
+
+<!-- CIERRE -->
+<div class="cierre">
+  <div class="cierre-t">El resumen en una línea</div>
+  <div class="cierre-b">
+    <p>El 48% del presupuesto se fue a campañas con el objetivo equivocado. No es un problema de audiencia ni de producto — es un problema de estructura. Las campañas con objetivo correcto (Conversión con Pixel) tienen ROAS de 4.53x en promedio y hasta 6.88x en la mejor.</p>
+    <p>El trabajo no es crear campañas desde cero. Es <strong>pausar lo que pierde, escalar lo que gana y conectar el Pixel correctamente</strong> para que Meta aprenda quién compra — y encuentre más personas iguales.</p>
+    <p>Con el mismo presupuesto mensual, una estructura correcta puede duplicar o triplicar el número de ventas.</p>
+  </div>
+</div>
+
+</div>
+</body>
+</html>

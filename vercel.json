@@ -25,6 +25,26 @@
       "source": "/propuesta/",
       "destination": "/propuesta",
       "permanent": true
+    },
+    {
+      "source": "/meta.html",
+      "destination": "/meta",
+      "permanent": true
+    },
+    {
+      "source": "/meta/",
+      "destination": "/meta",
+      "permanent": true
+    },
+    {
+      "source": "/plan-meta.html",
+      "destination": "/plan-meta",
+      "permanent": true
+    },
+    {
+      "source": "/plan-meta/",
+      "destination": "/plan-meta",
+      "permanent": true
     }
   ],
   "rewrites": [
@@ -35,6 +55,14 @@
     {
       "source": "/propuesta",
       "destination": "/propuesta.html"
+    },
+    {
+      "source": "/meta",
+      "destination": "/meta.html"
+    },
+    {
+      "source": "/plan-meta",
+      "destination": "/plan-meta.html"
     }
   ]
 }
