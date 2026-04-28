@@ -1,0 +1,1623 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Parrilla de Contenido — Tiendas Platino</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #0e0d0d;
+  --paper: #f6f4ef;
+  --white: #ffffff;
+  --red: #C8102E;
+  --gold: #B8860B;
+  --blue: #1A3FBF;
+  --green: #166534;
+  --purple: #5B21B6;
+  --border: #e0ddd5;
+  --faint: #f0ede7;
+  --mono: 'DM Mono', monospace;
+  --serif: 'Instrument Serif', serif;
+  --sans: 'DM Sans', sans-serif;
+  --display: 'Bebas Neue', sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--sans); background: var(--paper); color: var(--ink); line-height: 1.6; }
+
+/* MASTHEAD */
+.masthead {
+  background: var(--ink);
+  padding: 4rem 2rem 3.5rem;
+  position: relative;
+  overflow: hidden;
+}
+.masthead::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(200,16,46,.6), transparent);
+}
+.m-inner { max-width: 1160px; margin: 0 auto; }
+.m-label {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: .75rem;
+}
+.m-h1 {
+  font-family: var(--display);
+  font-size: clamp(52px, 8vw, 88px);
+  line-height: .92;
+  letter-spacing: .02em;
+  color: #fff;
+  margin-bottom: 1.25rem;
+}
+.m-h1 em { color: var(--red); font-style: normal; }
+.m-meta {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.m-stat { text-align: center; }
+.m-stat-n {
+  font-family: var(--display);
+  font-size: 32px;
+  color: #fff;
+  letter-spacing: .04em;
+  line-height: 1;
+}
+.m-stat-l {
+  font-family: var(--mono);
+  font-size: 8px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: #444;
+  margin-top: 2px;
+}
+.m-div { width: 1px; height: 40px; background: #222; }
+
+/* LEGEND */
+.legend {
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+}
+.legend-inner {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 1rem 2rem;
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.lg-item {
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: #777;
+}
+.lg-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.lg-reel { background: var(--red); }
+.lg-carrusel { background: var(--blue); }
+.lg-historia { background: var(--purple); }
+.lg-foto { background: var(--green); }
+
+/* WRAP */
+.wrap { max-width: 1160px; margin: 0 auto; padding: 3rem 2rem 6rem; }
+
+/* WEEK */
+.week { margin-bottom: 4rem; }
+.week-header {
+  display: flex;
+  align-items: flex-end;
+  gap: 1rem;
+  margin-bottom: 1.75rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 2px solid var(--ink);
+}
+.w-num {
+  font-family: var(--display);
+  font-size: 72px;
+  color: rgba(0,0,0,.08);
+  line-height: 1;
+  flex-shrink: 0;
+  letter-spacing: .02em;
+}
+.w-info {}
+.w-title {
+  font-family: var(--serif);
+  font-size: 20px;
+  font-style: italic;
+  line-height: 1.25;
+}
+.w-obj {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: #aaa;
+  margin-top: .25rem;
+}
+
+/* GRID */
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 1.5rem; }
+
+/* CARD */
+.card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform .2s, box-shadow .2s;
+}
+.card:hover { transform: translateY(-3px); box-shadow: 0 16px 48px rgba(0,0,0,.09); }
+
+.card-accent { height: 3px; }
+.ca-reel { background: var(--red); }
+.ca-carrusel { background: var(--blue); }
+.ca-historia { background: var(--purple); }
+.ca-foto { background: var(--green); }
+
+/* Card head */
+.card-head {
+  padding: .75rem 1.125rem;
+  border-bottom: 1px solid var(--faint);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.ch-left { display: flex; align-items: center; gap: .5rem; }
+.ch-dot { width: 7px; height: 7px; border-radius: 50%; }
+.ch-reel { background: var(--red); }
+.ch-carrusel { background: var(--blue); }
+.ch-historia { background: var(--purple); }
+.ch-foto { background: var(--green); }
+.ch-label {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+.cl-reel { color: var(--red); }
+.cl-carrusel { color: var(--blue); }
+.cl-historia { color: var(--purple); }
+.cl-foto { color: var(--green); }
+.ch-day {
+  font-family: var(--mono);
+  font-size: 8.5px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: #ccc;
+}
+
+/* Card body */
+.card-body { padding: 1.125rem; flex: 1; display: flex; flex-direction: column; gap: 1rem; }
+
+.card-titulo {
+  font-family: var(--serif);
+  font-size: 15.5px;
+  font-style: italic;
+  line-height: 1.3;
+  color: var(--ink);
+}
+
+/* FICHA TÉCNICA */
+.ficha {
+  display: flex;
+  gap: .4rem;
+  flex-wrap: wrap;
+}
+.ficha-chip {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: .06em;
+  padding: 3px 8px;
+  border-radius: 4px;
+  background: var(--faint);
+  color: #666;
+}
+.fc-dur { background: #fef3c7; color: #92400e; }
+.fc-fmt { background: #eff6ff; color: #1e40af; }
+
+/* LIBRETO — el corazón */
+.libreto {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  flex: 1;
+}
+.libreto-head {
+  background: var(--ink);
+  padding: .4rem .875rem;
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+.libreto-icon {
+  font-size: 11px;
+}
+.libreto-label {
+  font-family: var(--mono);
+  font-size: 8.5px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: #555;
+}
+.libreto-body {
+  padding: .875rem;
+  display: flex;
+  flex-direction: column;
+  gap: .625rem;
+}
+
+/* Escenas del libreto */
+.escena {
+  display: grid;
+  grid-template-columns: 60px 1fr;
+  gap: .5rem;
+  align-items: start;
+  padding-bottom: .625rem;
+  border-bottom: 1px solid var(--faint);
+}
+.escena:last-child { border-bottom: none; padding-bottom: 0; }
+.esc-num {
+  font-family: var(--mono);
+  font-size: 8.5px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: #bbb;
+  padding-top: 2px;
+  line-height: 1.4;
+}
+.esc-txt {
+  font-size: 12.5px;
+  color: #333;
+  line-height: 1.6;
+}
+.esc-txt strong { font-weight: 600; color: var(--ink); }
+.esc-txt em { font-style: italic; color: #555; }
+.esc-txt .voz {
+  display: block;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: #888;
+  font-style: normal;
+  margin-top: 2px;
+  padding-left: .75rem;
+  border-left: 2px solid var(--border);
+  line-height: 1.5;
+}
+
+/* COPY COMPLETO */
+.copy {
+  background: #18181b;
+  border-radius: 10px;
+  padding: .75rem 1rem;
+}
+.copy-label {
+  font-family: var(--mono);
+  font-size: 8.5px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: #555;
+  margin-bottom: .375rem;
+}
+.copy-txt {
+  font-size: 12.5px;
+  color: #d4d4d8;
+  line-height: 1.75;
+  white-space: pre-line;
+}
+.copy-txt strong { color: #fff; font-weight: 600; }
+
+/* CTA */
+.cta-bar {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  flex-wrap: wrap;
+}
+.cta-pill {
+  font-family: var(--mono);
+  font-size: 9.5px;
+  letter-spacing: .05em;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-weight: 600;
+}
+.cp-main { background: var(--ink); color: #fff; }
+.cp-sec { background: var(--faint); color: #555; }
+
+/* DIRECTOR */
+.director {
+  border-left: 2px solid var(--red);
+  padding: .5rem .75rem;
+  background: rgba(200,16,46,.03);
+  border-radius: 0 8px 8px 0;
+}
+.dir-label {
+  font-family: var(--mono);
+  font-size: 8.5px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: .2rem;
+}
+.dir-txt {
+  font-size: 11.5px;
+  color: #666;
+  line-height: 1.65;
+  font-style: italic;
+}
+
+/* NOTA FOOTER */
+.nota-footer {
+  background: var(--ink);
+  border-radius: 16px;
+  padding: 2.5rem;
+  margin-top: 2rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+.nf-block {}
+.nf-label {
+  font-family: var(--mono);
+  font-size: 8.5px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: #444;
+  margin-bottom: .5rem;
+}
+.nf-title {
+  font-family: var(--display);
+  font-size: 22px;
+  letter-spacing: .05em;
+  color: #fff;
+  margin-bottom: .75rem;
+}
+.nf-body { font-size: 12.5px; color: #666; line-height: 1.8; }
+.nf-body strong { color: #bbb; }
+
+@media(max-width:640px){
+  .grid { grid-template-columns: 1fr; }
+  .nota-footer { grid-template-columns: 1fr; }
+  .m-meta { gap: 1rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="masthead">
+  <div class="m-inner">
+    <div class="m-label">Sistema de contenido · Tiendas Platino · Mayo 2026</div>
+    <h1 class="m-h1">Parrilla de<br><em>Publicaciones</em></h1>
+    <div class="m-meta">
+      <div class="m-stat"><div class="m-stat-n">16</div><div class="m-stat-l">publicaciones</div></div>
+      <div class="m-div"></div>
+      <div class="m-stat"><div class="m-stat-n">4</div><div class="m-stat-l">semanas</div></div>
+      <div class="m-div"></div>
+      <div class="m-stat"><div class="m-stat-n">2</div><div class="m-stat-l">plataformas</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="legend">
+  <div class="legend-inner">
+    <div class="lg-item"><div class="lg-dot lg-reel"></div>Reel</div>
+    <div class="lg-item"><div class="lg-dot lg-carrusel"></div>Carrusel</div>
+    <div class="lg-item"><div class="lg-dot lg-historia"></div>Historia</div>
+    <div class="lg-item"><div class="lg-dot lg-foto"></div>Foto</div>
+  </div>
+</div>
+
+<div class="wrap">
+
+<!-- ══════════════ SEMANA 1 ══════════════ -->
+<div class="week">
+  <div class="week-header">
+    <div class="w-num">01</div>
+    <div class="w-info">
+      <div class="w-title">"Estamos de vuelta — y no vinimos a jugar"</div>
+      <div class="w-obj">Reactivación · recuperar alcance orgánico · FB 1.1M seguidores dormidos</div>
+    </div>
+  </div>
+  <div class="grid">
+
+    <!-- 1 · REEL -->
+    <div class="card">
+      <div class="card-accent ca-reel"></div>
+      <div class="card-head">
+        <div class="ch-left"><div class="ch-dot ch-reel"></div><span class="ch-label cl-reel">Reel</span></div>
+        <span class="ch-day">Lunes</span>
+      </div>
+      <div class="card-body">
+        <div class="card-titulo">"El hombre que siempre se ve bien — no nació así"</div>
+        <div class="ficha">
+          <span class="ficha-chip fc-dur">⏱ 18 seg</span>
+          <span class="ficha-chip fc-fmt">9:16 vertical</span>
+          <span class="ficha-chip">Sin locutor</span>
+          <span class="ficha-chip">Música urbana suave</span>
+        </div>
+        <div class="libreto">
+          <div class="libreto-head">
+            <span class="libreto-icon">🎬</span>
+            <span class="libreto-label">Libreto escena por escena</span>
+          </div>
+          <div class="libreto-body">
+            <div class="escena">
+              <span class="esc-num">Seg 0–3<br>HOOK</span>
+              <div class="esc-txt">
+                Primer plano de manos ajustando el cuello de una camisa frente al espejo. La cara no se ve todavía. Música entra suave.
+                <span class="voz">Texto en pantalla: "Hay hombres que entran a un lugar y algo pasa."</span>
+              </div>
+            </div>
+            <div class="escena">
+              <span class="esc-num">Seg 3–7<br>DATO</span>
+              <div class="esc-txt">
+                Corte rápido. El mismo hombre de cuerpo completo frente al espejo. Camisa Moon & Rain. Ajusta el último botón.
+                <span class="voz">Texto en pantalla: "La primera impresión se forma en 7 segundos."</span>
+              </div>
+            </div>
+            <div class="escena">
+              <span class="esc-num">Seg 7–13<br>HISTORIA</span>
+              <div class="esc-txt">
+                Cámara lenta. El hombre camina hacia la salida, de espaldas. Corte: llega a un lugar, gente voltea. Sin exagerar. Natural.
+                <span class="voz">Sin texto. Solo la música sube un poco de volumen.</span>
+              </div>
+            </div>
+            <div class="escena">
+              <span class="esc-num">Seg 13–18<br>CTA</span>
+              <div class="esc-txt">
+                Fade a negro. Aparece la camisa sobre fondo oscuro con el precio.
+                <span class="voz">Texto en pantalla: "Moon & Rain · Desde $359 · Envío en 3 días · tiendasplatino.com.mx"</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="copy">
+          <div class="copy-label">Copy del post</div>
+          <div class="copy-txt">La ropa que usas habla antes de que abras la boca.
+
+<strong>¿Qué dice la tuya?</strong>
+
+Moon & Rain · Fabricadas en Cuernavaca 🇲🇽
+Casual · Slim Fit · Deluxe · S a 4XL
+28% OFF · Envío en 3 días
+
+👇 Link en bio</div>
+        </div>
+        <div class="cta-bar">
+          <span class="cta-pill cp-main">CTA: link en bio</span>
+          <span class="cta-pill cp-sec">Guardar · Compartir</span>
+        </div>
+        <div class="director">
+          <div class="dir-label">Nota de producción</div>
+          <div class="dir-txt">El poder está en el silencio — sin locutor. El texto en pantalla reemplaza la voz. La cámara lenta en la escena de llegada es clave: es el momento en que el avatar se proyecta. Grabar en exterior o en un lugar con ambiente real, no fondo blanco.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2 · CARRUSEL -->
+    <div class="card">
+      <div class="card-accent ca-carrusel"></div>
+      <div class="card-head">
+        <div class="ch-left"><div class="ch-dot ch-carrusel"></div><span class="ch-label cl-carrusel">Carrusel</span></div>
+        <span class="ch-day">Miércoles</span>
+      </div>
+      <div class="card-body">
+        <div class="card-titulo">"100,000 hombres no eligieron Platino por accidente"</div>
+        <div class="ficha">
+          <span class="ficha-chip fc-dur">7 slides</span>
+          <span class="ficha-chip fc-fmt">1:1 cuadrado</span>
+          <span class="ficha-chip">Fotos reales de clientes</span>
+        </div>
+        <div class="libreto">
+          <div class="libreto-head">
+            <span class="libreto-icon">🎬</span>
+            <span class="libreto-label">Libreto slide por slide</span>
+          </div>
+          <div class="libreto-body">
+            <div class="escena">
+              <span class="esc-num">Slide 1<br>HOOK</span>
+              <div class="esc-txt">
+                Fondo negro. Tipografía blanca grande.
+                <span class="voz">"Cuando 100,000 hombres eligen lo mismo, algo está pasando. Desliza y ve qué."</span>
+              </div>
+            </div>
+            <div class="escena">
+              <span class="esc-num">Slide 2<br>DATO</span>
+              <div class="esc-txt">
+                Fondo oscuro. Solo números.
+                <span class="voz">"100,000 clientes · 4.95★ · 8 años fabricando en Cuernavaca, México"</span>
+              </div>
+            </div>
+            <div class="escena">
+              <span class="esc-num">Slides 3–6<br>CLIENTES</span>
+              <div class="esc-txt">
+                Un cliente por slide. Foto real en contexto (boda, trabajo, restaurante, salida). Su nombre y su reseña encima de la foto, con letra legible.
+                <span class="voz">Ejemplo: <em>"La mejor compra que hice este año. — @mario_cuernavaca"</em></span>
+              </div>
+            </div>
+            <div class="escena">
+              <span class="esc-num">Slide 7<br>CTA</span>
+              <div class="esc-txt">
+                Fondo negro. La camisa más vendida con precio y link.
+                <span class="voz">"¿Cuál es la tuya? · 28% OFF · tiendasplatino.com.mx"</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="copy">
+          <div class="copy-label">Copy del post</div>
+          <div class="copy-txt">Desliza 👉 Estas fotos no son modelos de agencia.
+
+Son clientes reales que compraron, recibieron y volvieron a comprar.
+
+<strong>100,000 personas no se equivocan dos veces.</strong>
+
+Moon & Rain · Hecho en México 🇲🇽
+28% OFF · Envío en 3 días · S a 4XL
+
+👇 ¿Cuál te llevas?</div>
+        </div>
+        <div class="cta-bar">
+          <span class="cta-pill cp-main">CTA: ver colección</span>
+          <span class="cta-pill cp-sec">Pedir reseñas a clientes activos</span>
+        </div>
+        <div class="director">
+          <div class="dir-label">Nota de producción</div>
+          <div class="dir-txt">El primer slide es el más importante — si no para, no hay nada. Filtro cálido consistente en todas las fotos de clientes. Las reseñas deben ser de clientes reales, no inventadas. Pedir 10–15 fotos con reseña a cambio de un descuento en su próxima compra.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3 · HISTORIA -->
+    <div class="card">
+      <div class="card-accent ca-historia"></div>
+      <div class="card-head">
+        <div class="ch-left"><div class="ch-dot ch-historia"></div><span class="ch-label cl-historia">Historia</span></div>
+        <span class="ch-day">Jueves</span>
+      </div>
+      <div class="card-body">
+        <div class="card-titulo">"¿Cuál quieres que traigamos de vuelta esta semana?"</div>
+        <div class="ficha">
+          <span class="ficha-chip fc-dur">10 seg</span>
+          <span class="ficha-chip fc-fmt">9:16 historia</span>
+          <span class="ficha-chip">Sticker encuesta</span>
+        </div>
+        <div class="libreto">
+          <div class="libreto-head">
+            <span class="libreto-icon">🎬</span>
+            <span class="libreto-label">Libreto de la historia</span>
+          </div>
+          <div class="libreto-body">
+            <div class="escena">
+              <span class="esc-num">Visual</span>
+              <div class="esc-txt">
+                Dos fotos de producto lado a lado sobre fondo oscuro. Una camisa Deluxe negra (izquierda) y una de cuadros azul (derecha).
+              </div>
+            </div>
+            <div class="escena">
+              <span class="esc-num">Texto</span>
+              <div class="esc-txt">
+                <span class="voz">"Stock limitado. Esta semana solo traemos una de vuelta. ¿Cuál quieres?"</span>
+              </div>
+            </div>
+            <div class="escena">
+              <span class="esc-num">Sticker</span>
+              <div class="esc-txt">
+                Encuesta de Instagram centrada. Opción A: Deluxe Negra · Opción B: Cuadros Azul.
+              </div>
+            </div>
+            <div class="escena">
+              <span class="esc-num">Respuesta</span>
+              <div class="esc-txt">
+                A quien vote, responder en DM con el precio y el link directo al producto. Esto genera conversaciones calientes automáticamente.
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="copy">
+          <div class="copy-label">Copy superpuesto en la historia</div>
+          <div class="copy-txt">Stock limitado. Esta semana solo repones UNA.
+
+<strong>¿Cuál quieres que traigamos de vuelta?</strong>
+
+👆 Vota · Te respondemos con el precio</div>
+        </div>
+        <div class="cta-bar">
+          <span class="cta-pill cp-main">CTA: responder DM con precio</span>
+        </div>
+        <div class="director">
+          <div class="dir-label">Nota de producción</div>
+          <div class="dir-txt">La clave está en la promesa de responder. Cada DM que llega es un cliente potencial con la guardia baja — ya mostró qué producto le gusta. Responder rápido, con el precio y el link directo, sin rodeos.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4 · FOTO -->
+    <div class="card">
+      <div class="card-accent ca-foto"></div>
+      <div class="card-head">
+        <div class="ch-left"><div class="ch-dot ch-foto"></div><span class="ch-label cl-foto">Foto</span></div>
+        <span class="ch-day">Sábado</span>
+      </div>
+      <div class="card-body">
+        <div class="card-titulo">"La camisa que no te falla — en ninguna ocasión"</div>
+        <div class="ficha">
+          <span class="ficha-chip fc-fmt">1:1 o 4:5</span>
+          <span class="ficha-chip">Exterior · luz natural</span>
+          <span class="ficha-chip">Contexto real</span>
+        </div>
+        <div class="libreto">
+          <div class="libreto-head">
+            <span class="libreto-icon">🎬</span>
+            <span class="libreto-label">Libreto del copy</span>
+          </div>
+          <div class="libreto-body">
+            <div class="escena">
+              <span class="esc-num">Línea 1<br>GANCHO</span>
+              <div class="esc-txt">
+                <span class="voz">"Hay ropa para ocasiones. Y hay ropa que sirve para todas. Son cosas muy distintas."</span>
+              </div>
+            </div>
+            <div class="escena">
+              <span class="esc-num">Línea 2<br>DATO</span>
+              <div class="esc-txt">
+                <span class="voz">"100% algodón. Slim Fit. Cuello normal. Diseñada para verse bien en todo contexto."</span>
+              </div>
+            </div>
+            <div class="escena">
+              <span class="esc-num">Línea 3<br>HISTORIA</span>
+              <div class="esc-txt">
+                <span class="voz">"Esta camisa fue al trabajo el lunes. A una cita el miércoles. A la reunión familiar el sábado. Y siguió igual de bien."</span>
+              </div>
+            </div>
+            <div class="escena">
+              <span class="esc-num">Cierre<br>REFUERZO</span>
+              <div class="esc-txt">
+                <span class="voz">"Eso es lo que llevamos años fabricando en Cuernavaca. Camisas que se quedan."</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="copy">
+          <div class="copy-label">Copy completo</div>
+          <div class="copy-txt">Hay ropa para ocasiones. Y hay ropa que sirve para todas.
+
+100% algodón · Slim Fit · Cuello normal.
+Diseñada para verse bien en cualquier contexto.
+
+Esta camisa fue al trabajo el lunes.
+A una cita el miércoles.
+A la reunión familiar el sábado.
+<strong>Y siguió igual de bien.</strong>
+
+Moon & Rain · Cuernavaca, México 🇲🇽
+28% OFF · Desde $359 · Envío 3 días
+
+¿Cuál es tu talla? 👇</div>
+        </div>
+        <div class="cta-bar">
+          <span class="cta-pill cp-main">CTA: comentar talla</span>
+          <span class="cta-pill cp-sec">Exterior · no estudio</span>
+        </div>
+        <div class="director">
+          <div class="dir-label">Nota de producción</div>
+          <div class="dir-txt">La foto debe mostrar al modelo usando la camisa, no exhibiéndola. Caminando, revisando el celular, conversando. Luz natural cálida. Exterior urbano. El CTA de comentar la talla genera datos de audiencia y micro-compromisos que preceden la compra.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════ SEMANA 2 ══════════════ -->
+<div class="week">
+  <div class="week-header">
+    <div class="w-num">02</div>
+    <div class="w-info">
+      <div class="w-title">"Aquí hacemos lo que vendes — te mostramos cómo"</div>
+      <div class="w-obj">Confianza · mostrar el proceso · reducir objeciones de compra</div>
+    </div>
+  </div>
+  <div class="grid">
+
+    <!-- 5 · REEL TALLER -->
+    <div class="card">
+      <div class="card-accent ca-reel"></div>
+      <div class="card-head">
+        <div class="ch-left"><div class="ch-dot ch-reel"></div><span class="ch-label cl-reel">Reel</span></div>
+        <span class="ch-day">Martes</span>
+      </div>
+      <div class="card-body">
+        <div class="card-titulo">"No importamos camisas. Las fabricamos."</div>
+        <div class="ficha">
+          <span class="ficha-chip fc-dur">⏱ 25 seg</span>
+          <span class="ficha-chip fc-fmt">9:16 vertical</span>
+          <span class="ficha-chip">Documental · sin locutor</span>
+        </div>
+        <div class="libreto">
+          <div class="libreto-head">
+            <span class="libreto-icon">🎬</span>
+            <span class="libreto-label">Libreto escena por escena</span>
+          </div>
+          <div class="libreto-body">
+            <div class="escena">
+              <span class="esc-num">Seg 0–3<br>HOOK</span>
+              <div class="esc-txt">
+                Primer plano de tijeras cortando tela. Sonido ambiente del taller. Música suave debajo.
+                <span class="voz">Texto: "¿Sabes de dónde viene la ropa que compras en línea?"</span>
+              </div>
+            </div>
+            <div class="escena">
+              <span class="esc-num">Seg 3–8<br>DATO</span>
+              <div class="esc-txt">
+                Corte a manos en máquina de coser. Primer plano de la costura.
+                <span class="voz">Texto: "El 78% de la ropa en México es importada. La nuestra, no."</span>
+              </div>
+            </div>
+            <div class="escena">
+              <span class="esc-num">Seg 8–16<br>PROCESO</span>
+              <div class="esc-txt">
+                Secuencia rápida: tela doblada, botones acomodados, camisas colgadas en orden. Cámara en mano, estilo documental. Audio ambiente del taller, sin música.
+                <span class="voz">Texto: "Cada camisa pasa por 12 puntos de revisión antes de salir."</span>
+              </div>
+            </div>
+            <div class="escena">
+              <span class="esc-num">Seg 16–22<br>REFERENCIA</span>
+              <div class="esc-txt">
+                Plano de la fachada o de un letrero del taller. O del equipo trabajando, de espaldas.
+                <span class="voz">Texto en pantalla (cita): "Hecho en México significa calidad que se toca, no que se promete."</span>
+              </div>
+            </div>
+            <div class="escena">
+              <span class="esc-num">Seg 22–25<br>CTA</span>
+              <div class="esc-txt">
+                Logo Platino + datos clave.
+                <span class="voz">Texto: "100,000 clientes · 8 años · Un solo taller · Cuernavaca, México"</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="copy">
+          <div class="copy-label">Copy del post</div>
+          <div class="copy-txt">Mira de cerca. 👀
+
+Esto es lo que pasa antes de que tu camisa llegue a tu puerta.
+
+Diseño propio. Tela seleccionada. Costura revisada pieza por pieza.
+
+<strong>Sin importaciones. Sin intermediarios. Sin compromisos.</strong>
+
+Moon & Rain · Cuernavaca, Morelos 🇲🇽
+28% OFF · Envío en 3 días
+
+👇 tiendasplatino.com.mx</div>
+        </div>
+        <div class="cta-bar">
+          <span class="cta-pill cp-main">CTA: link en bio</span>
+          <span class="cta-pill cp-sec">Compartir con alguien</span>
+        </div>
+        <div class="director">
+          <div class="dir-label">Nota de producción</div>
+          <div class="dir-txt">Cámara en mano todo el tiempo — los planos perfectos matan la autenticidad. El audio ambiente del taller es valioso: máquinas, telas, tijeras. Mezclar ese audio con música ambient baja. Los textos en pantalla deben aparecer y desaparecer rápido, como subtítulos, no como carteles.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6 · CARRUSEL TALLAS -->
+    <div class="card">
+      <div class="card-accent ca-carrusel"></div>
+      <div class="card-head">
+        <div class="ch-left"><div class="ch-dot ch-carrusel"></div><span class="ch-label cl-carrusel">Carrusel educativo</span></div>
+        <span class="ch-day">Jueves</span>
+      </div>
+      <div class="card-body">
+        <div class="card-titulo">"Cómo saber tu talla en 30 segundos — sin probarte nada"</div>
+        <div class="ficha">
+          <span class="ficha-chip fc-dur">5 slides</span>
+          <span class="ficha-chip fc-fmt">1:1 cuadrado</span>
+          <span class="ficha-chip">Infografía + tabla</span>
+        </div>
+        <div class="libreto">
+          <div class="libreto-head">
+            <span class="libreto-icon">🎬</span>
+            <span class="libreto-label">Libreto slide por slide</span>
+          </div>
+          <div class="libreto-body">
+            <div class="escena">
+              <span class="esc-num">Slide 1<br>HOOK</span>
+              <div class="esc-txt">
+                Fondo negro. Tipografía impactante.
+                <span class="voz">"El miedo a equivocarte en la talla te ha costado más outfits de los que crees. Esto lo resuelve hoy."</span>
+              </div>
+            </div>
+            <div class="escena">
+              <span class="esc-num">Slide 2<br>DATO</span>
+              <div class="esc-txt">
+                Estadística grande centrada.
+                <span class="voz">"La razón #1 por la que los hombres no compran ropa online: el miedo a la talla equivocada."</span>
+              </div>
+            </div>
+            <div class="escena">
+              <span class="esc-num">Slides 3–4<br>GUÍA</span>
+              <div class="esc-txt">
+                Infografía limpia. Silueta de camisa con flechas indicando dónde medir: pecho, cuello, manga. Slide 4: los números de la tabla de Platino por talla.
+              </div>
+            </div>
+            <div class="escena">
+              <span class="esc-num">Slide 5<br>CIERRE</span>
+              <div class="esc-txt">
+                Fondo de marca.
+                <span class="voz">"¿Aún tienes duda? Escríbenos. En 5 minutos te decimos cuál es la tuya."</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="copy">
+          <div class="copy-label">Copy del post</div>
+          <div class="copy-txt">"¿Y si no me queda?"
+
+Esa pregunta te ha costado más outfits de los que imaginas.
+
+Desliza 👉 En 4 pasos sabes tu talla Moon & Rain <strong>antes de comprar</strong>.
+
+¿Ya la tienes? Déjala en los comentarios 👇
+Duda = escríbenos. Respondemos en 5 minutos.
+
+tiendasplatino.com.mx</div>
+        </div>
+        <div class="cta-bar">
+          <span class="cta-pill cp-main">CTA: comentar su talla</span>
+          <span class="cta-pill cp-sec">DM si tienen duda</span>
+        </div>
+        <div class="director">
+          <div class="dir-label">Nota de producción</div>
+          <div class="dir-txt">El slide 1 lo es todo. Si no para, nadie ve la guía. La infografía de los slides 3–4 debe ser simple — fondo blanco, una figura, tres medidas. Sin adornos. Quien comenta su talla tiene 3 veces más probabilidad de comprar que quien solo da like.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7 · HISTORIA URGENCIA -->
+    <div class="card">
+      <div class="card-accent ca-historia"></div>
+      <div class="card-head">
+        <div class="ch-left"><div class="ch-dot ch-historia"></div><span class="ch-label cl-historia">Historia</span></div>
+        <span class="ch-day">Viernes</span>
+      </div>
+      <div class="card-body">
+        <div class="card-titulo">"Quedan 48 horas con el 28% de descuento"</div>
+        <div class="ficha">
+          <span class="ficha-chip fc-dur">10 seg</span>
+          <span class="ficha-chip">Countdown sticker</span>
+          <span class="ficha-chip">Fondo oscuro</span>
+        </div>
+        <div class="libreto">
+          <div class="libreto-head">
+            <span class="libreto-icon">🎬</span>
+            <span class="libreto-label">Libreto de la historia</span>
+          </div>
+          <div class="libreto-body">
+            <div class="escena">
+              <span class="esc-num">Visual</span>
+              <div class="esc-txt">Fondo oscuro. Sin fotos de producto. La urgencia es el protagonista. Sticker de countdown de Instagram centrado.</div>
+            </div>
+            <div class="escena">
+              <span class="esc-num">Texto principal</span>
+              <div class="esc-txt">
+                <span class="voz">"⏳ 48 horas · El 28% de descuento termina el domingo"</span>
+              </div>
+            </div>
+            <div class="escena">
+              <span class="esc-num">Texto secundario</span>
+              <div class="esc-txt">
+                <span class="voz">"Usa el código PLATINO10 en el checkout · 👆 Desliza · Ver colección"</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="copy">
+          <div class="copy-label">Copy superpuesto</div>
+          <div class="copy-txt"><strong>⏳ 48 horas</strong>
+
+El 28% termina el domingo.
+Código: PLATINO10
+
+👆 Desliza · Ver colección completa</div>
+        </div>
+        <div class="cta-bar">
+          <span class="cta-pill cp-main">CTA: swipe up a tienda</span>
+        </div>
+        <div class="director">
+          <div class="dir-label">Nota de producción</div>
+          <div class="dir-txt">Esta historia no necesita foto de producto. La urgencia sola convierte. Publicar entre las 6–8pm para llegar a la audiencia en su momento de relax. Hacer dos versiones: una el viernes, otra el sábado con "24 horas".</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 8 · REEL OUTFIT -->
+    <div class="card">
+      <div class="card-accent ca-reel"></div>
+      <div class="card-head">
+        <div class="ch-left"><div class="ch-dot ch-reel"></div><span class="ch-label cl-reel">Reel</span></div>
+        <span class="ch-day">Sábado</span>
+      </div>
+      <div class="card-body">
+        <div class="card-titulo">"3 outfits. 1 camisa. 0 excusas."</div>
+        <div class="ficha">
+          <span class="ficha-chip fc-dur">⏱ 20 seg</span>
+          <span class="ficha-chip fc-fmt">9:16 vertical</span>
+          <span class="ficha-chip">3 escenas · transición limpia</span>
+        </div>
+        <div class="libreto">
+          <div class="libreto-head">
+            <span class="libreto-icon">🎬</span>
+            <span class="libreto-label">Libreto escena por escena</span>
+          </div>
+          <div class="libreto-body">
+            <div class="escena">
+              <span class="esc-num">Seg 0–3<br>HOOK</span>
+              <div class="esc-txt">
+                Plano del clóset abierto. Manos que lo miran sin decidir.
+                <span class="voz">Texto: "Si el lunes abres el clóset y no sabes qué ponerte, el problema no es la ropa."</span>
+              </div>
+            </div>
+            <div class="escena">
+              <span class="esc-num">Seg 3–8<br>DATO</span>
+              <div class="esc-txt">
+                Corte. Hombre parado frente al espejo, solo la camisa sobre la mesa todavía.
+                <span class="voz">Texto: "Los hombres usan el 20% de su ropa el 80% del tiempo."</span>
+              </div>
+            </div>
+            <div class="escena">
+              <span class="esc-num">Seg 8–15<br>LOOKS</span>
+              <div class="esc-txt">
+                Tres cortes rápidos de 2 seg cada uno. Mismo modelo, misma camisa:<br>
+                — Look 1: pantalón de vestir · oficina · subtítulo "TRABAJO"<br>
+                — Look 2: jeans oscuros · restaurante · subtítulo "CITA"<br>
+                — Look 3: jeans claros · casual · subtítulo "FIN DE SEMANA"
+              </div>
+            </div>
+            <div class="escena">
+              <span class="esc-num">Seg 15–20<br>CTA</span>
+              <div class="esc-txt">
+                Camisa sola. Precio. Link.
+                <span class="voz">Texto: "Moon & Rain · $359 · Envío en 3 días · tiendasplatino.com.mx"</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="copy">
+          <div class="copy-label">Copy del post</div>
+          <div class="copy-txt">Una camisa. Tres looks. Ninguna excusa.
+
+Trabajo ✅  Cita ✅  Fin de semana ✅
+
+<strong>Así se ve inversión, no gasto.</strong>
+
+¿Cuál look prefieres? Comenta A, B o C 👇
+
+Moon & Rain · 28% OFF · Envío 3 días 📦
+tiendasplatino.com.mx</div>
+        </div>
+        <div class="cta-bar">
+          <span class="cta-pill cp-main">CTA: comentar A, B o C</span>
+        </div>
+        <div class="director">
+          <div class="dir-label">Nota de producción</div>
+          <div class="dir-txt">La clave es el contraste entre los tres looks — mismo hombre, misma camisa, fondo y pantalón distinto. Las transiciones deben ser limpias y rápidas. El subtítulo (TRABAJO / CITA / FIN DE SEMANA) aparece en el primer frame de cada look y desaparece antes del corte.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════ SEMANA 3 ══════════════ -->
+<div class="week">
+  <div class="week-header">
+    <div class="w-num">03</div>
+    <div class="w-info">
+      <div class="w-title">"Precio visible. CTA claro. Sin rodeos."</div>
+      <div class="w-obj">Conversión directa · precio en cada publicación · eliminar fricción</div>
+    </div>
+  </div>
+  <div class="grid">
+
+    <!-- 9 · CARRUSEL TOP 5 -->
+    <div class="card">
+      <div class="card-accent ca-carrusel"></div>
+      <div class="card-head">
+        <div class="ch-left"><div class="ch-dot ch-carrusel"></div><span class="ch-label cl-carrusel">Carrusel</span></div>
+        <span class="ch-day">Lunes</span>
+      </div>
+      <div class="card-body">
+        <div class="card-titulo">"Las 5 más vendidas esta semana — con precio"</div>
+        <div class="ficha">
+          <span class="ficha-chip fc-dur">6 slides</span>
+          <span class="ficha-chip">Precio visible en cada slide</span>
+        </div>
+        <div class="libreto">
+          <div class="libreto-head">
+            <span class="libreto-icon">🎬</span>
+            <span class="libreto-label">Libreto slide por slide</span>
+          </div>
+          <div class="libreto-body">
+            <div class="escena">
+              <span class="esc-num">Slide 1<br>HOOK</span>
+              <div class="esc-txt">
+                Fondo negro. Tipografía grande.
+                <span class="voz">"No te decimos cuál comprar. Los números ya lo dijeron por nosotros."</span>
+              </div>
+            </div>
+            <div class="escena">
+              <span class="esc-num">Slides 2–6<br>PRODUCTOS</span>
+              <div class="esc-txt">
+                Un producto por slide. Fondo blanco. Número de ranking (#1, #2…) arriba izquierda. Foto del modelo usando la camisa al centro. Precio tachado y precio con descuento abajo. Tallas disponibles en pequeño.
+                <span class="voz">Sin texto adicional. La foto y el precio hablan solos.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="copy">
+          <div class="copy-label">Copy del post</div>
+          <div class="copy-txt">Desliza 👉 Estas son las 5 camisas que más hombres eligieron esta semana.
+
+Precio visible. Talla visible. Sin letras pequeñas.
+
+<strong>Lo que ves es lo que pagas.</strong>
+
+28% OFF en todas · Tallas S a 4XL
+📦 Envío en 3 días a todo México
+
+👇 ¿Cuál te llevas? Deja tu talla en los comentarios.
+tiendasplatino.com.mx</div>
+        </div>
+        <div class="cta-bar">
+          <span class="cta-pill cp-main">CTA: comentar talla</span>
+          <span class="cta-pill cp-sec">Formato catálogo</span>
+        </div>
+        <div class="director">
+          <div class="dir-label">Nota de producción</div>
+          <div class="dir-txt">El precio visible en cada slide elimina la objeción más común — "¿cuánto cuesta?". Fondo blanco consistente en todos los slides de producto. La visibilidad del precio reduce la fricción y aumenta la conversión directa desde el carrusel.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 10 · REEL UNBOXING -->
+    <div class="card">
+      <div class="card-accent ca-reel"></div>
+      <div class="card-head">
+        <div class="ch-left"><div class="ch-dot ch-reel"></div><span class="ch-label cl-reel">Reel</span></div>
+        <span class="ch-day">Miércoles</span>
+      </div>
+      <div class="card-body">
+        <div class="card-titulo">"Así llega. Así se ve. Así se siente."</div>
+        <div class="ficha">
+          <span class="ficha-chip fc-dur">⏱ 22 seg</span>
+          <span class="ficha-chip fc-fmt">POV desde arriba</span>
+          <span class="ficha-chip">Audio ASMR + música</span>
+        </div>
+        <div class="libreto">
+          <div class="libreto-head">
+            <span class="libreto-icon">🎬</span>
+            <span class="libreto-label">Libreto escena por escena</span>
+          </div>
+          <div class="libreto-body">
+            <div class="escena">
+              <span class="esc-num">Seg 0–3<br>HOOK</span>
+              <div class="esc-txt">
+                Cámara desde arriba. Una caja de Platino sobre una cama o mesa. Manos reales, no de modelo.
+                <span class="voz">Texto: "Todos hemos comprado online y llegó algo diferente a la foto. Esto no es ese caso."</span>
+              </div>
+            </div>
+            <div class="escena">
+              <span class="esc-num">Seg 3–8<br>DATO</span>
+              <div class="esc-txt">
+                Manos abriendo la caja. Se ve el papel de envoltura, la camisa doblada.
+                <span class="voz">Texto: "El 34% de devoluciones online: el producto no era como la foto."</span>
+              </div>
+            </div>
+            <div class="escena">
+              <span class="esc-num">Seg 8–15<br>PROCESO</span>
+              <div class="esc-txt">
+                Manos sacando la camisa lentamente. Primer plano de la tela, los botones, la costura. Audio ambiente: tela, papel.
+                <span class="voz">Texto: "Cada camisa pasa por revisión de calidad antes de ser empacada."</span>
+              </div>
+            </div>
+            <div class="escena">
+              <span class="esc-num">Seg 15–22<br>PRUEBA</span>
+              <div class="esc-txt">
+                Camisa extendida sobre la cama. Corte: la misma foto que aparece en el sitio web. Exactamente igual.
+                <span class="voz">Texto: "Lo que ves en la foto · Es lo que recibes."</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="copy">
+          <div class="copy-label">Copy del post</div>
+          <div class="copy-txt">¿Alguna vez compraste online y llegó algo diferente?
+
+Aquí no.
+
+<strong>Lo que ves en la foto es exactamente lo que recibes.</strong>
+
+Empacado. Revisado. En 3 días o menos.
+
+¿Quieres verlo en tiempo real? Escríbenos 📩
+tiendasplatino.com.mx</div>
+        </div>
+        <div class="cta-bar">
+          <span class="cta-pill cp-main">CTA: DM o tienda</span>
+        </div>
+        <div class="director">
+          <div class="dir-label">Nota de producción</div>
+          <div class="dir-txt">Manos reales — no de modelo. Las manos perfectas rompen la autenticidad. El audio ASMR del empaque (papel, tela) es el sonido más satisfactorio de este tipo de contenido. El último corte comparando la camisa real con la foto del sitio es el momento de mayor impacto.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 11 · HISTORIA PRECIO -->
+    <div class="card">
+      <div class="card-accent ca-historia"></div>
+      <div class="card-head">
+        <div class="ch-left"><div class="ch-dot ch-historia"></div><span class="ch-label cl-historia">Historia</span></div>
+        <span class="ch-day">Jueves</span>
+      </div>
+      <div class="card-body">
+        <div class="card-titulo">"Esta camisa · $499 → $359 · ¿La quieres?"</div>
+        <div class="ficha">
+          <span class="ficha-chip fc-dur">10 seg</span>
+          <span class="ficha-chip">Precio grande · link directo</span>
+        </div>
+        <div class="libreto">
+          <div class="libreto-head">
+            <span class="libreto-icon">🎬</span>
+            <span class="libreto-label">Libreto de la historia</span>
+          </div>
+          <div class="libreto-body">
+            <div class="escena">
+              <span class="esc-num">Visual</span>
+              <div class="esc-txt">Foto del producto centrada. Fondo blanco o de marca. Sin adornos innecesarios.</div>
+            </div>
+            <div class="escena">
+              <span class="esc-num">Precio</span>
+              <div class="esc-txt">
+                Precio tachado en rojo: <strong>~~$499~~</strong> · Precio con descuento en blanco grande: <strong>$359 MXN</strong>. Código PLATINO10 visible debajo.
+              </div>
+            </div>
+            <div class="escena">
+              <span class="esc-num">Info</span>
+              <div class="esc-txt">
+                <span class="voz">"Tallas: S · M · L · XL · XXL · 3XL · Envío en 3 días · Todo México"</span>
+              </div>
+            </div>
+            <div class="escena">
+              <span class="esc-num">CTA</span>
+              <div class="esc-txt">Flecha hacia arriba + "Desliza y compra ahora". Link al producto específico, no a la tienda en general.</div>
+            </div>
+          </div>
+        </div>
+        <div class="copy">
+          <div class="copy-label">Texto superpuesto</div>
+          <div class="copy-txt">👇 Esta camisa
+
+<strong>~~$499~~ → $359 MXN</strong>
+Código: PLATINO10
+
+S · M · L · XL · XXL · 3XL
+📦 Envío en 3 días · Todo México
+
+👆 Desliza y compra ahora</div>
+        </div>
+        <div class="cta-bar">
+          <span class="cta-pill cp-main">CTA: swipe up al producto</span>
+          <span class="cta-pill cp-sec">Repetir con 3–5 productos distintos</span>
+        </div>
+        <div class="director">
+          <div class="dir-label">Nota de producción</div>
+          <div class="dir-txt">La simplicidad es la estrategia. El precio grande y el precio tachado hacen todo el trabajo. Link directo al producto, no a la home — cada clic adicional pierde clientes. Hacer esta misma historia para 3–5 productos distintos en la misma semana.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 12 · FOTO DEBATE -->
+    <div class="card">
+      <div class="card-accent ca-foto"></div>
+      <div class="card-head">
+        <div class="ch-left"><div class="ch-dot ch-foto"></div><span class="ch-label cl-foto">Foto</span></div>
+        <span class="ch-day">Sábado</span>
+      </div>
+      <div class="card-body">
+        <div class="card-titulo">"¿Cuadros o rayas? El debate de la semana."</div>
+        <div class="ficha">
+          <span class="ficha-chip fc-fmt">1:1 dividido</span>
+          <span class="ficha-chip">Mismo modelo · mismo fondo</span>
+        </div>
+        <div class="libreto">
+          <div class="libreto-head">
+            <span class="libreto-icon">🎬</span>
+            <span class="libreto-label">Libreto del copy</span>
+          </div>
+          <div class="libreto-body">
+            <div class="escena">
+              <span class="esc-num">Línea 1<br>GANCHO</span>
+              <div class="esc-txt">
+                <span class="voz">"Hay una pregunta que divide a los hombres más que cualquier otra: ¿cuadros o rayas?"</span>
+              </div>
+            </div>
+            <div class="escena">
+              <span class="esc-num">Línea 2<br>DATO</span>
+              <div class="esc-txt">
+                <span class="voz">"Las rayas alargan la figura. Los cuadros proyectan personalidad. Ninguna es mejor — depende de quién las usa."</span>
+              </div>
+            </div>
+            <div class="escena">
+              <span class="esc-num">Línea 3<br>EJEMPLO</span>
+              <div class="esc-txt">Foto dividida: camisa de cuadros izquierda (A) vs camisa de rayas derecha (B). Mismo modelo, mismo fondo, misma postura.</div>
+            </div>
+            <div class="escena">
+              <span class="esc-num">Cierre<br>REFUERZO</span>
+              <div class="esc-txt">
+                <span class="voz">"La que más votos tenga entra en promoción especial el lunes. Tú decides."</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="copy">
+          <div class="copy-label">Copy completo</div>
+          <div class="copy-txt">Debate de la semana 👇
+
+¿CUADROS o RAYAS?
+
+Comenta <strong>A</strong> si cuadros 🟫
+Comenta <strong>B</strong> si rayas ⬜
+
+La ganadora entra en promoción especial el lunes.
+
+<em>(Las dos ya tienen 28% OFF hoy)</em>
+
+tiendasplatino.com.mx</div>
+        </div>
+        <div class="cta-bar">
+          <span class="cta-pill cp-main">CTA: comentar A o B</span>
+          <span class="cta-pill cp-sec">Responder cada comentario</span>
+        </div>
+        <div class="director">
+          <div class="dir-label">Nota de producción</div>
+          <div class="dir-txt">Imagen dividida exactamente a la mitad. "A" y "B" en esquinas superiores. El algoritmo premia comentarios en los primeros 30 minutos — responder a cada comentario duplica el alcance. La promesa de promoción el lunes da razón para volver.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════ SEMANA 4 ══════════════ -->
+<div class="week">
+  <div class="week-header">
+    <div class="w-num">04</div>
+    <div class="w-info">
+      <div class="w-title">"Tú eres Platino — comunidad y recompra"</div>
+      <div class="w-obj">Retención · UGC · recompra · contenido que fideliza y se comparte</div>
+    </div>
+  </div>
+  <div class="grid">
+
+    <!-- 13 · REEL CLIENTE -->
+    <div class="card">
+      <div class="card-accent ca-reel"></div>
+      <div class="card-head">
+        <div class="ch-left"><div class="ch-dot ch-reel"></div><span class="ch-label cl-reel">Reel</span></div>
+        <span class="ch-day">Lunes</span>
+      </div>
+      <div class="card-body">
+        <div class="card-titulo">"No somos nosotros diciendo que es buena. Es él."</div>
+        <div class="ficha">
+          <span class="ficha-chip fc-dur">⏱ 18 seg</span>
+          <span class="ficha-chip">Video del cliente · mínima edición</span>
+        </div>
+        <div class="libreto">
+          <div class="libreto-head">
+            <span class="libreto-icon">🎬</span>
+            <span class="libreto-label">Libreto escena por escena</span>
+          </div>
+          <div class="libreto-body">
+            <div class="escena">
+              <span class="esc-num">Seg 0–3<br>HOOK</span>
+              <div class="esc-txt">
+                Pantalla en negro. Solo texto.
+                <span class="voz">"Cualquier marca puede decir que su producto es el mejor. Pero solo los clientes reales lo prueban."</span>
+              </div>
+            </div>
+            <div class="escena">
+              <span class="esc-num">Seg 3–5<br>DATO</span>
+              <div class="esc-txt">
+                <span class="voz">Texto en pantalla: "El 92% de las personas confía más en una recomendación real que en publicidad."</span>
+              </div>
+            </div>
+            <div class="escena">
+              <span class="esc-num">Seg 5–15<br>CLIENTE</span>
+              <div class="esc-txt">
+                Video del cliente hablando. Sin guión. Espontáneo. Subtítulos en pantalla. Logo Platino en esquina inferior.
+              </div>
+            </div>
+            <div class="escena">
+              <span class="esc-num">Seg 15–18<br>CITA</span>
+              <div class="esc-txt">
+                La frase más poderosa de lo que dijo el cliente, entre comillas, sobre fondo oscuro.
+                <span class="voz">Ejemplo: "La mejor compra que hice en meses." — @mario_mx</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="copy">
+          <div class="copy-label">Copy del post</div>
+          <div class="copy-txt">No te lo decimos nosotros.
+
+<strong>Te lo dice él.</strong>
+
+Gracias @[usuario] por compartir 🙌
+
+¿Tú también tienes una camisa Platino?
+Etiquétanos en tu foto → te compartimos en historias
+
+tiendasplatino.com.mx</div>
+        </div>
+        <div class="cta-bar">
+          <span class="cta-pill cp-main">CTA: etiquetar en foto</span>
+          <span class="cta-pill cp-sec">Incentivo: 10% en próxima compra</span>
+        </div>
+        <div class="director">
+          <div class="dir-label">Nota de producción</div>
+          <div class="dir-txt">No editar el video del cliente más de lo necesario — subtítulos y logo nada más. La autenticidad es el valor. Si no hay video, usar foto del cliente con su reseña en overlay. Conseguir estos videos ofreciendo un cupón a cambio: vale completamente la pena.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 14 · CARRUSEL NUEVA COLECCIÓN -->
+    <div class="card">
+      <div class="card-accent ca-carrusel"></div>
+      <div class="card-head">
+        <div class="ch-left"><div class="ch-dot ch-carrusel"></div><span class="ch-label cl-carrusel">Carrusel</span></div>
+        <span class="ch-day">Miércoles</span>
+      </div>
+      <div class="card-body">
+        <div class="card-titulo">"Ya llegaron. 12 modelos nuevos. Actúa hoy."</div>
+        <div class="ficha">
+          <span class="ficha-chip fc-dur">8–10 slides</span>
+          <span class="ficha-chip">1 producto por slide</span>
+          <span class="ficha-chip">Precio en cada uno</span>
+        </div>
+        <div class="libreto">
+          <div class="libreto-head">
+            <span class="libreto-icon">🎬</span>
+            <span class="libreto-label">Libreto slide por slide</span>
+          </div>
+          <div class="libreto-body">
+            <div class="escena">
+              <span class="esc-num">Slide 1<br>HOOK</span>
+              <div class="esc-txt">
+                "NUEVA COLECCIÓN" sobre fondo negro. Imagen de ambiente del taller o de modelos en sesión.
+                <span class="voz">"El hombre que siempre se ve bien no espera la próxima temporada. Actúa cuando llega lo nuevo."</span>
+              </div>
+            </div>
+            <div class="escena">
+              <span class="esc-num">Slide 2<br>DATO</span>
+              <div class="esc-txt">
+                <span class="voz">"12 modelos nuevos. Todos con 28% OFF. Todos con envío en 3 días. Los primeros modelos siempre se van primero."</span>
+              </div>
+            </div>
+            <div class="escena">
+              <span class="esc-num">Slides 3–9<br>CATÁLOGO</span>
+              <div class="esc-txt">Un modelo por slide. Foto del modelo usando la camisa. Nombre del modelo + precio con descuento abajo. Formato limpio y consistente.</div>
+            </div>
+            <div class="escena">
+              <span class="esc-num">Último slide<br>CTA</span>
+              <div class="esc-txt">
+                <span class="voz">"Si ves algo que te gusta, actúa hoy. Stock limitado. · tiendasplatino.com.mx"</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="copy">
+          <div class="copy-label">Copy del post</div>
+          <div class="copy-txt">YA DISPONIBLES ✨
+
+12 modelos nuevos. Todos con 28% OFF.
+Todos con envío en 3 días.
+
+Desliza 👉 Guarda los que quieres antes de que se acaben.
+
+<strong>Los primeros en llegar, primeros en elegir.</strong>
+
+👇 tiendasplatino.com.mx</div>
+        </div>
+        <div class="cta-bar">
+          <span class="cta-pill cp-main">CTA: guardar el post</span>
+          <span class="cta-pill cp-sec">Retargeting de guardados</span>
+        </div>
+        <div class="director">
+          <div class="dir-label">Nota de producción</div>
+          <div class="dir-txt">Pedir que guarden el post activa el algoritmo y crea una audiencia de retargeting en Meta (quienes guardaron = mayor intención de compra). El formato catálogo debe ser absolutamente consistente entre slides — si cambia el estilo visual entre fotos, pierde credibilidad.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 15 · HISTORIA WA -->
+    <div class="card">
+      <div class="card-accent ca-historia"></div>
+      <div class="card-head">
+        <div class="ch-left"><div class="ch-dot ch-historia"></div><span class="ch-label cl-historia">Historia</span></div>
+        <span class="ch-day">Viernes</span>
+      </div>
+      <div class="card-body">
+        <div class="card-titulo">"¿No encuentras lo que buscas? Te mandamos el catálogo por WhatsApp"</div>
+        <div class="ficha">
+          <span class="ficha-chip fc-dur">10 seg</span>
+          <span class="ficha-chip">Link directo a WA</span>
+          <span class="ficha-chip">Tono personal</span>
+        </div>
+        <div class="libreto">
+          <div class="libreto-head">
+            <span class="libreto-icon">🎬</span>
+            <span class="libreto-label">Libreto de la historia</span>
+          </div>
+          <div class="libreto-body">
+            <div class="escena">
+              <span class="esc-num">Visual</span>
+              <div class="esc-txt">Fondo con textura de tela de las camisas o foto del taller. Logo de WhatsApp prominente. Tono: persona real, no publicidad.</div>
+            </div>
+            <div class="escena">
+              <span class="esc-num">Texto principal</span>
+              <div class="esc-txt">
+                <span class="voz">"¿No encuentras tu talla o el modelo que buscas? Te mandamos el catálogo completo con precios ahora mismo."</span>
+              </div>
+            </div>
+            <div class="escena">
+              <span class="esc-num">Datos</span>
+              <div class="esc-txt">
+                <span class="voz">"📱 WhatsApp directo · Respondemos en menos de 5 min · Lun–Dom · Todo el día · Sin robots"</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="copy">
+          <div class="copy-label">Texto superpuesto</div>
+          <div class="copy-txt">¿No encuentras tu talla o el modelo que buscas?
+
+<strong>Te mandamos el catálogo completo ahora mismo.</strong>
+
+📱 WhatsApp directo
+✅ Respondemos en menos de 5 min
+✅ Sin robots · Sin esperas</div>
+        </div>
+        <div class="cta-bar">
+          <span class="cta-pill cp-main">CTA: abrir WhatsApp</span>
+        </div>
+        <div class="director">
+          <div class="dir-label">Nota de producción</div>
+          <div class="dir-txt">La diferencia entre "escríbenos" y "te respondemos en 5 minutos" es enorme. La promesa de tiempo de respuesta elimina la duda de si alguien va a contestar. Esta historia debe sentirse como si Yesbet estuviera hablando directamente, no como anuncio corporativo.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 16 · REEL CIERRE DE MES -->
+    <div class="card">
+      <div class="card-accent ca-reel"></div>
+      <div class="card-head">
+        <div class="ch-left"><div class="ch-dot ch-reel"></div><span class="ch-label cl-reel">Reel</span></div>
+        <span class="ch-day">Domingo</span>
+      </div>
+      <div class="card-body">
+        <div class="card-titulo">"Gracias por este mes — esto fue lo que pasó"</div>
+        <div class="ficha">
+          <span class="ficha-chip fc-dur">⏱ 30 seg</span>
+          <span class="ficha-chip">Montaje del mes</span>
+          <span class="ficha-chip">Música emotiva instrumental</span>
+        </div>
+        <div class="libreto">
+          <div class="libreto-head">
+            <span class="libreto-icon">🎬</span>
+            <span class="libreto-label">Libreto escena por escena</span>
+          </div>
+          <div class="libreto-body">
+            <div class="escena">
+              <span class="esc-num">Seg 0–3<br>HOOK</span>
+              <div class="esc-txt">
+                Pantalla negra. Texto solo.
+                <span class="voz">"Las marcas hablan de sí mismas todo el año. Nosotros preferimos hablar de ustedes."</span>
+              </div>
+            </div>
+            <div class="escena">
+              <span class="esc-num">Seg 3–10<br>DATO</span>
+              <div class="esc-txt">
+                Número grande en pantalla.
+                <span class="voz">"Este mes, X camisas viajaron de Cuernavaca a todo México."</span>
+              </div>
+            </div>
+            <div class="escena">
+              <span class="esc-num">Seg 10–22<br>MONTAJE</span>
+              <div class="esc-txt">
+                Clips y fotos del mes intercalados: clientes con su camisa, equipo en el taller, paquetes siendo preparados, entregas. Música emotiva. Sin texto — solo las imágenes hablan.
+              </div>
+            </div>
+            <div class="escena">
+              <span class="esc-num">Seg 22–27<br>DATO</span>
+              <div class="esc-txt">
+                <span class="voz">Texto: "Calificación del mes: 4.97★ · Tiempo de entrega promedio: 2.3 días"</span>
+              </div>
+            </div>
+            <div class="escena">
+              <span class="esc-num">Seg 27–30<br>CIERRE</span>
+              <div class="esc-txt">
+                Logo Platino. Texto en pantalla.
+                <span class="voz">"Gracias por confiar en lo que hacemos con las manos. · Cuernavaca, México 🇲🇽"</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="copy">
+          <div class="copy-label">Copy del post</div>
+          <div class="copy-txt">Este mes pasó algo bonito.
+
+Miles de camisas viajaron de Cuernavaca a todo México.
+Cientos de fotos de clientes que nos compartieron su look.
+Un equipo que se quedó hasta tarde para que tu pedido llegara a tiempo.
+
+<strong>Gracias por elegirnos.</strong>
+
+El próximo mes: más colecciones, más tallas, más razones para verte bien.
+
+Tiendas Platino 🇲🇽 · Hecho con orgullo desde Cuernavaca</div>
+        </div>
+        <div class="cta-bar">
+          <span class="cta-pill cp-main">CTA: guardar y compartir</span>
+        </div>
+        <div class="director">
+          <div class="dir-label">Nota de producción</div>
+          <div class="dir-txt">Este es el contenido que más se comparte de todo el mes — porque habla de la comunidad, no del producto. Las personas comparten lo que los hace sentir parte de algo. Música instrumental emotiva, sin letra. El silencio entre los clips vale tanto como las imágenes.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="nota-footer">
+  <div class="nf-block">
+    <div class="nf-label">Regla de oro del contenido</div>
+    <div class="nf-title">El hook lo es todo</div>
+    <div class="nf-body">
+      Los primeros 3 segundos determinan si alguien se queda o se va. <strong>El hook debe provocar una pregunta en la mente del que ve</strong> — una que solo se responde quedándose. No explicar, no vender todavía. Solo crear una pregunta irresistible.<br><br>
+      En texto: la primera línea hace la misma función. Si la primera línea no engancha, nadie lee la segunda.
+    </div>
+  </div>
+  <div class="nf-block">
+    <div class="nf-label">Regla de distribución</div>
+    <div class="nf-title">Responder = alcance</div>
+    <div class="nf-body">
+      Responder cada comentario en los primeros 30 minutos del post <strong>duplica el alcance orgánico</strong> en Facebook e Instagram. No es opcional — es parte del sistema.<br><br>
+      Cada DM que llega de una historia o reel es un lead caliente. Responder en menos de 5 minutos con el precio y el link directo convierte a una tasa entre 3 y 5 veces mayor que quien responde después de una hora.
+    </div>
+  </div>
+</div>
+
+</div>
+</body>
+</html>

@@ -123,6 +123,11 @@ h1{
     linear-gradient(180deg, rgba(255,255,255,.86), rgba(255,255,255,.72)),
     linear-gradient(135deg, rgba(126,34,206,.14), transparent 48%);
 }
+.card.parrilla{
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.86), rgba(255,255,255,.72)),
+    linear-gradient(135deg, rgba(180,83,9,.14), transparent 48%);
+}
 .badge{
   display:inline-flex;
   width:fit-content;
@@ -140,6 +145,7 @@ h1{
 .badge.orange{background:var(--accent-2)}
 .badge.blue{background:#1d4ed8}
 .badge.purple{background:#7e22ce}
+.badge.gold{background:#92400e}
 .card h2{
   margin:0;
   font-family: Georgia, "Times New Roman", serif;
@@ -214,7 +220,7 @@ h1{
   <main class="shell">
     <div class="topline">
       <div class="eyebrow">Tiendas Platino</div>
-      <div class="chip">Cuatro rutas: <strong>audit</strong>, <strong>propuesta</strong>, <strong>meta</strong> y <strong>plan-meta</strong></div>
+      <div class="chip">Rutas: <strong>audit</strong>, <strong>propuesta</strong>, <strong>meta</strong>, <strong>plan-meta</strong> y <strong>parrilla</strong></div>
     </div>
 
     <h1>Elige la página que quieres abrir</h1>
@@ -286,10 +292,26 @@ h1{
           <a class="button secondary" href="./plan-meta.html">Ver versión directa</a>
         </div>
       </article>
+
+      <article class="card parrilla">
+        <span class="badge gold">Parrilla</span>
+        <h2>Parrilla de publicaciones Mayo 2026</h2>
+        <p>
+          16 publicaciones en 4 semanas: libretos escena por escena, copy completo, notas de producción y CTAs para Instagram y Facebook.
+        </p>
+        <div class="meta">
+          <div>Ruta: <strong>/parrilla</strong></div>
+          <div>Archivo: <strong>parrilla-publicaciones.html</strong></div>
+        </div>
+        <div class="actions">
+          <a class="button primary" href="./parrilla-publicaciones.html">Abrir Parrilla</a>
+          <a class="button secondary" href="./parrilla-publicaciones.html">Ver versión directa</a>
+        </div>
+      </article>
     </section>
 
     <div class="footer">
-      Si entras por la raíz del dominio, esta es la página correcta. Si quieres ir directo a una página usa <code>/audit</code>, <code>/propuesta</code>, <code>/meta</code> o <code>/plan-meta</code>.
+      Si entras por la raíz del dominio, esta es la página correcta. Si quieres ir directo a una página usa <code>/audit</code>, <code>/propuesta</code>, <code>/meta</code>, <code>/plan-meta</code> o <code>/parrilla</code>.
     </div>
   </main>
 </body>
