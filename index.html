@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Acceso a las cuatro páginas del proyecto: audit, propuesta, auditoría de Meta Ads y plan operativo de campañas Meta.">
-<title>Tiendas Platino — Audit, Propuesta, Meta Ads y Plan</title>
+<meta name="description" content="Acceso a las seis páginas del proyecto: audit, propuesta, auditoría de Meta Ads, plan operativo, parrilla y plantilla de nuevos anuncios.">
+<title>Tiendas Platino — Audit, Propuesta, Meta Ads, Plan, Parrilla y Plantilla</title>
 <style>
 :root{
   --bg:#f5f1e8;
@@ -128,6 +128,11 @@ h1{
     linear-gradient(180deg, rgba(255,255,255,.86), rgba(255,255,255,.72)),
     linear-gradient(135deg, rgba(180,83,9,.14), transparent 48%);
 }
+.card.plantilla{
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.86), rgba(255,255,255,.72)),
+    linear-gradient(135deg, rgba(168,61,48,.12), transparent 48%);
+}
 .badge{
   display:inline-flex;
   width:fit-content;
@@ -220,7 +225,7 @@ h1{
   <main class="shell">
     <div class="topline">
       <div class="eyebrow">Tiendas Platino</div>
-      <div class="chip">Rutas: <strong>audit</strong>, <strong>propuesta</strong>, <strong>meta</strong>, <strong>plan-meta</strong> y <strong>parrilla</strong></div>
+      <div class="chip">Rutas: <strong>audit</strong>, <strong>propuesta</strong>, <strong>meta</strong>, <strong>plan-meta</strong>, <strong>parrilla</strong> y <strong>plantilla</strong></div>
     </div>
 
     <h1>Elige la página que quieres abrir</h1>
@@ -308,10 +313,26 @@ h1{
           <a class="button secondary" href="./parrilla-publicaciones.html">Ver versión directa</a>
         </div>
       </article>
+
+      <article class="card plantilla">
+        <span class="badge orange">Plantilla</span>
+        <h2>Plantilla de nuevos anuncios</h2>
+        <p>
+          Sistema de campañas con base estratégica, anuncios por objetivo, pixel y estructura, más resumen de ROAS.
+        </p>
+        <div class="meta">
+          <div>Ruta: <strong>/plantilla-de-nuevos-anuncios</strong></div>
+          <div>Archivo: <strong>plantilla-de-nuevos-anuncios.html</strong></div>
+        </div>
+        <div class="actions">
+          <a class="button primary" href="./plantilla-de-nuevos-anuncios.html">Abrir plantilla</a>
+          <a class="button secondary" href="./plantilla-de-nuevos-anuncios.html">Ver versión directa</a>
+        </div>
+      </article>
     </section>
 
     <div class="footer">
-      Si entras por la raíz del dominio, esta es la página correcta. Si quieres ir directo a una página usa <code>/audit</code>, <code>/propuesta</code>, <code>/meta</code>, <code>/plan-meta</code> o <code>/parrilla</code>.
+      Si entras por la raíz del dominio, esta es la página correcta. Si quieres ir directo a una página usa <code>/audit</code>, <code>/propuesta</code>, <code>/meta</code>, <code>/plan-meta</code>, <code>/parrilla</code> o <code>/plantilla-de-nuevos-anuncios</code>.
     </div>
   </main>
 </body>
