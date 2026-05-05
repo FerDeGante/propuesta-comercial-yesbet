@@ -1,0 +1,1347 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#f4efe7">
+<title>Plantilla de Nuevos Anuncios — Tiendas Platino</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&amp;family=Syne:wght@400;600;700;800&amp;family=Syne+Mono&amp;display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f4efe7;
+  --surface: #fffdf9;
+  --surface2: #f8f3eb;
+  --border: #ded3c4;
+  --border2: #cdbca9;
+  --text: #1f1a16;
+  --muted: #685f57;
+  --faint: #988d81;
+  --red: #a83d30;
+  --red-dim: rgba(168, 61, 48, .09);
+  --gold: #9a742d;
+  --gold-dim: rgba(154, 116, 45, .10);
+  --green: #2f7a4f;
+  --green-dim: rgba(47, 122, 79, .10);
+  --cream: #fffdf9;
+  --shadow: 0 18px 48px rgba(53, 40, 28, .08);
+  --shadow2: 0 8px 24px rgba(53, 40, 28, .06);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Syne',sans-serif;
+  background:
+    radial-gradient(circle at 12% 0%, rgba(168,61,48,.08), transparent 24%),
+    radial-gradient(circle at 100% 0%, rgba(154,116,45,.08), transparent 22%),
+    linear-gradient(180deg, #fbf8f2 0%, #f2ebe1 100%);
+  color:var(--text);
+  line-height:1.6;
+  min-height:100vh;
+  position:relative;
+}
+body::before{
+  content:'';
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  background-image:radial-gradient(rgba(31,26,22,.03) 1px, transparent 1px);
+  background-size:24px 24px;
+  opacity:.35;
+  mask-image:linear-gradient(180deg, rgba(0,0,0,.55), transparent 82%);
+}
+a{color:inherit}
+
+/* HEADER */
+.header{
+  padding:5rem clamp(1.25rem, 3vw, 5rem) 3rem;
+  border-bottom:1px solid var(--border);
+  position:relative;
+  overflow:hidden;
+  background:linear-gradient(135deg, rgba(255,255,255,.86), rgba(246,239,230,.94));
+}
+.header::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(ellipse 50% 70% at 100% 0%, rgba(168,61,48,.08) 0%, transparent 60%),
+    radial-gradient(ellipse 36% 48% at 0% 100%, rgba(154,116,45,.07) 0%, transparent 60%);
+  pointer-events:none;
+}
+.header > *{
+  position:relative;
+  z-index:1;
+  max-width:1140px;
+  margin-left:auto;
+  margin-right:auto;
+}
+.header-eyebrow{
+  font-family:'Syne Mono',monospace;
+  font-size:10px;
+  letter-spacing:.25em;
+  text-transform:uppercase;
+  color:var(--red);
+  margin-bottom:1.75rem;
+}
+.header-title{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(44px, 7.6vw, 96px);
+  font-weight:900;
+  line-height:.9;
+  color:var(--text);
+  margin-bottom:1.25rem;
+  max-width:920px;
+}
+.header-title em{font-style:italic;color:var(--gold)}
+.header-sub{
+  font-size:15px;
+  color:var(--muted);
+  max-width:560px;
+  line-height:1.8;
+  margin-bottom:2rem;
+}
+.header-pills{
+  display:flex;
+  gap:.75rem;
+  flex-wrap:wrap;
+  max-width:1140px;
+}
+.pill{
+  font-family:'Syne Mono',monospace;
+  font-size:10px;
+  letter-spacing:.08em;
+  padding:.45rem .85rem;
+  border:1px solid var(--border);
+  border-radius:999px;
+  color:var(--muted);
+  background:rgba(255,255,255,.72);
+  box-shadow:var(--shadow2);
+  backdrop-filter:blur(8px);
+}
+
+/* NAV */
+.nav{
+  display:flex;
+  gap:.5rem;
+  border-bottom:1px solid var(--border);
+  position:sticky;
+  top:0;
+  z-index:50;
+  background:rgba(251,248,242,.82);
+  backdrop-filter:blur(16px);
+  overflow-x:auto;
+  padding:.85rem clamp(1rem, 3vw, 5rem);
+}
+.nav-btn{
+  font-family:'Syne Mono',monospace;
+  font-size:9px;
+  letter-spacing:.15em;
+  text-transform:uppercase;
+  color:var(--muted);
+  padding:.8rem 1.1rem;
+  background:none;
+  border:1px solid transparent;
+  border-radius:999px;
+  cursor:pointer;
+  transition:all .2s ease;
+  white-space:nowrap;
+}
+.nav-btn:hover{
+  color:var(--text);
+  background:rgba(255,255,255,.76);
+  border-color:var(--border);
+}
+.nav-btn.on{
+  color:var(--text);
+  border-color:var(--border);
+  background:var(--surface);
+  box-shadow:var(--shadow2);
+}
+
+/* WRAP */
+.wrap{
+  max-width:1180px;
+  margin:0 auto;
+  padding:clamp(2rem, 4vw, 4rem) clamp(1rem, 3vw, 5rem) 8rem;
+  position:relative;
+  z-index:1;
+}
+
+/* SECTION */
+.sec{display:none}
+.sec.on{display:block;animation:fadeUp .28s ease both}
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(10px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+/* AVATAR STRIP */
+.avatar-strip{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:1px;
+  border:1px solid var(--border);
+  border-radius:20px;
+  overflow:hidden;
+  margin-bottom:3rem;
+  background:var(--border);
+  box-shadow:var(--shadow2);
+}
+.avatar-cell{
+  background:linear-gradient(180deg, #fff, #fbf7f0);
+  padding:1.45rem 1.65rem;
+}
+.avatar-cell-label{
+  font-family:'Syne Mono',monospace;
+  font-size:9px;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--red);
+  margin-bottom:.65rem;
+}
+.avatar-cell-val{
+  font-size:13.5px;
+  color:var(--muted);
+  line-height:1.8;
+}
+.avatar-cell-val strong{color:var(--text);font-weight:700}
+
+/* SECTION TITLE */
+.sec-title{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(28px,4vw,48px);
+  font-weight:700;
+  line-height:1.08;
+  color:var(--text);
+  margin-bottom:.75rem;
+}
+.sec-title em{font-style:italic;color:var(--gold)}
+.sec-sub{
+  font-size:13px;
+  color:var(--muted);
+  margin-bottom:2.5rem;
+  line-height:1.75;
+}
+
+/* CAMPAÑA */
+.camp{
+  border:1px solid var(--border);
+  border-radius:24px;
+  margin-bottom:2.5rem;
+  overflow:hidden;
+  background:linear-gradient(180deg, #fff 0%, #fbf7f0 100%);
+  box-shadow:var(--shadow);
+}
+.camp-top{
+  padding:2rem clamp(1.25rem, 3vw, 2.5rem);
+  border-bottom:1px solid var(--border);
+  display:grid;
+  grid-template-columns:clamp(70px, 8vw, 96px) 1fr;
+  gap:1.5rem;
+  align-items:start;
+  background:linear-gradient(135deg, rgba(255,255,255,.88), rgba(248,242,234,.94));
+}
+.camp-num{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(56px, 8vw, 84px);
+  font-weight:900;
+  line-height:.9;
+  color:rgba(168,61,48,.14);
+}
+.camp-tag{
+  font-family:'Syne Mono',monospace;
+  font-size:9px;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--red);
+  margin-bottom:.5rem;
+}
+.camp-name{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(20px,3vw,30px);
+  font-weight:700;
+  color:var(--text);
+  margin-bottom:.45rem;
+  line-height:1.06;
+}
+.camp-hook{
+  font-size:13px;
+  color:var(--muted);
+  font-style:italic;
+}
+
+/* METRICS */
+.metrics{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  gap:1px;
+  background:var(--border);
+  border-bottom:1px solid var(--border);
+}
+.metric{
+  padding:1rem 1.25rem;
+  background:linear-gradient(180deg, #fff, #fbf7f0);
+  min-height:76px;
+}
+.m-label{
+  font-family:'Syne Mono',monospace;
+  font-size:8px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:var(--faint);
+  margin-bottom:.35rem;
+}
+.m-val{
+  font-size:13px;
+  font-weight:700;
+  color:var(--text);
+}
+.m-val.g{color:var(--green)}
+.m-val.r{color:var(--red)}
+.m-val.o{color:var(--gold)}
+
+/* BODY */
+.camp-body{padding:clamp(1.35rem, 3vw, 2.5rem)}
+
+/* INFO GRID */
+.igrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;margin-bottom:1.5rem}
+.igrid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem;margin-bottom:1.5rem}
+
+/* INFO BLOCK */
+.ib{
+  background:linear-gradient(180deg, #fff, #fbf7f0);
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:1.25rem 1.35rem;
+  box-shadow:var(--shadow2);
+}
+.ib.red{border-color:rgba(168,61,48,.18);background:linear-gradient(180deg, rgba(168,61,48,.06), rgba(255,255,255,.97))}
+.ib.gold{border-color:rgba(154,116,45,.18);background:linear-gradient(180deg, rgba(154,116,45,.06), rgba(255,255,255,.97))}
+.ib.green{border-color:rgba(47,122,79,.18);background:linear-gradient(180deg, rgba(47,122,79,.06), rgba(255,255,255,.97))}
+.ib-label{
+  font-family:'Syne Mono',monospace;
+  font-size:8px;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--faint);
+  margin-bottom:.5rem;
+}
+.ib.red .ib-label{color:rgba(168,61,48,.68)}
+.ib.gold .ib-label{color:rgba(154,116,45,.68)}
+.ib.green .ib-label{color:rgba(47,122,79,.68)}
+.ib-val{
+  font-size:13px;
+  color:var(--muted);
+  line-height:1.8;
+}
+.ib-val strong{color:var(--text);font-weight:700}
+.ib.red .ib-val strong{color:#9f2d23}
+.ib.gold .ib-val strong{color:#8f6a25}
+.ib.green .ib-val strong{color:#2f7a4f}
+
+/* LIBRETO */
+.libreto{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:20px;
+  overflow:hidden;
+  margin-bottom:1.5rem;
+  box-shadow:var(--shadow2);
+}
+.libreto-header{
+  padding:1rem 1.25rem;
+  border-bottom:1px solid var(--border);
+  display:flex;
+  align-items:center;
+  gap:.8rem;
+  background:linear-gradient(180deg, #faf5ed, #f8f2e8);
+}
+.libreto-badge{
+  font-family:'Syne Mono',monospace;
+  font-size:8px;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  background:var(--red-dim);
+  color:var(--red);
+  padding:.25rem .75rem;
+  border-radius:999px;
+  border:1px solid rgba(168,61,48,.12);
+}
+.libreto-dur{
+  font-family:'Syne Mono',monospace;
+  font-size:9px;
+  color:var(--faint);
+  letter-spacing:.1em;
+  text-transform:uppercase;
+}
+.timeline{padding:1.35rem}
+.escena{
+  display:grid;
+  grid-template-columns:102px 1fr;
+  gap:1rem;
+  border-bottom:1px solid var(--border);
+  padding:1.15rem 0;
+}
+.escena:first-child{padding-top:0}
+.escena:last-child{border-bottom:none;padding-bottom:0}
+.e-time{
+  font-family:'Syne Mono',monospace;
+  font-size:9px;
+  color:var(--red);
+  letter-spacing:.05em;
+  padding-top:2px;
+}
+.e-tipo{
+  font-family:'Syne Mono',monospace;
+  font-size:8px;
+  letter-spacing:.15em;
+  text-transform:uppercase;
+  color:var(--faint);
+  margin-bottom:.45rem;
+}
+.e-desc{
+  font-size:13px;
+  color:var(--muted);
+  line-height:1.85;
+}
+.e-desc strong{color:var(--text);font-weight:700}
+.e-voz{
+  margin-top:.55rem;
+  font-family:'Playfair Display',serif;
+  font-style:italic;
+  font-size:14px;
+  color:var(--gold);
+  border-left:2px solid var(--gold);
+  padding:.1rem 0 .1rem .8rem;
+}
+.e-texto{
+  display:inline-block;
+  margin-top:.4rem;
+  background:rgba(255,255,255,.9);
+  border:1px solid var(--border);
+  border-radius:999px;
+  padding:.22rem .7rem;
+  font-family:'Syne Mono',monospace;
+  font-size:10px;
+  color:var(--text);
+  letter-spacing:.04em;
+}
+
+/* COPY */
+.copy-block{
+  border:1px solid var(--border);
+  border-radius:16px;
+  overflow:hidden;
+  margin-bottom:1rem;
+  background:var(--surface);
+  box-shadow:var(--shadow2);
+}
+.copy-plat{
+  font-family:'Syne Mono',monospace;
+  font-size:8px;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--faint);
+  padding:.75rem 1.1rem;
+  background:linear-gradient(180deg, #faf5ed, #f7f1e7);
+  border-bottom:1px solid var(--border);
+}
+.copy-text{
+  padding:1.25rem 1.35rem;
+  font-size:13px;
+  line-height:1.9;
+  color:var(--muted);
+  white-space:pre-wrap;
+}
+.copy-text strong{color:var(--text)}
+
+/* DIRECTOR NOTE */
+.dnote{
+  border-left:4px solid var(--red);
+  background:linear-gradient(180deg, rgba(168,61,48,.08), rgba(168,61,48,.04));
+  border-radius:0 16px 16px 0;
+  padding:1rem 1.25rem;
+  margin-bottom:1.25rem;
+  box-shadow:var(--shadow2);
+}
+.dnote-label{
+  font-family:'Syne Mono',monospace;
+  font-size:8px;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--red);
+  margin-bottom:.4rem;
+}
+.dnote-text{
+  font-size:13px;
+  color:#7d261e;
+  line-height:1.8;
+}
+.dnote-text strong{color:var(--text)}
+
+/* ROAS BOX */
+.roas-box{
+  border:1px solid rgba(47,122,79,.18);
+  background:linear-gradient(135deg, rgba(47,122,79,.09), rgba(47,122,79,.04));
+  border-radius:20px;
+  padding:1.5rem 1.7rem;
+  display:flex;
+  align-items:center;
+  gap:1.7rem;
+  flex-wrap:wrap;
+  margin-top:1.5rem;
+  box-shadow:var(--shadow2);
+}
+.roas-num{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(52px, 7vw, 74px);
+  font-weight:900;
+  line-height:1;
+  color:var(--green);
+}
+.roas-desc{
+  font-size:13px;
+  color:rgba(47,122,79,.88);
+  line-height:1.8;
+  max-width:560px;
+}
+.roas-desc strong{color:#1e6f43}
+
+/* TRIGGERS */
+.triggers{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1rem}
+.trig{
+  font-family:'Syne Mono',monospace;
+  font-size:9px;
+  letter-spacing:.08em;
+  padding:.34rem .85rem;
+  border-radius:999px;
+}
+.trig.r{
+  background:var(--red-dim);
+  color:var(--red);
+  border:1px solid rgba(168,61,48,.15);
+}
+.trig.g{
+  background:var(--green-dim);
+  color:var(--green);
+  border:1px solid rgba(47,122,79,.15);
+}
+.trig.o{
+  background:var(--gold-dim);
+  color:var(--gold);
+  border:1px solid rgba(154,116,45,.15);
+}
+
+/* TABLA */
+.tabla{
+  width:100%;
+  border-collapse:separate;
+  border-spacing:0;
+  margin-top:1.25rem;
+  border:1px solid var(--border);
+  border-radius:18px;
+  overflow:hidden;
+  background:var(--surface);
+  box-shadow:var(--shadow2);
+}
+.tabla th{
+  font-family:'Syne Mono',monospace;
+  font-size:8px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:var(--faint);
+  text-align:left;
+  padding:.88rem 1rem;
+  border-bottom:1px solid var(--border);
+  background:linear-gradient(180deg, #faf5ed, #f7f1e7);
+  font-weight:400;
+}
+.tabla td{
+  font-size:12.5px;
+  padding:.9rem 1rem;
+  border-bottom:1px solid var(--border);
+  color:var(--muted);
+  vertical-align:top;
+  background:rgba(255,255,255,.92);
+}
+.tabla td strong{color:var(--text)}
+.tabla tr:last-child td{border-bottom:none}
+.badge{
+  font-family:'Syne Mono',monospace;
+  font-size:8px;
+  letter-spacing:.08em;
+  padding:.24rem .6rem;
+  border-radius:999px;
+  display:inline-block;
+}
+.badge-alta{
+  background:var(--red-dim);
+  color:var(--red);
+  border:1px solid rgba(168,61,48,.15);
+}
+.badge-media{
+  background:var(--gold-dim);
+  color:var(--gold);
+  border:1px solid rgba(154,116,45,.15);
+}
+.badge-baja{
+  background:rgba(255,255,255,.78);
+  color:var(--faint);
+  border:1px solid var(--border);
+}
+
+/* SEP */
+.sep{
+  display:flex;
+  align-items:center;
+  gap:1.5rem;
+  margin:2.5rem 0;
+}
+.sep-line{flex:1;height:1px;background:var(--border)}
+.sep-label{
+  font-family:'Syne Mono',monospace;
+  font-size:8px;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--faint);
+  white-space:nowrap;
+}
+
+@media(max-width:960px){
+  .header,.wrap{padding-left:1.25rem;padding-right:1.25rem}
+  .nav{padding-left:1rem;padding-right:1rem}
+}
+@media(max-width:768px){
+  .camp-top{grid-template-columns:1fr}
+  .camp-num{font-size:48px}
+  .avatar-strip{grid-template-columns:1fr}
+  .igrid,.igrid3{grid-template-columns:1fr}
+  .escena{grid-template-columns:1fr}
+  .metrics{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .metric{min-height:auto}
+  .header-title{max-width:100%}
+}
+@media(max-width:560px){
+  .metrics{grid-template-columns:1fr}
+  .tabla th,.tabla td{padding:.72rem .8rem;font-size:11.5px}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .sec.on{animation:none}
+  .nav-btn{transition:none}
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-eyebrow">Sistema de campañas · Tiendas Platino · 2026</div>
+  <div class="header-title">ANUNCIOS<br>QUE <em>CONVIERTEN</em></div>
+  <div class="header-sub">Campañas construidas desde el dolor del avatar. Cada segundo de video tiene un propósito. Cada línea de copy activa un trigger. Estructura lista para escalar.</div>
+  <div class="header-pills">
+    <div class="pill">Avatar: Carlos / Miguel · 28–42 años</div>
+    <div class="pill">Ticket: $350–$600 MXN</div>
+    <div class="pill">Meta Ads + TikTok</div>
+    <div class="pill">ROAS objetivo: 3.5x–6x</div>
+    <div class="pill">Facebook 1.1M · IG 183K</div>
+  </div>
+</div>
+
+<div class="nav">
+  <button class="nav-btn on" onclick="show('base',this)">Base estratégica</button>
+  <button class="nav-btn" onclick="show('c1',this)">C1 · Identidad</button>
+  <button class="nav-btn" onclick="show('c2',this)">C2 · Evento</button>
+  <button class="nav-btn" onclick="show('c3',this)">C3 · Reactivación FB</button>
+  <button class="nav-btn" onclick="show('c4',this)">C4 · Retargeting</button>
+  <button class="nav-btn" onclick="show('c5',this)">C5 · Recompra</button>
+  <button class="nav-btn" onclick="show('pixel',this)">Pixel + estructura</button>
+  <button class="nav-btn" onclick="show('resumen',this)">Resumen ROAS</button>
+</div>
+
+<div class="wrap">
+
+<!-- ═══════════════════════ BASE ESTRATÉGICA ═══════════════════════ -->
+<div class="sec on" id="sec-base">
+  <div class="sec-title">Base <em>estratégica</em></div>
+  <div class="sec-sub">Antes de lanzar un anuncio. Lo que dictó el diagnóstico Meta.</div>
+
+  <div class="avatar-strip">
+    <div class="avatar-cell">
+      <div class="avatar-cell-label">Quién es Carlos</div>
+      <div class="avatar-cell-val"><strong>28–42 años.</strong> Trabaja, le va bien. Quiere que se note — pero sin parecer que lo intenta. Gym o box no para competir, para verse bien. Va al estadio. Cuida cómo llega a un lugar.</div>
+    </div>
+    <div class="avatar-cell">
+      <div class="avatar-cell-label">Qué escucha</div>
+      <div class="avatar-cell-val"><strong>Natanael Cano, Peso Pluma, Eslabón Armado.</strong> Los fines: Regional Mexicano de carretera. Trap suave de ambiente. No reguetón de gym — sí corridos tumbados o lounge urbano.</div>
+    </div>
+    <div class="avatar-cell">
+      <div class="avatar-cell-label">Por qué no compra</div>
+      <div class="avatar-cell-val">No es el precio. Es la <strong>incertidumbre.</strong> "¿La talla sirve? ¿El color se ve igual? ¿Qué pasa si no me queda?" Cada fricción sin resolver es una venta perdida.</div>
+    </div>
+  </div>
+
+  <div class="igrid3" style="margin-bottom:2rem">
+    <div class="ib red">
+      <div class="ib-label">Problema #1 detectado</div>
+      <div class="ib-val"><strong>Brecha de atribución 65–75%.</strong> Meta Pixel no dispara ViewContent, AddToCart ni Purchase correctamente. El algoritmo no sabe a quién mostrarle los anuncios. Cada peso en pauta es ineficiente.</div>
+    </div>
+    <div class="ib red">
+      <div class="ib-label">Problema #2 detectado</div>
+      <div class="ib-val"><strong>$4,432 MXN en campañas con ROAS negativo</strong> activas simultáneamente con la única campaña que sí convierte. El presupuesto ganador está subalimentado.</div>
+    </div>
+    <div class="ib gold">
+      <div class="ib-label">Oportunidad #1</div>
+      <div class="ib-val"><strong>1.1M de seguidores en Facebook sin contenido en 6 semanas.</strong> El primer post de regreso tiene impulso algorítmico natural. Si se hace bien, es el activo más barato para generar tráfico caliente ahora mismo.</div>
+    </div>
+  </div>
+
+  <div class="igrid">
+    <div class="ib">
+      <div class="ib-label">Estructura de campañas que funciona</div>
+      <div class="ib-val">
+        <strong>3 niveles obligatorios:</strong><br><br>
+        1. <strong>Prospección fría</strong> — Lookalike de compradores + intereses hombre moda/gym/fútbol. Objetivo: Compra.<br>
+        2. <strong>Retargeting cálido</strong> — Visitaron sitio o vieron video 50%+. Objetivo: Compra.<br>
+        3. <strong>Recompra</strong> — Compradores de los últimos 90 días. Objetivo: Compra repetida.<br><br>
+        Nunca mezclar mayoreo con menudeo en el mismo Ad Set.
+      </div>
+    </div>
+    <div class="ib">
+      <div class="ib-label">Regla de creatividad para alto ROAS</div>
+      <div class="ib-val">
+        <strong>El producto no es el protagonista — el momento es el protagonista.</strong><br><br>
+        Carlos no compra tela. Compra cómo se va a sentir cuando llegue a ese lugar con esa camisa. El ad que muestra el momento antes de mostrar el producto gana. Sin excepción.<br><br>
+        Ratio de prueba: <strong>3 creatividades por Ad Set mínimo.</strong> Dejar que Meta optimice. No matar variantes antes de 72h.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════ C1 · IDENTIDAD ═══════════════════════ -->
+<div class="sec" id="sec-c1">
+  <div class="camp">
+    <div class="camp-top">
+      <div class="camp-num">01</div>
+      <div>
+        <div class="camp-tag">Campaña de prospección fría · Meta Reels · 15–30s</div>
+        <div class="camp-name">EL QUE NO SE VE<br>NO EXISTE</div>
+        <div class="camp-hook">"Para el hombre que sabe que la primera impresión no se repite."</div>
+      </div>
+    </div>
+    <div class="metrics">
+      <div class="metric"><div class="m-label">Objetivo</div><div class="m-val">Conversión · Compra</div></div>
+      <div class="metric"><div class="m-label">Formato</div><div class="m-val">Reel 15s + 30s</div></div>
+      <div class="metric"><div class="m-label">Plataforma</div><div class="m-val">IG Reels + FB Feed</div></div>
+      <div class="metric"><div class="m-label">ROAS est.</div><div class="m-val g">4.5x – 6x</div></div>
+      <div class="metric"><div class="m-label">Budget mín.</div><div class="m-val">$3,500/semana</div></div>
+      <div class="metric"><div class="m-label">Trigger</div><div class="m-val r">Dolor identidad</div></div>
+    </div>
+    <div class="camp-body">
+      <div class="dnote">
+        <div class="dnote-label">Nota del director</div>
+        <div class="dnote-text">No mostrar la camisa en los primeros 8 segundos. Mostrar el <strong>momento</strong>. Carlos tiene que verse a sí mismo antes de ver el producto. Paleta oscura, iluminación cálida. Música: trap suave o corridos de ambiente — no cumbia, no reguetón. Voz en off masculina, calma y firme, sin gritar. La cámara sigue al protagonista como si ya fuera alguien importante.</div>
+      </div>
+
+      <div class="libreto">
+        <div class="libreto-header">
+          <span class="libreto-badge">LIBRETO COMPLETO</span>
+          <span class="libreto-dur">Versión 30 segundos · Variante A</span>
+        </div>
+        <div class="timeline">
+          <div class="escena">
+            <div class="e-time">0:00 – 0:03</div>
+            <div>
+              <div class="e-tipo">HOOK VISUAL — sin texto</div>
+              <div class="e-desc"><strong>Plano: espejo de baño.</strong> Hombre 30s, bien parecido. Camisa ordinaria. Se ajusta el cuello. Se mira. Algo no convence. Sin exagerar — solo un silencio incómodo que dura lo justo.</div>
+            </div>
+          </div>
+          <div class="escena">
+            <div class="e-time">0:03 – 0:09</div>
+            <div>
+              <div class="e-tipo">TENSIÓN — el momento que duele</div>
+              <div class="e-desc"><strong>Corte: llega a una reunión con amigos.</strong> Todos bien vestidos. Él entra. Nadie reacciona diferente. No es drama — es esa incomodidad silenciosa que solo él siente.
+                <div class="e-voz">"Hay ropa que te pones. Y hay ropa que te pone a ti."</div>
+              </div>
+            </div>
+          </div>
+          <div class="escena">
+            <div class="e-time">0:09 – 0:18</div>
+            <div>
+              <div class="e-tipo">TRANSFORMACIÓN — mismo hombre, diferente resultado</div>
+              <div class="e-desc"><strong>Mismo hombre. Camisa Tiendas Platino.</strong> Llega al mismo lugar. Esta vez la cámara lo sigue diferente. Un apretón de manos más. Alguien lo nota. No grita el cambio — lo insinúa. La música sube 20%.</div>
+            </div>
+          </div>
+          <div class="escena">
+            <div class="e-time">0:18 – 0:24</div>
+            <div>
+              <div class="e-tipo">PRODUCTO — limpio, sin ruido</div>
+              <div class="e-desc"><strong>3 camisas en movimiento lento.</strong> Fondo neutro. Textura visible. Colores reales — no saturados.
+                <div class="e-texto">Diseño exclusivo · Tallas S–XXL · Envío 3 días</div>
+              </div>
+            </div>
+          </div>
+          <div class="escena">
+            <div class="e-time">0:24 – 0:30</div>
+            <div>
+              <div class="e-tipo">CTA — directo, sin rodeos</div>
+              <div class="e-desc"><strong>Logo Tiendas Platino. Fondo oscuro.</strong>
+                <div class="e-voz">"Vístete como quien ya llegó."</div>
+                <div class="e-texto">tiendasplatino.com.mx → COMPRAR AHORA</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="libreto">
+        <div class="libreto-header">
+          <span class="libreto-badge">VARIANTE B — STORIES</span>
+          <span class="libreto-dur">15 segundos · Vertical 9:16</span>
+        </div>
+        <div class="timeline">
+          <div class="escena">
+            <div class="e-time">0:00 – 0:04</div>
+            <div>
+              <div class="e-tipo">HOOK DE TEXTO — primer frame</div>
+              <div class="e-desc">Fondo oscuro. Texto grande.
+                <div class="e-texto">¿Cuándo fue la última vez que llegaste a un lugar y lo notaron?</div>
+                <div class="e-desc" style="margin-top:.5rem">Música inicia. Sin imagen aún.</div>
+              </div>
+            </div>
+          </div>
+          <div class="escena">
+            <div class="e-time">0:04 – 0:11</div>
+            <div>
+              <div class="e-tipo">PRODUCTO EN MOVIMIENTO</div>
+              <div class="e-desc"><strong>Hombre vistiendo camisa.</strong> Planos de detalle: cuello, puño, textura de tela. No full body aún. Crear anticipación.</div>
+            </div>
+          </div>
+          <div class="escena">
+            <div class="e-time">0:11 – 0:15</div>
+            <div>
+              <div class="e-tipo">REVEAL + CTA</div>
+              <div class="e-desc">Full body. Confianza. Logo.
+                <div class="e-texto">Nueva colección · Envío en 3 días · Ver ahora</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="igrid">
+        <div class="ib">
+          <div class="ib-label">Copy para caption del ad</div>
+          <div class="ib-val" style="white-space:pre-line">No es cuestión de gastar más.
+Es cuestión de dejar de comprar lo que no te representa.
+
+<strong>Tiendas Platino — diseños que se notan sin necesitar explicarlos.</strong>
+
+✓ Envío en 3 días
+✓ Tallas S a XXL
+✓ Diseño exclusivo
+
+→ tiendasplatino.com.mx</div>
+        </div>
+        <div class="ib">
+          <div class="ib-label">Segmentación</div>
+          <div class="ib-val">
+            <strong>Demografía:</strong> Hombres 26–44<br>
+            <strong>Geo:</strong> CDMX, GDL, MTY, Cuernavaca, Puebla<br>
+            <strong>Intereses:</strong> Moda casual hombre, gym, fútbol, carros, conciertos<br>
+            <strong>Lookalike:</strong> 1–3% de compradores existentes en Shopify<br>
+            <strong>Excluir:</strong> Compradores últimos 30 días (van a Recompra)
+          </div>
+        </div>
+      </div>
+
+      <div class="triggers">
+        <span class="trig r">Dolor: pasar desapercibido</span>
+        <span class="trig r">Miedo: no estar al nivel</span>
+        <span class="trig g">Solución: presencia sin esfuerzo</span>
+        <span class="trig g">Identidad proyectada</span>
+        <span class="trig o">Prueba social implícita</span>
+      </div>
+
+      <div class="roas-box">
+        <div class="roas-num">4.5x</div>
+        <div class="roas-desc">Con pixel corregido y objetivo de Compra activo. <strong>Cada $1,000 MXN en pauta genera ~$4,500 en ventas</strong> en los primeros 7 días de prueba. Escala a 6x con optimización de creatividades en semana 3.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════ C2 · EVENTO ═══════════════════════ -->
+<div class="sec" id="sec-c2">
+  <div class="camp">
+    <div class="camp-top">
+      <div class="camp-num">02</div>
+      <div>
+        <div class="camp-tag">Campaña de urgencia · Evento / Temporada · 15s UGC</div>
+        <div class="camp-name">PARA EL LUGAR<br>QUE TE MERECES</div>
+        <div class="camp-hook">"Boda, graduación, cena. No llegues sin estar listo."</div>
+      </div>
+    </div>
+    <div class="metrics">
+      <div class="metric"><div class="m-label">Objetivo</div><div class="m-val">Conversión · Compra</div></div>
+      <div class="metric"><div class="m-label">Formato</div><div class="m-val">UGC estilo orgánico 15s</div></div>
+      <div class="metric"><div class="m-label">Plataforma</div><div class="m-val">TikTok + IG Reels</div></div>
+      <div class="metric"><div class="m-label">ROAS est.</div><div class="m-val g">3.5x – 5x</div></div>
+      <div class="metric"><div class="m-label">Budget mín.</div><div class="m-val">$2,500/semana</div></div>
+      <div class="metric"><div class="m-label">Trigger</div><div class="m-val r">Urgencia de evento</div></div>
+    </div>
+    <div class="camp-body">
+      <div class="dnote">
+        <div class="dnote-label">Nota del director</div>
+        <div class="dnote-text">Este ad tiene que parecer orgánico — no un anuncio. Sin producción exagerada. Alguien frente a su espejo, probándose una camisa antes de salir a un evento real. El poder está en la autenticidad. <strong>El formato UGC convierte 2–3x más que el ad producido en TikTok porque la guardia del usuario baja.</strong> Grabar en casa, iluminación natural, audio directo. Sin logo al inicio.</div>
+      </div>
+
+      <div class="libreto">
+        <div class="libreto-header">
+          <span class="libreto-badge">LIBRETO UGC</span>
+          <span class="libreto-dur">15 segundos · Estilo orgánico · TikTok / Reels</span>
+        </div>
+        <div class="timeline">
+          <div class="escena">
+            <div class="e-time">0:00 – 0:02</div>
+            <div>
+              <div class="e-tipo">HOOK HABLADO — cámara en mano</div>
+              <div class="e-desc">Persona frente a espejo, mirando a cámara.
+                <div class="e-voz">"Antes de ir a una boda sin saber qué ponerte…"</div>
+              </div>
+            </div>
+          </div>
+          <div class="escena">
+            <div class="e-time">0:02 – 0:08</div>
+            <div>
+              <div class="e-tipo">DEMO — natural, sin actuar</div>
+              <div class="e-desc">Se pone la camisa. Planos de detalle rápidos: cuello, color, fit. <strong>Cara de "esto sí me convence".</strong>
+                <div class="e-voz">"Mira cómo quedó esta de Tiendas Platino — llegó en 3 días."</div>
+              </div>
+            </div>
+          </div>
+          <div class="escena">
+            <div class="e-time">0:08 – 0:13</div>
+            <div>
+              <div class="e-tipo">PRUEBA SOCIAL</div>
+              <div class="e-desc">Muestra el teléfono con la página del producto o la confirmación de envío. Real, no editado.
+                <div class="e-texto">tiendasplatino.com.mx — enlace en bio</div>
+              </div>
+            </div>
+          </div>
+          <div class="escena">
+            <div class="e-time">0:13 – 0:15</div>
+            <div>
+              <div class="e-tipo">CTA URGENTE</div>
+              <div class="e-desc">
+                <div class="e-voz">"Si tienes un evento pronto — ya sabes dónde."</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="igrid">
+        <div class="ib">
+          <div class="ib-label">3 hooks alternativos para probar</div>
+          <div class="ib-val">
+            <strong>Hook A:</strong> "La camisa que uso para no llegar igual que todos"<br><br>
+            <strong>Hook B:</strong> "Me compré esta para la boda de mi cuñado y esto pasó…" (pausa)<br><br>
+            <strong>Hook C:</strong> "POV: tienes una cena importante en 4 días y no sabes qué ponerte"
+          </div>
+        </div>
+        <div class="ib">
+          <div class="ib-label">Por qué UGC convierte aquí</div>
+          <div class="ib-val">Carlos no confía en fotos de catálogo. Necesita ver la camisa <strong>en un cuerpo real, en luz real.</strong> El UGC resuelve las 3 objeciones principales: talla, color real y calidad de tela — en 15 segundos y sin que parezca venta.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════ C3 · REACTIVACIÓN FB ═══════════════════════ -->
+<div class="sec" id="sec-c3">
+  <div class="camp">
+    <div class="camp-top">
+      <div class="camp-num">03</div>
+      <div>
+        <div class="camp-tag">Campaña de reactivación · Facebook 1.1M · Orgánico + Boost</div>
+        <div class="camp-name">EL REGRESO<br>QUE SE NOTA</div>
+        <div class="camp-hook">"1.1M de personas que no han escuchado nada en 6 semanas. El primer post lo es todo."</div>
+      </div>
+    </div>
+    <div class="metrics">
+      <div class="metric"><div class="m-label">Canal</div><div class="m-val">Facebook orgánico + boost</div></div>
+      <div class="metric"><div class="m-label">Formato</div><div class="m-val">Video 45s + carrusel</div></div>
+      <div class="metric"><div class="m-label">Boost recomendado</div><div class="m-val">$800–$1,200 MXN</div></div>
+      <div class="metric"><div class="m-label">Objetivo boost</div><div class="m-val o">Interacción → Retargeting</div></div>
+      <div class="metric"><div class="m-label">Impacto esperado</div><div class="m-val g">Audiencia cálida gratis</div></div>
+    </div>
+    <div class="camp-body">
+      <div class="dnote">
+        <div class="dnote-label">Nota del director — CRÍTICO</div>
+        <div class="dnote-text">El primer post de regreso después de 6 semanas tiene <strong>impulso algorítmico natural en Facebook.</strong> Meta lo muestra más porque hay "novedad". Si se publica contenido mediocre, se desperdicia la única ventana de reenganche. Este post tiene que ser el mejor contenido que ha publicado Tiendas Platino en los últimos 2 años. Sin filtros genéricos. Sin foto de catálogo plana. Un video real, con historia, con emoción.</div>
+      </div>
+
+      <div class="libreto">
+        <div class="libreto-header">
+          <span class="libreto-badge">LIBRETO · VIDEO DE REGRESO</span>
+          <span class="libreto-dur">45 segundos · Facebook Video · Alta producción</span>
+        </div>
+        <div class="timeline">
+          <div class="escena">
+            <div class="e-time">0:00 – 0:05</div>
+            <div>
+              <div class="e-tipo">APERTURA — sin logo, sin marca</div>
+              <div class="e-desc"><strong>Plano de una ciudad de noche.</strong> Luces. Movimiento. Alguien caminando. No se sabe a dónde va. La música entra suave — Regional Mexicano instrumental o trap ambiente.
+                <div class="e-texto">Sin texto. Solo imagen.</div>
+              </div>
+            </div>
+          </div>
+          <div class="escena">
+            <div class="e-time">0:05 – 0:15</div>
+            <div>
+              <div class="e-tipo">TENSIÓN — el problema universal</div>
+              <div class="e-desc">Planos rápidos: ropa tirada en la cama, armario abierto, indecisión. No es exagerado — es cotidiano. Todos lo han vivido.
+                <div class="e-voz">"Hay momentos que merecen más que lo primero que encuentras."</div>
+              </div>
+            </div>
+          </div>
+          <div class="escena">
+            <div class="e-time">0:15 – 0:30</div>
+            <div>
+              <div class="e-tipo">REVEAL — la nueva colección</div>
+              <div class="e-desc"><strong>Planos de producto con cuerpo.</strong> Diferentes modelos, diferentes estilos. Colores de temporada. Textura. Movimiento. No es catálogo — es editorial.
+                <div class="e-voz">"Diseñada para el hombre que ya sabe lo que quiere — solo necesitaba encontrarlo."</div>
+              </div>
+            </div>
+          </div>
+          <div class="escena">
+            <div class="e-time">0:30 – 0:40</div>
+            <div>
+              <div class="e-tipo">OFERTA DE REGRESO</div>
+              <div class="e-desc"><strong>Logo Tiendas Platino entra limpio.</strong>
+                <div class="e-texto">Nueva colección disponible · Envío gratis esta semana · tiendasplatino.com.mx</div>
+                <div class="e-desc" style="margin-top:.5rem">Si se quiere generar urgencia real: <strong>"Solo esta semana, envío gratis en pedidos +$400"</strong></div>
+              </div>
+            </div>
+          </div>
+          <div class="escena">
+            <div class="e-time">0:40 – 0:45</div>
+            <div>
+              <div class="e-tipo">CTA SOCIAL</div>
+              <div class="e-desc">
+                <div class="e-voz">"¿Cuál te llevas? Etiqueta a quien lo necesita ver."</div>
+                <div class="e-desc" style="margin-top:.4rem">El "etiqueta a alguien" multiplica el alcance orgánico sin costo adicional.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="igrid">
+        <div class="ib">
+          <div class="ib-label">Copy de publicación (Facebook)</div>
+          <div class="ib-val" style="white-space:pre-line">Llevamos semanas preparando algo diferente.
+
+No solo ropa nueva — <strong>una colección hecha para el hombre que sabe que la presentación lo es todo.</strong>
+
+Nueva temporada ya disponible.
+Envío en 3 días a todo México.
+
+¿Cuál es la tuya? 👇
+tiendasplatino.com.mx</div>
+        </div>
+        <div class="ib">
+          <div class="ib-label">Estrategia de boost</div>
+          <div class="ib-val">
+            <strong>Paso 1:</strong> Publicar orgánico. Esperar 2–4 horas naturales.<br>
+            <strong>Paso 2:</strong> Si llega a 50+ reacciones, hacer boost de $800 MXN por 3 días. Objetivo: Interacción.<br>
+            <strong>Paso 3:</strong> Crear audiencia personalizada de personas que interactuaron con este video.<br>
+            <strong>Paso 4:</strong> Usar esa audiencia como retargeting en Campaña C4.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════ C4 · RETARGETING ═══════════════════════ -->
+<div class="sec" id="sec-c4">
+  <div class="camp">
+    <div class="camp-top">
+      <div class="camp-num">04</div>
+      <div>
+        <div class="camp-tag">Retargeting · Carritos abandonados + visitantes 3 días · Meta</div>
+        <div class="camp-name">YA LO VISTE.<br>¿QUÉ ESPERAS?</div>
+        <div class="camp-hook">"Para quien ya mostró interés. Solo necesita el empujón correcto."</div>
+      </div>
+    </div>
+    <div class="metrics">
+      <div class="metric"><div class="m-label">Objetivo</div><div class="m-val">Conversión · Compra</div></div>
+      <div class="metric"><div class="m-label">Audiencia</div><div class="m-val">Visitantes 3d + Carrito</div></div>
+      <div class="metric"><div class="m-label">Formato</div><div class="m-val">Imagen + Carrusel</div></div>
+      <div class="metric"><div class="m-label">ROAS est.</div><div class="m-val g">6x – 9x</div></div>
+      <div class="metric"><div class="m-label">Budget mín.</div><div class="m-val">$1,500/semana</div></div>
+      <div class="metric"><div class="m-label">Ventana</div><div class="m-val o">0–72 horas post visita</div></div>
+    </div>
+    <div class="camp-body">
+      <div class="dnote">
+        <div class="dnote-label">Nota del director</div>
+        <div class="dnote-text">Esta es la campaña de mayor ROAS posible porque habla con gente que YA quiso comprar. <strong>No necesitan convencimiento — necesitan un recordatorio con una razón de actuar ahora.</strong> El copy tiene que sonar como si la marca supiera que los vio — sin ser invasivo. La urgencia debe ser real: stock limitado, precio exclusivo por tiempo, envío gratis solo esta semana.</div>
+      </div>
+
+      <div class="igrid3">
+        <div class="ib gold">
+          <div class="ib-label">Ad A — Carrito abandonado (0–24h)</div>
+          <div class="ib-val"><strong>Imagen del producto exacto que vieron.</strong> Copy:<br><br>"Lo dejaste en tu carrito. Sigue ahí. Pero el stock no espera." → CTA: Completar compra</div>
+        </div>
+        <div class="ib gold">
+          <div class="ib-label">Ad B — Visitante sin carrito (24–48h)</div>
+          <div class="ib-val"><strong>Carrusel de los más vendidos.</strong> Copy:<br><br>"Miles de hombres en México ya eligieron. ¿Cuál es la tuya?" → CTA: Ver colección</div>
+        </div>
+        <div class="ib gold">
+          <div class="ib-label">Ad C — Urgencia real (48–72h)</div>
+          <div class="ib-val"><strong>Imagen única, copy directo.</strong><br><br>"Envío gratis solo hasta el [día]. Después vuelve al costo normal." → CTA: Aprovechar ahora</div>
+        </div>
+      </div>
+
+      <div class="ib">
+        <div class="ib-label">Secuencia completa de retargeting</div>
+        <div class="ib-val">
+          <strong>Hora 0–1:</strong> WhatsApp de recuperación de carrito (si tienen el número — vía Accretum)<br>
+          <strong>Hora 1–24:</strong> Ad A — producto exacto en feed<br>
+          <strong>Hora 24–48:</strong> Ad B — social proof, más vendidos<br>
+          <strong>Hora 48–72:</strong> Ad C — urgencia real, oferta con límite de tiempo<br>
+          <strong>Día 7+:</strong> Salir del retargeting, entrar a lista de reenganche mensual
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════ C5 · RECOMPRA ═══════════════════════ -->
+<div class="sec" id="sec-c5">
+  <div class="camp">
+    <div class="camp-top">
+      <div class="camp-num">05</div>
+      <div>
+        <div class="camp-tag">Campaña de recompra · Compradores últimos 90 días · Email + Meta</div>
+        <div class="camp-name">YA SABES<br>LO QUE HACEMOS</div>
+        <div class="camp-hook">"El cliente que ya compró es 5x más fácil de cerrar. Y no requiere convencer."</div>
+      </div>
+    </div>
+    <div class="metrics">
+      <div class="metric"><div class="m-label">Objetivo</div><div class="m-val">Segunda compra</div></div>
+      <div class="metric"><div class="m-label">Canal</div><div class="m-val">Email + Meta Custom Audience</div></div>
+      <div class="metric"><div class="m-label">Audiencia</div><div class="m-val">Compradores 0–90 días</div></div>
+      <div class="metric"><div class="m-label">ROAS est.</div><div class="m-val g">8x – 12x</div></div>
+      <div class="metric"><div class="m-label">Frecuencia</div><div class="m-val">1 vez por mes</div></div>
+      <div class="metric"><div class="m-label">Costo</div><div class="m-val g">El más bajo de todos</div></div>
+    </div>
+    <div class="camp-body">
+      <div class="dnote">
+        <div class="dnote-label">Nota del director</div>
+        <div class="dnote-text">Esta es la campaña más rentable del sistema entero. El dinero ya está gastado en adquisición. Activar a quien ya compró es dinero casi gratis. <strong>El tono aquí es diferente — no hay que vender, hay que invitar.</strong> Como si un amigo de confianza te dijera "llegó algo nuevo y pensé en ti." Sin descuentos innecesarios. El cliente que compró por calidad vuelve por calidad, no por precio.</div>
+      </div>
+
+      <div class="igrid">
+        <div class="ib">
+          <div class="ib-label">Email de recompra — asunto</div>
+          <div class="ib-val">
+            <strong>Opción A:</strong> "Llegó la colección que seguías esperando"<br>
+            <strong>Opción B:</strong> "[Nombre], guardamos algo para ti"<br>
+            <strong>Opción C:</strong> "Porque la última vez no fue coincidencia"<br><br>
+            <strong>Regla:</strong> Nunca usar "descuento", "oferta" o "%" en el asunto para este segmento. El gancho es la exclusividad, no el precio.
+          </div>
+        </div>
+        <div class="ib">
+          <div class="ib-label">Ad de recompra en Meta</div>
+          <div class="ib-val">
+            <strong>Audiencia:</strong> Custom Audience de compradores (subir lista de Shopify a Meta)<br>
+            <strong>Formato:</strong> Carrusel de nueva colección<br>
+            <strong>Copy:</strong> "Ya sabes la calidad. Ya sabes el servicio. La nueva colección llega a tiempo para [evento de temporada]."<br><br>
+            <strong>Excluir</strong> compradores de los últimos 14 días para no saturar.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════ PIXEL + ESTRUCTURA ═══════════════════════ -->
+<div class="sec" id="sec-pixel">
+  <div class="sec-title">Pixel + <em>Estructura</em></div>
+  <div class="sec-sub">Sin esto, ninguna campaña funciona al máximo. Prioridad absoluta antes de activar cualquier ad.</div>
+
+  <div class="igrid" style="margin-bottom:2rem">
+    <div class="ib red">
+      <div class="ib-label">Estado actual del pixel (diagnóstico)</div>
+      <div class="ib-val">
+        <strong>PageView:</strong> ✓ Funciona<br>
+        <strong>ViewContent:</strong> ❌ No confirmado en PDPs<br>
+        <strong>AddToCart:</strong> ❌ Posiblemente no mapeado<br>
+        <strong>InitiateCheckout:</strong> ❌ No detectado<br>
+        <strong>Purchase:</strong> ❌ Solo 21 compras en 15 días vs. 60+ en Shopify<br><br>
+        <strong>Brecha de atribución: 65–75%</strong>
+      </div>
+    </div>
+    <div class="ib green">
+      <div class="ib-label">Corrección prioritaria (hacer hoy)</div>
+      <div class="ib-val">
+        1. Abrir Meta Events Manager<br>
+        2. Verificar eventos últimas 24h con Event Testing Tool<br>
+        3. Activar <strong>Conversions API</strong> vía integración Shopify nativa<br>
+        4. Validar que Purchase matchea con órdenes reales<br>
+        5. Configurar <strong>Advanced Matching</strong> con email y teléfono<br><br>
+        <strong>Resultado:</strong> Meta aprende a quién mostrar el ad. ROAS sube sin tocar el presupuesto.
+      </div>
+    </div>
+  </div>
+
+  <div class="ib" style="margin-bottom:1.5rem">
+    <div class="ib-label">Estructura de campañas correcta (lo que debe existir)</div>
+    <div class="ib-val">
+      <table class="tabla" style="margin-top:0">
+        <tr>
+          <th>Campaña</th><th>Objetivo Meta</th><th>Audiencia</th><th>Budget semana</th><th>Prioridad</th>
+        </tr>
+        <tr>
+          <td><strong>Prospección fría</strong></td>
+          <td>Compra (Purchase)</td>
+          <td>Lookalike 1–3% + Intereses</td>
+          <td>$3,500 MXN</td>
+          <td><span class="badge badge-alta">Alta</span></td>
+        </tr>
+        <tr>
+          <td><strong>Retargeting cálido</strong></td>
+          <td>Compra (Purchase)</td>
+          <td>Visitantes 3d + Carrito</td>
+          <td>$1,500 MXN</td>
+          <td><span class="badge badge-alta">Alta</span></td>
+        </tr>
+        <tr>
+          <td><strong>Recompra</strong></td>
+          <td>Compra (Purchase)</td>
+          <td>Compradores 0–90d</td>
+          <td>$800 MXN</td>
+          <td><span class="badge badge-alta">Alta</span></td>
+        </tr>
+        <tr>
+          <td><strong>Reactivación FB</strong></td>
+          <td>Interacción → Retargeting</td>
+          <td>Fanbase 1.1M</td>
+          <td>$1,000 MXN (boost)</td>
+          <td><span class="badge badge-media">Media</span></td>
+        </tr>
+        <tr>
+          <td><strong>Mayoreo</strong> (separado)</td>
+          <td>Lead Generation</td>
+          <td>Audiencia B2B independiente</td>
+          <td>Budget propio</td>
+          <td><span class="badge badge-baja">Separar</span></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="dnote">
+    <div class="dnote-label">Campaña a pausar inmediatamente</div>
+    <div class="dnote-text">Las campañas "rodrigo / MAYOREO" y "LINEA AXEL / MAYOREO" con $2,093 MXN gastados y 0 compras en Shopify deben pausarse o separarse en una cuenta diferente. <strong>Mezclar mayoreo con retail en el mismo pixel contamina el algoritmo de optimización</strong> — Meta no sabe si quieres vender a consumidores o distribuidores.</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════ RESUMEN ROAS ═══════════════════════ -->
+<div class="sec" id="sec-resumen">
+  <div class="sec-title">Resumen <em>ROAS</em></div>
+  <div class="sec-sub">Proyección conservadora con pixel corregido y estructura correcta desde semana 1.</div>
+
+  <table class="tabla" style="margin-bottom:2.5rem">
+    <tr>
+      <th>Campaña</th><th>Budget semanal</th><th>ROAS mín.</th><th>ROAS máx.</th><th>Venta est. semana 1</th><th>Dificultad técnica</th>
+    </tr>
+    <tr>
+      <td><strong>C1 · Identidad</strong></td>
+      <td>$3,500 MXN</td>
+      <td class="m-val g" style="font-size:13px">4.5x</td>
+      <td class="m-val g" style="font-size:13px">6x</td>
+      <td><strong>$15,750 – $21,000</strong></td>
+      <td><span class="badge badge-media">Media</span></td>
+    </tr>
+    <tr>
+      <td><strong>C2 · Evento UGC</strong></td>
+      <td>$2,500 MXN</td>
+      <td class="m-val g" style="font-size:13px">3.5x</td>
+      <td class="m-val g" style="font-size:13px">5x</td>
+      <td><strong>$8,750 – $12,500</strong></td>
+      <td><span class="badge badge-baja">Baja</span></td>
+    </tr>
+    <tr>
+      <td><strong>C3 · Reactivación FB</strong></td>
+      <td>$1,000 MXN</td>
+      <td class="m-val o" style="font-size:13px">Orgánico</td>
+      <td class="m-val g" style="font-size:13px">8x boost</td>
+      <td><strong>Audiencia cálida gratis</strong></td>
+      <td><span class="badge badge-baja">Baja</span></td>
+    </tr>
+    <tr>
+      <td><strong>C4 · Retargeting</strong></td>
+      <td>$1,500 MXN</td>
+      <td class="m-val g" style="font-size:13px">6x</td>
+      <td class="m-val g" style="font-size:13px">9x</td>
+      <td><strong>$9,000 – $13,500</strong></td>
+      <td><span class="badge badge-alta">Requiere pixel OK</span></td>
+    </tr>
+    <tr>
+      <td><strong>C5 · Recompra</strong></td>
+      <td>$800 MXN</td>
+      <td class="m-val g" style="font-size:13px">8x</td>
+      <td class="m-val g" style="font-size:13px">12x</td>
+      <td><strong>$6,400 – $9,600</strong></td>
+      <td><span class="badge badge-baja">Baja</span></td>
+    </tr>
+    <tr style="border-top:2px solid var(--border2)">
+      <td><strong>TOTAL</strong></td>
+      <td><strong>$9,300 MXN</strong></td>
+      <td></td>
+      <td></td>
+      <td><strong style="color:#1e6f43">$39,900 – $56,600 MXN</strong></td>
+      <td></td>
+    </tr>
+  </table>
+
+  <div class="roas-box">
+    <div class="roas-num">5.4x</div>
+    <div class="roas-desc">ROAS promedio proyectado con pixel corregido y estructura de 3 niveles activa. <strong>$9,300 MXN invertidos generan entre $39,900 y $56,600 MXN en ventas semanales.</strong> El multiplicador sube a 7x+ en semana 4 cuando Meta tiene suficientes datos de compra para optimizar automáticamente.</div>
+  </div>
+
+  <div class="sep"><div class="sep-line"></div><div class="sep-label">Condiciones para alcanzar estas cifras</div><div class="sep-line"></div></div>
+
+  <div class="igrid3">
+    <div class="ib green">
+      <div class="ib-label">Condición 1 — No negociable</div>
+      <div class="ib-val"><strong>Pixel corregido con Conversions API activo.</strong> Sin esto, Meta optimiza a ciegas. Cada peso en pauta rinde 40–60% menos de lo posible.</div>
+    </div>
+    <div class="ib green">
+      <div class="ib-label">Condición 2 — Crítica</div>
+      <div class="ib-val"><strong>Objetivo de campaña = Compra (Purchase).</strong> No Tráfico. No Interacción. No Alcance. El algoritmo de Meta optimiza para lo que le pides — pídele compradores.</div>
+    </div>
+    <div class="ib green">
+      <div class="ib-label">Condición 3 — Para escalar</div>
+      <div class="ib-val"><strong>Mínimo 3 creatividades por Ad Set.</strong> Dejar correr 72h antes de apagar variantes. El ganador se escala — no se sustituye inmediatamente.</div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /wrap -->
+
+<script>
+function show(id, btn) {
+  document.querySelectorAll('.sec').forEach(s => s.classList.remove('on'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('on'));
+  document.getElementById('sec-' + id).classList.add('on');
+  btn.classList.add('on');
+  window.scrollTo({ top: document.querySelector('.wrap').offsetTop - 60, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>
